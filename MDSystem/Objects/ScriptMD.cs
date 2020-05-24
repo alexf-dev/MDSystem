@@ -35,5 +35,7 @@ namespace MDSystem.Objects
         /// Описание 
         /// </summary>
         public string Description { get; set; }
+
+        public List<ActionMD> Actions { get; set; }
     }
 }

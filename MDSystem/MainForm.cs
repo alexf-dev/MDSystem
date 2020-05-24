@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MDSystem.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,25 @@ namespace MDSystem
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            //Application.Run(new MainForm());
+            UserEdit userEdit = new UserEdit();
+            userEdit.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ScriptEdit se = new ScriptEdit();
+            se.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            RunTestedScript rts = new RunTestedScript();
+            rts.Show();
         }
     }
 }

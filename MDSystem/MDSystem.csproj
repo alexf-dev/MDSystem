@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9D145B2E-E7AA-4574-9386-33CCF3062447}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>MDSystem</RootNamespace>
     <AssemblyName>MDSystem</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
@@ -85,7 +85,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\ApplicationData.cs" />
     <Compile Include="Data\DataTransfer.cs" />
+    <Compile Include="Forms\RunTestedScript.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RunTestedScript.Designer.cs">
+      <DependentUpon>RunTestedScript.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ScriptEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ScriptEdit.Designer.cs">
+      <DependentUpon>ScriptEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserEdit.Designer.cs">
+      <DependentUpon>UserEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,7 +119,6 @@
     <Compile Include="Objects\Enumerators\AccessLevel.cs" />
     <Compile Include="Objects\LibraryMD.cs" />
     <Compile Include="Objects\LogMD.cs" />
-    <Compile Include="Objects\Person.cs" />
     <Compile Include="Objects\ScriptMD.cs" />
     <Compile Include="Objects\Enumerators\ScriptMDType.cs" />
     <Compile Include="Objects\User.cs" />
@@ -114,10 +132,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\" />
     <Folder Include="Objects\BDObjects\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\RunTestedScript.resx">
+      <DependentUpon>RunTestedScript.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ScriptEdit.resx">
+      <DependentUpon>ScriptEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserEdit.resx">
+      <DependentUpon>UserEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

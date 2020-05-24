@@ -11,5 +11,7 @@ namespace MDSystem.Objects
     /// </summary>
     public enum AccessLevel
     {
+        none = 0,
+        all_level = 1
     }
 }

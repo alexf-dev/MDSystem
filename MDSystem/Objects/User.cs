@@ -8,14 +8,24 @@ namespace MDSystem.Objects
     public class User : BaseObject
     {
         /// <summary>
-        /// Персона 
+        /// Фамилия
         /// </summary>
-        public Person Person { get; set; }
+        public string FirstName { get; set; }
 
         /// <summary>
-        /// ФИО персоны
+        /// Имя
         /// </summary>
-        public string FullName { get { return Person.FullName; } }
+        public string LastName { get; set; }
+
+        /// <summary>
+        /// Отчество
+        /// </summary>
+        public string MiddleName { get; set; }
+
+        /// <summary>
+        /// ФИО
+        /// </summary>
+        public string FullName { get { return string.Format("{0} {1} {2}", FirstName, LastName, MiddleName); } }
 
         /// <summary>
         /// Должность 
@@ -28,8 +38,22 @@ namespace MDSystem.Objects
         public Department Department { get; set; }
 
         /// <summary>
+        /// Логин пользователя
+        /// </summary>
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// Пароль
+        /// </summary>
+        public string Password { get; set; }
+
+        /// <summary>
         /// Статус пользователя
         /// </summary>
         public UserStatus Status { get; set; }
+
+        public Guid WorkplaceId { get { return Workplace.Id; } }
+
+        public Guid DepartmentId { get { return Department.Id; } }
     }
 }

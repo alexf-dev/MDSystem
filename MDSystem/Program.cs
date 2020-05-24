@@ -23,37 +23,36 @@ namespace MDSystem
             //if (args.Contains("-debug"))
             //    ApplicationSettings.IsDeveloper = true;
 
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new MainForm());
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
 
-            Console.WriteLine("Hello Alex!");
+            //            Console.WriteLine("Hello Alex!");
 
-            Person person = new Person()
-            {
-                Id = Guid.NewGuid(),
-                FirstName = "Петров",
-                LastName = "Петр",
-                MiddleName = "Петрович",
-                BirthDate = new DateTime(1977, 8, 11, 0, 0, 0)
-,
-            };
+            //            User person = new User()
+            //            {
+            //                Id = Guid.NewGuid(),
+            //                FirstName = "Петров",
+            //                LastName = "Петр",
+            //                MiddleName = "Петрович"
+            //,
+            //            };
 
-            //1. Insert  
-            var insertSQL = "INSERT INTO public.t_person (id, firstname, lastname, middlename, birthdate, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, @BirthDate, now(), @DelRec);";
-            using (var conn = OpenConnection(_connStr))
-            {
-                //var affectedRows = conn.Execute(insertSQL, person);
-                //Console.WriteLine(affectedRows > 0 ? "insert successfully!" : "insert failure");
-                var customer = conn.Query<Person>("Select * FROM public.t_person WHERE firstname = @PersonFirstName",  new { PersonFirstName = person.FirstName}).ToList();
+            ////1. Insert  
+            //var insertSQL = "INSERT INTO public.t_users (id, firstname, lastname, middlename, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, now(), @DelRec);";
+            //using (var conn = OpenConnection(_connStr))
+            //{
+            //    //var affectedRows = conn.Execute(insertSQL, person);
+            //    //Console.WriteLine(affectedRows > 0 ? "insert successfully!" : "insert failure");
+            //    var customer = conn.Query<User>("Select * FROM public.t_users WHERE firstname = @PersonFirstName",  new { PersonFirstName = person.FirstName}).ToList();
 
-                //                insertSQL = string.Format(@"
-                //INSERT INTO public.t_person(id, firstname, lastname, middlename, birthdate, rec_date, del_rec) 
-                //VALUES('{0}', '{1}', '{2}','{3}', '{4}', '{5}', '{6}');", person.Id, person.FirstName, person.LastName, person.MiddleName, person.BirthDate, DateTime.Now, person.DelRec);
-                //var res = conn.Execute(insertSQL);
-                //Console.WriteLine(res > 0 ? "insert successfully!" : "insert failure");
-                //PrintData();
-            }
+            //    //                insertSQL = string.Format(@"
+            //    //INSERT INTO public.t_person(id, firstname, lastname, middlename, birthdate, rec_date, del_rec) 
+            //    //VALUES('{0}', '{1}', '{2}','{3}', '{4}', '{5}', '{6}');", person.Id, person.FirstName, person.LastName, person.MiddleName, person.BirthDate, DateTime.Now, person.DelRec);
+            //    //var res = conn.Execute(insertSQL);
+            //    //Console.WriteLine(res > 0 ? "insert successfully!" : "insert failure");
+            //    //PrintData();
+            //}
 
             //            //2.update  
             //            using (var conn = OpenConnection(_connStr))
@@ -98,18 +97,18 @@ namespace MDSystem
         /// </summary>  
         public static void PrintData()
         {
-            IList<Person> list;
+            IList<User> list;
             //2.query  
             using (var conn = OpenConnection(_connStr))
             {
-                var querySQL = @"SELECT id, firstname, lastname, middlename, birthdate, rec_date, del_rec FROM public.t_person;";
-                list = conn.Query<Person>(querySQL).ToList();
+                var querySQL = @"SELECT id, firstname, lastname, middlename, rec_date, del_rec FROM public.t_users;";
+                list = conn.Query<User>(querySQL).ToList();
             }
             if (list.Count > 0)
             {
                 foreach (var item in list)
                 {//print  
-                    Console.WriteLine($"{item.FirstName}'s Birthday is {item.BirthDate}");
+                    Console.WriteLine($"{item.FirstName}'s Birthday is {item.DelRec}");
                 }
             }
             else
