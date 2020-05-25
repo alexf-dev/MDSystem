@@ -2,13 +2,8 @@
 using MDSystem.Objects;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MDSystem.Forms
@@ -30,47 +25,49 @@ namespace MDSystem.Forms
 
         private bool SaveScript()
         {
-            ScriptMD script = new ScriptMD();
-            script.Id = Guid.NewGuid();
-            script.Name = txtScriptName.Text;
-            script.Code = txtScriptCode.Text;
-            script.ScriptType = ScriptMDType.Тестовый;
-            script.Actions = GetScriptActions();
+            //ScriptMD script = new ScriptMD();
+            //script.Id = Guid.NewGuid();
+            //script.Name = txtScriptName.Text;
+            //script.Code = txtScriptCode.Text;
+            //script.ScriptType = ScriptMDType.Тестовый;
+            //script.Actions = GetScriptActions();
 
             bool isSuccess = false;
 
-            if (script.Save(CommandAttribute.INSERT))
+            //if (script.Save(CommandAttribute.INSERT))
+            //{
+            //    foreach (var actionMD in script.Actions)
+            //    {
+            //        actionMD.ParentId = script.Id;
+            //        isSuccess = actionMD.Save(CommandAttribute.INSERT);
+            //    }
+            //}
+
+            //return isSuccess;
+
+            string fileName = Environment.CurrentDirectory + @"\" + "BDScripts.txt";
+            string scriptData = "";
+            scriptData += "script" + ";";// + Environment.NewLine;
+            scriptData += txtScriptName.Text + ";";// + Environment.NewLine;
+            scriptData += txtScriptCode.Text + ";";// + Environment.NewLine;
+            scriptData += txtActionsList.Text;// + Environment.NewLine;
+            scriptData += Environment.NewLine;
+
+            try
             {
-                foreach (var actionMD in script.Actions)
+                using (StreamWriter sw = new StreamWriter(fileName, true, System.Text.Encoding.UTF8))
                 {
-                    actionMD.ParentId = script.Id;
-                    isSuccess = actionMD.Save(CommandAttribute.INSERT);
+                    sw.Write(scriptData);
                 }
+
+                isSuccess = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
 
             return isSuccess;
-
-            //string fileName = Environment.CurrentDirectory + @"\" + "BDScripts.txt";
-            //string scriptData = "";
-            //scriptData += "script" + ";";// + Environment.NewLine;
-            //scriptData += txtScriptName.Text + ";";// + Environment.NewLine;
-            //scriptData += txtScriptCode.Text + ";";// + Environment.NewLine;
-            //scriptData += txtActionsList.Text;// + Environment.NewLine;
-            //scriptData += Environment.NewLine;
-
-            //try
-            //{
-            //    using (StreamWriter sw = new StreamWriter(fileName, true, System.Text.Encoding.UTF8))
-            //    {
-            //        sw.Write(scriptData);
-            //    }
-
-            //    MessageBox.Show("Запись " + fileName + " выполнена");
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //}            
         }
 
         private List<ActionMD> GetScriptActions()

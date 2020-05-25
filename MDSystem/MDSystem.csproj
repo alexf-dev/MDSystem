@@ -122,6 +122,7 @@
     <Compile Include="Objects\Enumerators\AccessLevel.cs" />
     <Compile Include="Objects\Enumerators\ActionMDType.cs" />
     <Compile Include="Objects\Enumerators\CommandAttribute.cs" />
+    <Compile Include="Objects\GetDataFilter.cs" />
     <Compile Include="Objects\LibraryMD.cs" />
     <Compile Include="Objects\Report.cs" />
     <Compile Include="Objects\ScriptMD.cs" />
