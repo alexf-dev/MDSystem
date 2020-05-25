@@ -18,14 +18,14 @@ namespace MDSystem.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Save())
+            if (SaveUser())
                 MessageBox.Show("Пользователь сохранен.");
             else                
                 MessageBox.Show("Ошибка сохранения.");
 
         }
 
-        private bool Save()
+        private bool SaveUser()
         {
             User user = new User();
 
@@ -57,20 +57,7 @@ namespace MDSystem.Forms
                     user.Department = dp;
             }
 
-            //1. Insert  
-            string _connStr = @"HOST=127.0.0.1;PORT=5432;DATABASE=MD;USER ID=postgres;PASSWORD=123;";
-
-            var insertSQL = "INSERT INTO public.t_users (id, firstname, lastname, middlename, workplace_id, department_id, username, password, status, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, @WorkplaceId, @DepartmentId, @UserName, @Password, @Status, now(), @DelRec);";
-            var affectedRows = 0;
-            using (var conn = OpenConnection(_connStr))
-            {
-                affectedRows = conn.Execute(insertSQL, user);
-            }
-
-            if (affectedRows > 0)
-                return true;
-            else
-                return false;
+            return user.Save(CommandAttribute.INSERT);
         }
 
         /// <summary>  

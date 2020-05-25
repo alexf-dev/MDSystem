@@ -20,11 +20,16 @@ namespace MDSystem.Objects
         /// <summary>
         /// Среднее время фиксации
         /// </summary>
-        public TimeSpan TimeSpan { get; set; }
+        public TimeSpan TimeExecution { get; set; }
 
         /// <summary>
         /// Дополнительная информация
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Тип действия
+        /// </summary>
+        public ActionMDType ActionType { get; set; }
     }
 }

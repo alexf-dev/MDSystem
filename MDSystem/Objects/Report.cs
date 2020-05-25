@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 namespace MDSystem.Objects
 {
     /// <summary>
-    /// Тип сценария
+    /// Запись лога
     /// </summary>
-    public enum ScriptMDType
+    public class Report : BaseObject
     {
-        none= 0,
-        Полетная_подготовка = 1,
-        Тестовый = 2
+        /// <summary>
+        /// Время запуска 
+        /// </summary>
+        public DateTime StartDate { get; set; }
     }
 }

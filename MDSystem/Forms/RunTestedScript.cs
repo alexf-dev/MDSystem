@@ -18,8 +18,11 @@ namespace MDSystem.Forms
         private string _scriptName = "";
         private string _actionsDate = "";
 
+        private List<ScriptMD> _bdScripts = new List<ScriptMD>();
+        private List<ScriptMD> _operatorScripts = new List<ScriptMD>();
 
-        private List<ScriptMD> _scripts = new List<ScriptMD>();
+        private ScriptMD _selectedBDScript = null;
+        private ScriptMD _operatorScript = null;
 
         public RunTestedScript()
         {
@@ -27,37 +30,39 @@ namespace MDSystem.Forms
 
             btnRunTest.Enabled = false;
 
-            GetScripts();
+            _bdScripts = GetBDScripts();
         }
 
-        private void GetScripts()
+        private List<ScriptMD> GetBDScripts()
         {
-            //_scriptName = txtScriptName.Text;
-            
-            string fileName = Environment.CurrentDirectory + @"\" + "Scripts.txt";
+            List<ScriptMD> bdScripts = new List<ScriptMD>();
+
+            string fileName = Environment.CurrentDirectory + @"\" + "BDScripts.txt";
             string scriptData = "";
 
+            // Получаем информацию о сценариях из BDScripts.txt
             try
             {
                 using (StreamReader sr = new StreamReader(fileName, System.Text.Encoding.UTF8))
                 {
                     scriptData = sr.ReadToEnd();
                 }
-
-                //MessageBox.Show("Запись " + fileName + " выполнена");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
 
+            // Каждая запись о скрипте в текстовом файле заканчивается символом *
+            // получаем массив строк, в каждой информация о конкретном скрипте
             string[] sp = scriptData.Split(new char[] { '*'}, StringSplitOptions.RemoveEmptyEntries);
 
             char[] trimChars = new char[] { '\\', 'r', 'n'};
 
             foreach (var item in sp)
             {
-                if (item.Contains("script"))
+                // item - строка данных одного сценария
+                if (item.Contains("script"))    // каждая строка сценария содержит слово script в начале строки, т.е. здесь мы избавляемся от пустых строк
                 {
                     List<string> items = item.Trim(trimChars).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(it => it.Trim(trimChars)).ToList();
                     if (items[0].Contains("script"))
@@ -69,61 +74,120 @@ namespace MDSystem.Forms
                     script.Code = items[0];
                     items.RemoveAt(0);
 
+                    // если в строке сценария отсутствуют действия - пропускаем эту строку, сценарий не учитывается
                     if (items.Count > 0)
                         script.Actions = new List<ActionMD>();
                     else
                         continue;
 
+                    // оставшиеся в items строки - действия по сценарию
                     foreach (var data in items)
                     {
                         ActionMD actionMD = new ActionMD();
 
+                        // делим каждое действие на данные - номер по порядку, наименование, время выполнения
                         List<string> dataList = data.Trim().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                        List<string> dataAction = dataList[0].Split(new char[] { '.' }).ToList();
 
-                        actionMD.OrderValue = int.Parse(dataAction[0]);
-                        actionMD.Name = dataAction[1].Trim();
+                        // получаем индекс первого вхождения символа '.' - до этого символа это порядковый номер действия
+                        int orderValueIndex = dataList[0].IndexOf('.');
+                        string orderValueStr = dataList[0].Substring(0, orderValueIndex);
 
-                        actionMD.TimeSpan = TimeSpan.Parse(dataList[1].Trim());
+                        actionMD.OrderValue = int.Parse(orderValueStr);
+                        actionMD.Name = dataList[0].Substring(orderValueIndex + 1).Trim();
+                        actionMD.TimeExecution = TimeSpan.Parse(dataList[1].Trim());
 
                         script.Actions.Add(actionMD);
                     }
 
-                    _scripts.Add(script);
+                    bdScripts.Add(script);
                 }
             }
-
-            //foreach (var scr in _scripts)
-            //{
-            //    foreach (var ac in scr.Actions)
-            //    {
-            //        _actionsDate += ac.OrderValue.ToString() + " " + ac.Name + " " + ac.TimeSpan.ToString() + Environment.NewLine;
-            //    }
-            //    _actionsDate += Environment.NewLine;
-            //}
-
-            //txtBDActionsList.Text = _actionsDate;
-
-            btnRunTest.Enabled = true;
+            
+            return bdScripts;
         }
 
         private void btnRunTest_Click(object sender, EventArgs e)
         {
+            _operatorScript = GetOperatorScript();
+
+            MakeReportData();
+        }
+
+        private void MakeReportData()
+        {
+            TimeSpan zeroTime = new TimeSpan(0, 0, 0);
+
+            TimeSpan operatorTime = new TimeSpan();
+            foreach (var action in _operatorScript.Actions)
+                operatorTime += action.TimeExecution;
+
+            TimeSpan selectedDBTime = new TimeSpan();
+            foreach (var action in _selectedBDScript.Actions)
+                selectedDBTime += action.TimeExecution;
+
+            TimeSpan result = selectedDBTime - operatorTime;
+
+            string timeResult = "";
+            timeResult += "Время выполнения сценария в БД: " + selectedDBTime.ToString() + Environment.NewLine;
+            timeResult += "Время выполнения сценария пользователем: " + operatorTime.ToString() + Environment.NewLine;
+            timeResult += "Разница времени выполнения: " + result.ToString() + Environment.NewLine;
+
+            txtTimeControl.Text = timeResult;
+        }
+
+        private ScriptMD GetOperatorScript()
+        {
+            string actionsData = txtUserActionsList.Text;
+            string[] sp = actionsData.Split(new char[] { '*' }, StringSplitOptions.RemoveEmptyEntries);
+            char[] trimChars = new char[] { '\\', 'r', 'n' };
+
+            ScriptMD operatorScript = new ScriptMD();
+            operatorScript.Id = Guid.NewGuid();
+            operatorScript.Name = _selectedBDScript.Name;
+            operatorScript.Code = _selectedBDScript.Code;
+            operatorScript.Actions = new List<ActionMD>();
+
+            foreach (var item in sp)
+            {
+                ActionMD actionMD = new ActionMD();
+
+                // делим каждое действие на данные - номер по порядку, наименование, время выполнения
+                List<string> dataList = item.Trim().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                // получаем индекс первого вхождения символа '.' - до этого символа это порядковый номер действия
+                int orderValueIndex = dataList[0].IndexOf('.');
+                string orderValueStr = dataList[0].Substring(0, orderValueIndex);
+
+                actionMD.OrderValue = int.Parse(orderValueStr);
+                actionMD.Name = dataList[0].Substring(orderValueIndex + 1).Trim();
+                actionMD.TimeExecution = TimeSpan.Parse(dataList[1].Trim());
+
+                operatorScript.Actions.Add(actionMD);               
+            }
+
+            return operatorScript;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _selectedBDScript = null;
             txtBDActionsList.Text = "";
+            _actionsDate = "";
 
             if (string.IsNullOrWhiteSpace(txtScriptName.Text))
                 return;
 
-            ScriptMD sc = _scripts.FirstOrDefault(it => it.Name.Equals(txtScriptName.Text));
+            _selectedBDScript = _bdScripts.FirstOrDefault(it => it.Name.Equals(txtScriptName.Text));
 
-            if (sc != null)
+            if (_selectedBDScript != null)
             {
-                foreach (var ac in sc.Actions)
+                foreach (var ac in _selectedBDScript.Actions)
                 {
-                    _actionsDate += ac.OrderValue.ToString() + " " + ac.Name + " " + ac.TimeSpan.ToString() + Environment.NewLine;
+                    _actionsDate += ac.OrderValue.ToString() + " " + ac.Name + " " + ac.TimeExecution.ToString() + Environment.NewLine;
                 }
 
                 txtBDActionsList.Text = _actionsDate;
+                btnRunTest.Enabled = true;
             }
             else
             {

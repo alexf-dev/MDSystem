@@ -34,13 +34,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnRunTest = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtUserActionsList = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtBDActionsList = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTimeControl = new System.Windows.Forms.TextBox();
             this.btnMakeStatus = new System.Windows.Forms.Button();
             this.btnSaveReport = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -97,6 +98,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Действия пользователя:";
             // 
+            // txtUserActionsList
+            // 
+            this.txtUserActionsList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtUserActionsList.Location = new System.Drawing.Point(3, 16);
+            this.txtUserActionsList.Multiline = true;
+            this.txtUserActionsList.Name = "txtUserActionsList";
+            this.txtUserActionsList.Size = new System.Drawing.Size(419, 309);
+            this.txtUserActionsList.TabIndex = 4;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.txtBDActionsList);
@@ -106,15 +116,6 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Действия по сценарию в БД:";
-            // 
-            // txtUserActionsList
-            // 
-            this.txtUserActionsList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUserActionsList.Location = new System.Drawing.Point(3, 16);
-            this.txtUserActionsList.Multiline = true;
-            this.txtUserActionsList.Name = "txtUserActionsList";
-            this.txtUserActionsList.Size = new System.Drawing.Size(419, 309);
-            this.txtUserActionsList.TabIndex = 4;
             // 
             // txtBDActionsList
             // 
@@ -160,11 +161,22 @@
             this.btnSaveReport.Text = "Сохранить отчет";
             this.btnSaveReport.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(472, 57);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(38, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = ">>";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // RunTestedScript
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(930, 535);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSaveReport);
             this.Controls.Add(this.btnMakeStatus);
             this.Controls.Add(this.txtTimeControl);
@@ -202,5 +214,6 @@
         private System.Windows.Forms.TextBox txtTimeControl;
         private System.Windows.Forms.Button btnMakeStatus;
         private System.Windows.Forms.Button btnSaveReport;
+        private System.Windows.Forms.Button button1;
     }
 }

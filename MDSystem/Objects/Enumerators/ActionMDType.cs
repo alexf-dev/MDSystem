@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MDSystem.Objects
 {
-    /// <summary>
-    /// Запись лога
-    /// </summary>
-    public class LogMD
+    public enum ActionMDType
     {
+        none = 0,
+        Проверка = 1,
+        Вычисление = 2       
     }
 }

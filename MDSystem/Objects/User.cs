@@ -5,7 +5,7 @@ namespace MDSystem.Objects
     /// <summary>
     /// Пользователь
     /// </summary>
-    public class User : BaseObject
+    public class User : BaseObject, ISaveObject
     {
         /// <summary>
         /// Фамилия

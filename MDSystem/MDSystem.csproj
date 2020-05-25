@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="Data\ApplicationData.cs" />
     <Compile Include="Data\DataTransfer.cs" />
+    <Compile Include="Data\DataTransfer.SaveData.cs" />
     <Compile Include="Forms\RunTestedScript.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,10 +116,13 @@
     <Compile Include="Objects\ActionMDHistory.cs" />
     <Compile Include="Objects\Base\BaseObject.cs" />
     <Compile Include="Objects\Base\IBaseObject.cs" />
+    <Compile Include="Objects\Base\ISaveObject.cs" />
     <Compile Include="Objects\Department.cs" />
     <Compile Include="Objects\Enumerators\AccessLevel.cs" />
+    <Compile Include="Objects\Enumerators\ActionMDType.cs" />
+    <Compile Include="Objects\Enumerators\CommandAttribute.cs" />
     <Compile Include="Objects\LibraryMD.cs" />
-    <Compile Include="Objects\LogMD.cs" />
+    <Compile Include="Objects\Report.cs" />
     <Compile Include="Objects\ScriptMD.cs" />
     <Compile Include="Objects\Enumerators\ScriptMDType.cs" />
     <Compile Include="Objects\User.cs" />

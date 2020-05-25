@@ -20,7 +20,6 @@ namespace MDSystem
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            //Application.Run(new MainForm());
             UserEdit userEdit = new UserEdit();
             userEdit.Show();
         }

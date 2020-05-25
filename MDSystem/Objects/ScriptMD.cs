@@ -24,18 +24,21 @@ namespace MDSystem.Objects
         /// <summary>
         /// Дата создания (регистрации) 
         /// </summary>
-        public DateTime RegDate { get; set; }
-
-        /// <summary>
-        /// Время запуска 
-        /// </summary>
-        public DateTime StartDate { get; set; }
+        public DateTime RecDate { get; set; }        
 
         /// <summary>
         /// Описание 
         /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Тип сценария
+        /// </summary>
+        public ScriptMDType ScriptType { get; set; }
+
+        /// <summary>
+        /// Список действий
+        /// </summary>
         public List<ActionMD> Actions { get; set; }
     }
 }

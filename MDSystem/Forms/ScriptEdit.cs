@@ -20,18 +20,18 @@ namespace MDSystem.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Save();
+            SaveScript();
         }
 
-        private void Save()
+        private void SaveScript()
         {
-            string fileName = Environment.CurrentDirectory + @"\" + "Scripts.txt";
+            string fileName = Environment.CurrentDirectory + @"\" + "BDScripts.txt";
             string scriptData = "";
             scriptData += "script" + ";";// + Environment.NewLine;
             scriptData += txtScriptName.Text + ";";// + Environment.NewLine;
             scriptData += txtScriptCode.Text + ";";// + Environment.NewLine;
             scriptData += txtActionsList.Text;// + Environment.NewLine;
-            scriptData += "*" + Environment.NewLine;
+            scriptData += Environment.NewLine;
 
             try
             {
