@@ -16,6 +16,7 @@ namespace MDSystem.Objects
         public Guid? ParentId { get; set; }
         public List<Guid> ParentIds { get; set; }
         public string Name { get; set; }
+        public bool AllObjects { get; set; }
 
         public GetDataFilter()
         {
