@@ -20,6 +20,13 @@ namespace MDSystem.Data
         {
             if (saveObject is User)
                 return SaveObject((User)saveObject, commandAttribute);
+            else 
+                if (saveObject is ScriptMD)
+                    return SaveObject((ScriptMD)saveObject, commandAttribute);
+            else
+                if (saveObject is ActionMD)
+                    return SaveObject((ActionMD)saveObject, commandAttribute);
+
 
             return false;
         }
@@ -86,6 +93,134 @@ namespace MDSystem.Data
                 return true;
 
             return false;
-        }       
+        }
+
+        /// <summary>
+        /// Save object ScriptMDs
+        /// </summary>
+        /// <param name="saveObject"></param>
+        /// <param name="commandAttribute"></param>
+        /// <returns></returns>
+        private static bool SaveObject(ScriptMD saveObject, CommandAttribute commandAttribute)
+        {
+            int affectedRows = 0;
+
+            using (var conn = OpenConnection(ConnectionString))
+            {
+                switch (commandAttribute)
+                {
+                    case CommandAttribute.INSERT:
+                        {
+                            try
+                            {
+                                var insertSQL = "INSERT INTO public.t_scripts (id, name, code, script_type, description, rec_date, del_rec) Values (@Id, @Name, @Code, @ScriptType, @Description, now(), @DelRec);";
+                                affectedRows = conn.Execute(insertSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.UPDATE:
+                        {
+                            try
+                            {
+                                var updateSQL = "UPDATE INTO public.t_users (id, firstname, lastname, middlename, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, now(), @DelRec);";
+                                affectedRows = conn.Execute(updateSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка обновления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.DELETE:
+                        {
+                            try
+                            {
+                                var deleteSQL = "DELETE FROM public.t_users WHERE id = @Id;";
+                                affectedRows = conn.Execute(deleteSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка удаления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (affectedRows > 0)
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Save object ActionMD
+        /// </summary>
+        /// <param name="saveObject"></param>
+        /// <param name="commandAttribute"></param>
+        /// <returns></returns>
+        private static bool SaveObject(ActionMD saveObject, CommandAttribute commandAttribute)
+        {
+            int affectedRows = 0;
+
+            using (var conn = OpenConnection(ConnectionString))
+            {
+                switch (commandAttribute)
+                {
+                    case CommandAttribute.INSERT:
+                        {                            
+                            try
+                            {
+                                var insertSQL = "INSERT INTO public.t_actions (id, parent_id, name, order_value, action_type, time_execution, description, rec_date, del_rec) Values (@Id, @ParentId, @Name, @OrderValue, @ActionType, @TimeExecution, @Description, now(), @DelRec);";
+                                affectedRows = conn.Execute(insertSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.UPDATE:
+                        {
+                            try
+                            {
+                                var updateSQL = "UPDATE INTO public.t_users (id, firstname, lastname, middlename, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, now(), @DelRec);";
+                                affectedRows = conn.Execute(updateSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка обновления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.DELETE:
+                        {
+                            try
+                            {
+                                var deleteSQL = "DELETE FROM public.t_users WHERE id = @Id;";
+                                affectedRows = conn.Execute(deleteSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка удаления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (affectedRows > 0)
+                return true;
+
+            return false;
+        }
     }
 }

@@ -3,9 +3,6 @@ using MDSystem.Objects;
 using System;
 using System.Linq;
 using System.Windows.Forms;
-using Dapper;
-using Npgsql;
-using System.Data;
 
 namespace MDSystem.Forms
 {
@@ -58,18 +55,6 @@ namespace MDSystem.Forms
             }
 
             return user.Save(CommandAttribute.INSERT);
-        }
-
-        /// <summary>  
-        /// get the db connection  
-        /// </summary>  
-        /// <param name="connStr"></param>  
-        /// <returns></returns>  
-        public static IDbConnection OpenConnection(string connStr)
-        {
-            var conn = new NpgsqlConnection(connStr);
-            conn.Open();
-            return conn;
         }
     }
 }

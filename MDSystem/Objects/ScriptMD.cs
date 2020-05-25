@@ -9,7 +9,7 @@ namespace MDSystem.Objects
     /// <summary>
     /// Сценарий действия
     /// </summary>
-    public class ScriptMD : BaseObject
+    public class ScriptMD : BaseObject, ISaveObject
     {
         /// <summary>
         /// Наименование 
@@ -30,7 +30,7 @@ namespace MDSystem.Objects
         /// Описание 
         /// </summary>
         public string Description { get; set; }
-
+        
         /// <summary>
         /// Тип сценария
         /// </summary>

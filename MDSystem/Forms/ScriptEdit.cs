@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MDSystem.Data;
+using MDSystem.Objects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,32 +22,85 @@ namespace MDSystem.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            SaveScript();
+            if (SaveScript())
+                MessageBox.Show("Сценарий сохранен");
+            else
+                MessageBox.Show("Ошибка сохранения");
         }
 
-        private void SaveScript()
+        private bool SaveScript()
         {
-            string fileName = Environment.CurrentDirectory + @"\" + "BDScripts.txt";
-            string scriptData = "";
-            scriptData += "script" + ";";// + Environment.NewLine;
-            scriptData += txtScriptName.Text + ";";// + Environment.NewLine;
-            scriptData += txtScriptCode.Text + ";";// + Environment.NewLine;
-            scriptData += txtActionsList.Text;// + Environment.NewLine;
-            scriptData += Environment.NewLine;
+            ScriptMD script = new ScriptMD();
+            script.Id = Guid.NewGuid();
+            script.Name = txtScriptName.Text;
+            script.Code = txtScriptCode.Text;
+            script.ScriptType = ScriptMDType.Тестовый;
+            script.Actions = GetScriptActions();
 
-            try
+            bool isSuccess = false;
+
+            if (script.Save(CommandAttribute.INSERT))
             {
-                using (StreamWriter sw = new StreamWriter(fileName, true, System.Text.Encoding.UTF8))
+                foreach (var actionMD in script.Actions)
                 {
-                    sw.Write(scriptData);
+                    actionMD.ParentId = script.Id;
+                    isSuccess = actionMD.Save(CommandAttribute.INSERT);
                 }
-
-                MessageBox.Show("Запись " + fileName + " выполнена");
             }
-            catch (Exception e)
+
+            return isSuccess;
+
+            //string fileName = Environment.CurrentDirectory + @"\" + "BDScripts.txt";
+            //string scriptData = "";
+            //scriptData += "script" + ";";// + Environment.NewLine;
+            //scriptData += txtScriptName.Text + ";";// + Environment.NewLine;
+            //scriptData += txtScriptCode.Text + ";";// + Environment.NewLine;
+            //scriptData += txtActionsList.Text;// + Environment.NewLine;
+            //scriptData += Environment.NewLine;
+
+            //try
+            //{
+            //    using (StreamWriter sw = new StreamWriter(fileName, true, System.Text.Encoding.UTF8))
+            //    {
+            //        sw.Write(scriptData);
+            //    }
+
+            //    MessageBox.Show("Запись " + fileName + " выполнена");
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}            
+        }
+
+        private List<ActionMD> GetScriptActions()
+        {
+            string actionsData = txtActionsList.Text;
+            string[] sp = actionsData.Split(new char[] { '*' }, StringSplitOptions.RemoveEmptyEntries);
+            char[] trimChars = new char[] { '\\', 'r', 'n' };
+
+            List<ActionMD> actions = new List<ActionMD>();
+
+            foreach (var item in sp)
             {
-                Console.WriteLine(e.Message);
-            }            
+                ActionMD actionMD = new ActionMD();
+                actionMD.Id = Guid.NewGuid();
+                // делим каждое действие на данные - номер по порядку, наименование, время выполнения
+                List<string> dataList = item.Trim().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                // получаем индекс первого вхождения символа '.' - до этого символа это порядковый номер действия
+                int orderValueIndex = dataList[0].IndexOf('.');
+                string orderValueStr = dataList[0].Substring(0, orderValueIndex);
+
+                actionMD.OrderValue = int.Parse(orderValueStr);
+                actionMD.Name = dataList[0].Substring(orderValueIndex + 1).Trim();
+                actionMD.TimeExecution = TimeSpan.Parse(dataList[1].Trim());
+                actionMD.ActionType = ActionMDType.Вычисление;
+
+                actions.Add(actionMD);
+            }
+
+            return actions;
         }
     }
 }

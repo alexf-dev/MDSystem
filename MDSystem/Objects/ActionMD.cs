@@ -5,8 +5,13 @@ namespace MDSystem.Objects
     /// <summary>
     /// Действие системы
     /// </summary>
-    public class ActionMD : BaseObject
+    public class ActionMD : BaseObject, ISaveObject
     {
+        /// <summary>
+        /// Идентификатор родительского объекта
+        /// </summary>
+        public Guid ParentId { get; set; }
+
         /// <summary>
         /// Наименование
         /// </summary>
