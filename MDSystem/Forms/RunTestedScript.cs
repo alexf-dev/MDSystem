@@ -1,4 +1,5 @@
-﻿using MDSystem.Objects;
+﻿using MDSystem.Data;
+using MDSystem.Objects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,8 +15,6 @@ namespace MDSystem.Forms
 {
     public partial class RunTestedScript : Form
     {
-        private string _fullName = "";
-        private string _scriptName = "";
         private string _actionsDate = "";
 
         private List<ScriptMD> _bdScripts = new List<ScriptMD>();
@@ -37,79 +36,80 @@ namespace MDSystem.Forms
         {
             List<ScriptMD> bdScripts = new List<ScriptMD>();
 
-            string fileName = Environment.CurrentDirectory + @"\" + "BDScripts.txt";
-            string scriptData = "";
+            //string fileName = Environment.CurrentDirectory + @"\" + "BDScripts.txt";
+            //string scriptData = "";
 
-            // Получаем информацию о сценариях из BDScripts.txt
-            try
-            {
-                using (StreamReader sr = new StreamReader(fileName, System.Text.Encoding.UTF8))
-                {
-                    scriptData = sr.ReadToEnd();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            //// Получаем информацию о сценариях из BDScripts.txt
+            //try
+            //{
+            //    using (StreamReader sr = new StreamReader(fileName, System.Text.Encoding.UTF8))
+            //    {
+            //        scriptData = sr.ReadToEnd();
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
 
-            // Каждая запись о скрипте в текстовом файле заканчивается символом *
-            // получаем массив строк, в каждой информация о конкретном скрипте
-            string[] sp = scriptData.Split(new char[] { '*'}, StringSplitOptions.RemoveEmptyEntries);
+            //// Каждая запись о скрипте в текстовом файле заканчивается символом *
+            //// получаем массив строк, в каждой информация о конкретном скрипте
+            //string[] sp = scriptData.Split(new char[] { '*'}, StringSplitOptions.RemoveEmptyEntries);
 
-            char[] trimChars = new char[] { '\\', 'r', 'n'};
+            //char[] trimChars = new char[] { '\\', 'r', 'n'};
 
-            foreach (var item in sp)
-            {
-                // item - строка данных одного сценария
-                if (item.Contains("script"))    // каждая строка сценария содержит слово script в начале строки, т.е. здесь мы избавляемся от пустых строк
-                {
-                    List<string> items = item.Trim(trimChars).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(it => it.Trim(trimChars)).ToList();
-                    if (items[0].Contains("script"))
-                        items.RemoveAt(0);
+            //foreach (var item in sp)
+            //{
+            //    // item - строка данных одного сценария
+            //    if (item.Contains("script"))    // каждая строка сценария содержит слово script в начале строки, т.е. здесь мы избавляемся от пустых строк
+            //    {
+            //        List<string> items = item.Trim(trimChars).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(it => it.Trim(trimChars)).ToList();
+            //        if (items[0].Contains("script"))
+            //            items.RemoveAt(0);
 
-                    ScriptMD script = new ScriptMD();
-                    script.Name = items[0];
-                    items.RemoveAt(0);
-                    script.Code = items[0];
-                    items.RemoveAt(0);
+            //        ScriptMD script = new ScriptMD();
+            //        script.Name = items[0];
+            //        items.RemoveAt(0);
+            //        script.Code = items[0];
+            //        items.RemoveAt(0);
 
-                    // если в строке сценария отсутствуют действия - пропускаем эту строку, сценарий не учитывается
-                    if (items.Count > 0)
-                        script.Actions = new List<ActionMD>();
-                    else
-                        continue;
+            //        // если в строке сценария отсутствуют действия - пропускаем эту строку, сценарий не учитывается
+            //        if (items.Count > 0)
+            //            script.Actions = new List<ActionMD>();
+            //        else
+            //            continue;
 
-                    // оставшиеся в items строки - действия по сценарию
-                    foreach (var data in items)
-                    {
-                        ActionMD actionMD = new ActionMD();
+            //        // оставшиеся в items строки - действия по сценарию
+            //        foreach (var data in items)
+            //        {
+            //            ActionMD actionMD = new ActionMD();
 
-                        // делим каждое действие на данные - номер по порядку, наименование, время выполнения
-                        List<string> dataList = data.Trim().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            //            // делим каждое действие на данные - номер по порядку, наименование, время выполнения
+            //            List<string> dataList = data.Trim().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                        // получаем индекс первого вхождения символа '.' - до этого символа это порядковый номер действия
-                        int orderValueIndex = dataList[0].IndexOf('.');
-                        string orderValueStr = dataList[0].Substring(0, orderValueIndex);
+            //            // получаем индекс первого вхождения символа '.' - до этого символа это порядковый номер действия
+            //            int orderValueIndex = dataList[0].IndexOf('.');
+            //            string orderValueStr = dataList[0].Substring(0, orderValueIndex);
 
-                        actionMD.OrderValue = int.Parse(orderValueStr);
-                        actionMD.Name = dataList[0].Substring(orderValueIndex + 1).Trim();
-                        actionMD.TimeExecution = TimeSpan.Parse(dataList[1].Trim());
+            //            actionMD.OrderValue = int.Parse(orderValueStr);
+            //            actionMD.Name = dataList[0].Substring(orderValueIndex + 1).Trim();
+            //            actionMD.TimeExecution = TimeSpan.Parse(dataList[1].Trim());
 
-                        script.Actions.Add(actionMD);
-                    }
+            //            script.Actions.Add(actionMD);
+            //        }
 
-                    bdScripts.Add(script);
-                }
-            }
+            //        bdScripts.Add(script);
+            //    }
+            //}
             
             return bdScripts;
         }
 
         private void btnRunTest_Click(object sender, EventArgs e)
         {
-            _operatorScript = GetOperatorScript();
+            btnMakeStatus.Enabled = btnSaveReport.Enabled = false;
 
+            _operatorScript = GetOperatorScript();
             MakeReportData();
         }
 
@@ -133,6 +133,7 @@ namespace MDSystem.Forms
             timeResult += "Разница времени выполнения: " + result.ToString() + Environment.NewLine;
 
             txtTimeControl.Text = timeResult;
+            btnMakeStatus.Enabled = btnSaveReport.Enabled = true;
         }
 
         private ScriptMD GetOperatorScript()
@@ -170,21 +171,22 @@ namespace MDSystem.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            _actionsDate = "";
             _selectedBDScript = null;
             txtBDActionsList.Text = "";
-            _actionsDate = "";
 
             if (string.IsNullOrWhiteSpace(txtScriptName.Text))
                 return;
 
-            _selectedBDScript = _bdScripts.FirstOrDefault(it => it.Name.Equals(txtScriptName.Text));
+            _selectedBDScript = (ScriptMD)(DataTransfer.GetDataObject<ScriptMD>(new GetDataFilterScriptMD { Name = txtScriptName.Text }));
+            //_bdScripts.FirstOrDefault(it => it.Name.Equals(txtScriptName.Text));
 
             if (_selectedBDScript != null)
             {
-                foreach (var ac in _selectedBDScript.Actions)
-                {
-                    _actionsDate += ac.OrderValue.ToString() + " " + ac.Name + " " + ac.TimeExecution.ToString() + Environment.NewLine;
-                }
+                _selectedBDScript.Actions = (DataTransfer.GetDataObjects<ActionMD>(new GetDataFilterActionMD { ParentId = _selectedBDScript.Id })).ConvertAll(it => (ActionMD)it);
+
+                foreach (var ac in _selectedBDScript.Actions)                
+                    _actionsDate += ac.OrderValue.ToString() + " " + ac.Name + " " + ac.TimeExecution.ToString() + Environment.NewLine;                
 
                 txtBDActionsList.Text = _actionsDate;
                 btnRunTest.Enabled = true;

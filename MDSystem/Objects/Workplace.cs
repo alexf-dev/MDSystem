@@ -5,7 +5,7 @@ namespace MDSystem.Objects
     /// <summary>
     /// Должность
     /// </summary>
-    public class Workplace : BaseObject
+    public class Workplace : BaseObject, ISaveObject
     {
         /// <summary>
         /// Идентификатор родительского объекта (подразделение)
@@ -15,11 +15,11 @@ namespace MDSystem.Objects
         /// <summary>
         /// Наименование 
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; }        
 
-        /// <summary>
-        /// Уровень доступа
-        /// </summary>
-        public AccessLevel AccessLevel { get; set; }
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

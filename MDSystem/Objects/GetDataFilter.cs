@@ -16,6 +16,7 @@ namespace MDSystem.Objects
         public Guid? ParentId { get; set; }
         public List<Guid> ParentIds { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public bool AllObjects { get; set; }
 
         public GetDataFilter()
@@ -24,7 +25,35 @@ namespace MDSystem.Objects
             Ids = null;
             ParentId = null;
             ParentIds = null;
-            Name = null;
+            Description = null;
+            AllObjects = false;
         }
+    }
+
+    public class GetDataFilterUser : GetDataFilter
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string MiddleName { get; set; }
+    }
+
+    public class GetDataFilterDepartment : GetDataFilter
+    {
+
+    }
+
+    public class GetDataFilterWorkplace : GetDataFilter
+    {
+
+    }
+
+    public class GetDataFilterScriptMD : GetDataFilter
+    {
+
+    }
+
+    public class GetDataFilterActionMD : GetDataFilter
+    {
+
     }
 }

@@ -35,5 +35,17 @@ namespace MDSystem
             RunTestedScript rts = new RunTestedScript();
             rts.Show();
         }
+
+        private void ToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            DepartmentEdit de = new DepartmentEdit();
+            de.Show();
+        }
+
+        private void ToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            WorkplaceEdit we = new WorkplaceEdit();
+            we.Show();
+        }
     }
 }

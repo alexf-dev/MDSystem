@@ -9,7 +9,7 @@ namespace MDSystem.Objects
     /// <summary>
     /// Подразделение
     /// </summary>
-    public class Department : BaseObject
+    public class Department : BaseObject, ISaveObject
     {
         /// <summary>
         /// Идентификатор родительского объекта (вышестоящее подразделение)
@@ -20,5 +20,10 @@ namespace MDSystem.Objects
         /// Наименование 
         /// </summary>
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

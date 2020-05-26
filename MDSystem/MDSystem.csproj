@@ -89,6 +89,12 @@
     <Compile Include="Data\DataTransfer.cs" />
     <Compile Include="Data\DataTransfer.SaveData.cs" />
     <Compile Include="Data\DataTransfer.GetData.cs" />
+    <Compile Include="Forms\DepartmentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DepartmentEdit.Designer.cs">
+      <DependentUpon>DepartmentEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RunTestedScript.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,19 +113,25 @@
     <Compile Include="Forms\UserEdit.Designer.cs">
       <DependentUpon>UserEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\WorkplaceEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WorkplaceEdit.Designer.cs">
+      <DependentUpon>WorkplaceEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Objects\AccessLevel.cs" />
     <Compile Include="Objects\ActionMD.cs" />
     <Compile Include="Objects\ActionMDHistory.cs" />
     <Compile Include="Objects\Base\BaseObject.cs" />
     <Compile Include="Objects\Base\IBaseObject.cs" />
     <Compile Include="Objects\Base\ISaveObject.cs" />
     <Compile Include="Objects\Department.cs" />
-    <Compile Include="Objects\Enumerators\AccessLevel.cs" />
     <Compile Include="Objects\Enumerators\ActionMDType.cs" />
     <Compile Include="Objects\Enumerators\CommandAttribute.cs" />
     <Compile Include="Objects\GetDataFilter.cs" />
@@ -141,6 +153,9 @@
     <Folder Include="Objects\BDObjects\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\DepartmentEdit.resx">
+      <DependentUpon>DepartmentEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RunTestedScript.resx">
       <DependentUpon>RunTestedScript.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserEdit.resx">
       <DependentUpon>UserEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WorkplaceEdit.resx">
+      <DependentUpon>WorkplaceEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

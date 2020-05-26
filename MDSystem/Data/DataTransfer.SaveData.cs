@@ -26,7 +26,12 @@ namespace MDSystem.Data
             else
                 if (saveObject is ActionMD)
                     return SaveObject((ActionMD)saveObject, commandAttribute);
-
+            else
+                if (saveObject is Department)
+                    return SaveObject((Department)saveObject, commandAttribute);
+            else
+                if (saveObject is Workplace)
+                    return SaveObject((Workplace)saveObject, commandAttribute);
 
             return false;
         }
@@ -49,7 +54,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var insertSQL = "INSERT INTO public.t_users (id, firstname, lastname, middlename, workplace_id, department_id, username, password, status, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, @WorkplaceId, @DepartmentId, @UserName, @Password, @Status, now(), @DelRec);";
+                                var insertSQL = "INSERT INTO public.t_users (id, firstname, lastname, middlename, workplace_id, department_id, username, password, status, access_level_value, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, @WorkplaceId, @DepartmentId, @UserName, @Password, @Status, @AccessLevelValue, now(), @DelRec);";
                                 affectedRows = conn.Execute(insertSQL, saveObject);
                             }
                             catch (Exception exc)
@@ -96,7 +101,7 @@ namespace MDSystem.Data
         }
 
         /// <summary>
-        /// Save object ScriptMDs
+        /// Save object ScriptMD
         /// </summary>
         /// <param name="saveObject"></param>
         /// <param name="commandAttribute"></param>
@@ -178,6 +183,134 @@ namespace MDSystem.Data
                             try
                             {
                                 var insertSQL = "INSERT INTO public.t_actions (id, parent_id, name, order_value, action_type, time_execution, description, rec_date, del_rec) Values (@Id, @ParentId, @Name, @OrderValue, @ActionType, @TimeExecution, @Description, now(), @DelRec);";
+                                affectedRows = conn.Execute(insertSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.UPDATE:
+                        {
+                            try
+                            {
+                                var updateSQL = "UPDATE INTO public.t_users (id, firstname, lastname, middlename, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, now(), @DelRec);";
+                                affectedRows = conn.Execute(updateSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка обновления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.DELETE:
+                        {
+                            try
+                            {
+                                var deleteSQL = "DELETE FROM public.t_users WHERE id = @Id;";
+                                affectedRows = conn.Execute(deleteSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка удаления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (affectedRows > 0)
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Save object Department
+        /// </summary>
+        /// <param name="saveObject"></param>
+        /// <param name="commandAttribute"></param>
+        /// <returns></returns>
+        private static bool SaveObject(Department saveObject, CommandAttribute commandAttribute)
+        {
+            int affectedRows = 0;
+
+            using (var conn = OpenConnection(ConnectionString))
+            {
+                switch (commandAttribute)
+                {
+                    case CommandAttribute.INSERT:
+                        {
+                            try
+                            {
+                                var insertSQL = "INSERT INTO public.t_departments (id, parent_id, name, rec_date, del_rec) Values (@Id, @ParentId, @Name, now(), @DelRec);";
+                                affectedRows = conn.Execute(insertSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.UPDATE:
+                        {
+                            try
+                            {
+                                var updateSQL = "UPDATE INTO public.t_users (id, firstname, lastname, middlename, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, now(), @DelRec);";
+                                affectedRows = conn.Execute(updateSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка обновления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.DELETE:
+                        {
+                            try
+                            {
+                                var deleteSQL = "DELETE FROM public.t_users WHERE id = @Id;";
+                                affectedRows = conn.Execute(deleteSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка удаления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (affectedRows > 0)
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Save object Workplace
+        /// </summary>
+        /// <param name="saveObject"></param>
+        /// <param name="commandAttribute"></param>
+        /// <returns></returns>
+        private static bool SaveObject(Workplace saveObject, CommandAttribute commandAttribute)
+        {
+            int affectedRows = 0;
+
+            using (var conn = OpenConnection(ConnectionString))
+            {
+                switch (commandAttribute)
+                {
+                    case CommandAttribute.INSERT:
+                        {
+                            try
+                            {
+                                var insertSQL = "INSERT INTO public.t_workplaces (id, parent_id, name, access_level, rec_date, del_rec) Values (@Id, @ParentId, @Name, @AccessLevel, now(), @DelRec);";
                                 affectedRows = conn.Execute(insertSQL, saveObject);
                             }
                             catch (Exception exc)

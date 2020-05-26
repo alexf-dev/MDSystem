@@ -52,8 +52,20 @@ namespace MDSystem.Objects
         /// </summary>
         public UserStatus Status { get; set; }
 
+        /// <summary>
+        /// Уровень доступа
+        /// </summary>
+        public AccessLevel AccessLevel { get; set; }
+
+        /// <summary>
+        /// Дата изменения записи в БД
+        /// </summary>
+        public DateTime RecDate { get; set; }
+
         public Guid WorkplaceId { get { return Workplace.Id; } }
 
         public Guid DepartmentId { get { return Department.Id; } }
+
+        public int AccessLevelValue { get; set; }
     }
 }

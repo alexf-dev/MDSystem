@@ -36,5 +36,10 @@ namespace MDSystem.Objects
         /// Тип действия
         /// </summary>
         public ActionMDType ActionType { get; set; }
+
+        /// <summary>
+        /// Дата изменения записи в БД
+        /// </summary>
+        public DateTime RecDate { get; set; }
     }
 }

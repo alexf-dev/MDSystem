@@ -123,6 +123,7 @@
             this.txtBDActionsList.Location = new System.Drawing.Point(3, 16);
             this.txtBDActionsList.Multiline = true;
             this.txtBDActionsList.Name = "txtBDActionsList";
+            this.txtBDActionsList.ReadOnly = true;
             this.txtBDActionsList.Size = new System.Drawing.Size(418, 309);
             this.txtBDActionsList.TabIndex = 4;
             // 
@@ -145,6 +146,7 @@
             // 
             // btnMakeStatus
             // 
+            this.btnMakeStatus.Enabled = false;
             this.btnMakeStatus.Location = new System.Drawing.Point(635, 469);
             this.btnMakeStatus.Name = "btnMakeStatus";
             this.btnMakeStatus.Size = new System.Drawing.Size(113, 44);
@@ -154,6 +156,7 @@
             // 
             // btnSaveReport
             // 
+            this.btnSaveReport.Enabled = false;
             this.btnSaveReport.Location = new System.Drawing.Point(790, 469);
             this.btnSaveReport.Name = "btnSaveReport";
             this.btnSaveReport.Size = new System.Drawing.Size(113, 44);
@@ -189,6 +192,7 @@
             this.Controls.Add(this.txtFullName);
             this.Controls.Add(this.label1);
             this.Name = "RunTestedScript";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Выполнение тестового сценария";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

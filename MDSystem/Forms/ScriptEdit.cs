@@ -17,54 +17,56 @@ namespace MDSystem.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveScript())
-                MessageBox.Show("Сценарий сохранен");
+            string result;
+
+            if (IsValidData(out result))
+            {
+                if (SaveScript())
+                    MessageBox.Show("Сценарий сохранен");
+                else
+                    MessageBox.Show("Ошибка сохранения");
+            }
             else
-                MessageBox.Show("Ошибка сохранения");
+            {
+                MessageBox.Show(result);
+                return;
+            }
+        }
+
+        private bool IsValidData(out string result)
+        {
+            result = "";
+
+            if (string.IsNullOrWhiteSpace(txtScriptName.Text))
+                result += "Не указано наименование сценария\r\n";
+
+            if (string.IsNullOrWhiteSpace(txtActionsList.Text))
+                result += "Не заполнен список действий\r\n";
+
+            if (!string.IsNullOrWhiteSpace(result))
+                return false;
+
+            return true;
         }
 
         private bool SaveScript()
         {
-            //ScriptMD script = new ScriptMD();
-            //script.Id = Guid.NewGuid();
-            //script.Name = txtScriptName.Text;
-            //script.Code = txtScriptCode.Text;
-            //script.ScriptType = ScriptMDType.Тестовый;
-            //script.Actions = GetScriptActions();
+            ScriptMD script = new ScriptMD();
+            script.Id = Guid.NewGuid();
+            script.Name = txtScriptName.Text;
+            script.Code = txtScriptCode.Text;
+            script.ScriptType = ScriptMDType.Тестовый;
+            script.Actions = GetScriptActions();
 
             bool isSuccess = false;
 
-            //if (script.Save(CommandAttribute.INSERT))
-            //{
-            //    foreach (var actionMD in script.Actions)
-            //    {
-            //        actionMD.ParentId = script.Id;
-            //        isSuccess = actionMD.Save(CommandAttribute.INSERT);
-            //    }
-            //}
-
-            //return isSuccess;
-
-            string fileName = Environment.CurrentDirectory + @"\" + "BDScripts.txt";
-            string scriptData = "";
-            scriptData += "script" + ";";// + Environment.NewLine;
-            scriptData += txtScriptName.Text + ";";// + Environment.NewLine;
-            scriptData += txtScriptCode.Text + ";";// + Environment.NewLine;
-            scriptData += txtActionsList.Text;// + Environment.NewLine;
-            scriptData += Environment.NewLine;
-
-            try
+            if (script.Save(CommandAttribute.INSERT))
             {
-                using (StreamWriter sw = new StreamWriter(fileName, true, System.Text.Encoding.UTF8))
+                foreach (var actionMD in script.Actions)
                 {
-                    sw.Write(scriptData);
+                    actionMD.ParentId = script.Id;
+                    isSuccess = actionMD.Save(CommandAttribute.INSERT);
                 }
-
-                isSuccess = true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
             }
 
             return isSuccess;
@@ -76,7 +78,7 @@ namespace MDSystem.Forms
             string[] sp = actionsData.Split(new char[] { '*' }, StringSplitOptions.RemoveEmptyEntries);
             char[] trimChars = new char[] { '\\', 'r', 'n' };
 
-            List<ActionMD> actions = new List<ActionMD>();
+            List<ActionMD> actions = new List<ActionMD>();   
 
             foreach (var item in sp)
             {
