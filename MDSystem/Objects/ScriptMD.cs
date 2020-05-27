@@ -42,6 +42,11 @@ namespace MDSystem.Objects
         public List<ActionMD> Actions { get; set; }
 
         /// <summary>
+        /// Порядок выполненных действий
+        /// </summary>
+        public int[] ActionsOrderList { get; set; }
+
+        /// <summary>
         /// Дата изменения записи в БД
         /// </summary>
         public DateTime RecDate { get; set; }

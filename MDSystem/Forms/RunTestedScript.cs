@@ -20,8 +20,17 @@ namespace MDSystem.Forms
         private List<ScriptMD> _bdScripts = new List<ScriptMD>();
         private List<ScriptMD> _operatorScripts = new List<ScriptMD>();
 
+        private TimeSpan operatorTime = new TimeSpan();
+        private TimeSpan selectedDBTime = new TimeSpan();
+
         private ScriptMD _selectedBDScript = null;
         private ScriptMD _operatorScript = null;
+        private User _operatorsUser = null;
+
+        private string _firstName = "";
+        private string _lastName = "";
+        private string _middleName = "";
+        private DateTime _startDate;
 
         public RunTestedScript()
         {
@@ -29,7 +38,7 @@ namespace MDSystem.Forms
 
             btnRunTest.Enabled = false;
 
-            _bdScripts = GetBDScripts();
+            //_bdScripts = GetBDScripts();
         }
 
         private List<ScriptMD> GetBDScripts()
@@ -109,6 +118,7 @@ namespace MDSystem.Forms
         {
             btnMakeStatus.Enabled = btnSaveReport.Enabled = false;
 
+            _startDate = DateTime.Now;
             _operatorScript = GetOperatorScript();
             MakeReportData();
         }
@@ -117,11 +127,11 @@ namespace MDSystem.Forms
         {
             TimeSpan zeroTime = new TimeSpan(0, 0, 0);
 
-            TimeSpan operatorTime = new TimeSpan();
+            operatorTime = new TimeSpan();
             foreach (var action in _operatorScript.Actions)
                 operatorTime += action.TimeExecution;
 
-            TimeSpan selectedDBTime = new TimeSpan();
+            selectedDBTime = new TimeSpan();
             foreach (var action in _selectedBDScript.Actions)
                 selectedDBTime += action.TimeExecution;
 
@@ -148,6 +158,7 @@ namespace MDSystem.Forms
             operatorScript.Code = _selectedBDScript.Code;
             operatorScript.Actions = new List<ActionMD>();
 
+
             foreach (var item in sp)
             {
                 ActionMD actionMD = new ActionMD();
@@ -165,6 +176,16 @@ namespace MDSystem.Forms
 
                 operatorScript.Actions.Add(actionMD);               
             }
+
+            List<int> orderList = new List<int>();
+
+            foreach (var act in operatorScript.Actions)
+                orderList.Add(act.OrderValue);
+
+            operatorScript.ActionsOrderList = orderList.ToArray();
+
+            //foreach (var act in operatorScript.Actions)
+            //    operatorScript.ActionsOrderList.Add(act.OrderValue);
 
             return operatorScript;
         }
@@ -195,7 +216,59 @@ namespace MDSystem.Forms
             {
                 MessageBox.Show("Сценарий " + "\"" + txtScriptName.Text + "\"" + " отсутствует в БД.");
                 return;
-            }
+            }            
+        }
+
+        private User GetOperatorsUser()
+        {
+            if (string.IsNullOrWhiteSpace(txtFullName.Text))
+                return null;
+
+            MakeOperatorsFullName();
+
+            return (User)(DataTransfer.GetDataObject<User>(new GetDataFilterUser { FirstName = _firstName, LastName = _lastName, MiddleName = _middleName }));
+        }
+
+        private void MakeOperatorsFullName()
+        {
+            if (string.IsNullOrWhiteSpace(txtFullName.Text))
+                return;
+
+            string[] fullNameArray = txtFullName.Text.Split(new char[] { ' ' });
+
+            _firstName = fullNameArray.Length > 0 ? fullNameArray[0].Trim() : "";
+            _lastName = fullNameArray.Length > 1 ? fullNameArray[1].Trim() : "";
+            _middleName = fullNameArray.Length > 2 ? fullNameArray[2].Trim() : "";
+        }
+
+        private void btnSaveReport_Click(object sender, EventArgs e)
+        {
+            Report report = MakeNewReport();
+
+            if (report.Save(CommandAttribute.INSERT))
+                MessageBox.Show("Отчет сохранен");
+            else
+                MessageBox.Show("Ошибка сохранения");
+        }
+
+        private Report MakeNewReport()
+        {
+            _operatorsUser = GetOperatorsUser();
+
+            Report report = new Report();
+            report.Id = Guid.NewGuid();
+            report.ScriptId = _selectedBDScript.Id;
+            report.ScriptName = _selectedBDScript.Name;
+            report.UserID = ApplicationData.CurrentUser.Id;
+            report.OperatorFullName = _operatorsUser.FullName;
+            report.ActionsAmount = _operatorScript.Actions.Count;
+            report.TimeExecutionAmount = operatorTime;
+            report.Actions = _operatorScript.Actions;
+            report.ActionsOrderList = _operatorScript.ActionsOrderList;
+            report.Description = "";
+            report.StartDate = _startDate;
+
+            return report;
         }
     }
 }

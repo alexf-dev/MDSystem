@@ -114,16 +114,17 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(403, 36);
+            this.button3.Location = new System.Drawing.Point(417, 64);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 59);
             this.button3.TabIndex = 2;
             this.button3.Text = "Вывести отчеты оператора";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(219, 36);
+            this.button2.Location = new System.Drawing.Point(239, 64);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 59);
             this.button2.TabIndex = 1;
@@ -133,7 +134,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(35, 36);
+            this.button1.Location = new System.Drawing.Point(61, 64);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 59);
             this.button1.TabIndex = 0;

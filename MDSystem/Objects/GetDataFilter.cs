@@ -56,4 +56,9 @@ namespace MDSystem.Objects
     {
 
     }
+
+    public class GetDataFilterReport : GetDataFilter
+    {
+        public string OperatorFullName { get; set; }
+    }
 }

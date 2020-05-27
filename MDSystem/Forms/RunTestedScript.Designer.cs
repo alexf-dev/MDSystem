@@ -163,6 +163,7 @@
             this.btnSaveReport.TabIndex = 10;
             this.btnSaveReport.Text = "Сохранить отчет";
             this.btnSaveReport.UseVisualStyleBackColor = true;
+            this.btnSaveReport.Click += new System.EventHandler(this.btnSaveReport_Click);
             // 
             // button1
             // 

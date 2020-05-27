@@ -58,6 +58,13 @@ namespace MDSystem.Forms
             script.ScriptType = ScriptMDType.Тестовый;
             script.Actions = GetScriptActions();
 
+            List<int> orderList = new List<int>();
+
+            foreach (var act in script.Actions)
+                orderList.Add(act.OrderValue);
+
+            script.ActionsOrderList = orderList.ToArray();
+
             bool isSuccess = false;
 
             if (script.Save(CommandAttribute.INSERT))

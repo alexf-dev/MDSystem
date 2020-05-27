@@ -32,9 +32,12 @@ namespace MDSystem.Data
             else
                 if (saveObject is Workplace)
                     return SaveObject((Workplace)saveObject, commandAttribute);
+            else
+                if (saveObject is Report)
+                    return SaveObject((Report)saveObject, commandAttribute);
 
             return false;
-        }
+        }        
 
         /// <summary>
         /// Save object User
@@ -118,7 +121,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var insertSQL = "INSERT INTO public.t_scripts (id, name, code, script_type, description, reg_date, rec_date, del_rec) Values (@Id, @Name, @Code, @ScriptType, @Description, @RegDate, now(), @DelRec);";
+                                var insertSQL = "INSERT INTO public.t_scripts (id, name, code, actions_order_list, script_type, description, reg_date, rec_date, del_rec) Values (@Id, @Name, @Code, @ActionsOrderList, @ScriptType, @Description, @RegDate, now(), @DelRec);";
                                 affectedRows = conn.Execute(insertSQL, saveObject);
                             }
                             catch (Exception exc)
@@ -324,6 +327,70 @@ namespace MDSystem.Data
                             try
                             {
                                 var updateSQL = "UPDATE INTO public.t_users (id, firstname, lastname, middlename, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, now(), @DelRec);";
+                                affectedRows = conn.Execute(updateSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка обновления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.DELETE:
+                        {
+                            try
+                            {
+                                var deleteSQL = "DELETE FROM public.t_users WHERE id = @Id;";
+                                affectedRows = conn.Execute(deleteSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка удаления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (affectedRows > 0)
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Save object Report
+        /// </summary>
+        /// <param name="saveObject"></param>
+        /// <param name="commandAttribute"></param>
+        /// <returns></returns>
+        private static bool SaveObject(Report saveObject, CommandAttribute commandAttribute)
+        {
+            int affectedRows = 0;
+
+            using (var conn = OpenConnection(ConnectionString))
+            {
+                switch (commandAttribute)
+                {
+                    case CommandAttribute.INSERT:
+                        {
+                            try
+                            {
+                                var insertSQL = "INSERT INTO public.t_reports (id, script_id, script_name, user_id, operator_name, actions_amount, time_execution_amount, actions_order_list, description, start_date, rec_date, del_rec) Values (@Id, @ScriptId, @ScriptName, @UserID, @OperatorFullName, @ActionsAmount, @TimeExecutionAmount, @ActionsOrderList, @Description, @StartDate, now(), @DelRec);";
+                                affectedRows = conn.Execute(insertSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.UPDATE:
+                        {
+                            try
+                            {
+                                var updateSQL = "UPDATE INTO public.t_reports (id, firstname, lastname, middlename, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, now(), @DelRec);";
                                 affectedRows = conn.Execute(updateSQL, saveObject);
                             }
                             catch (Exception exc)

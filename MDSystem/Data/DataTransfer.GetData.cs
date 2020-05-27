@@ -31,6 +31,9 @@ namespace MDSystem.Data
             else
                 if (typeof(T).Equals(typeof(ActionMD)))
                     return GetData((GetDataFilterActionMD)filter);
+            else
+                if (typeof(T).Equals(typeof(Report)))
+                    return GetData((GetDataFilterReport)filter);
 
             return null;
         }
@@ -91,7 +94,7 @@ namespace MDSystem.Data
             using (var conn = OpenConnection(ConnectionString))
             {
                 if (!string.IsNullOrWhiteSpace(filter.Name))
-                    customer = conn.Query<ScriptMD>("SELECT id as Id, name as Name, code as Code, script_type as ScriptType, description as Description, reg_date as RegDate, rec_date as RecDate, del_rec as DelRec FROM public.t_scripts WHERE name = @Name", new { Name = filter.Name }).ToList();
+                    customer = conn.Query<ScriptMD>("SELECT id as Id, name as Name, code as Code, actions_order_list as ActionsOrderList, script_type as ScriptType, description as Description, reg_date as RegDate, rec_date as RecDate, del_rec as DelRec FROM public.t_scripts WHERE name = @Name", new { Name = filter.Name }).ToList();
             }
 
             return customer.Count > 0 ? customer.First() : null;
@@ -104,6 +107,18 @@ namespace MDSystem.Data
             {
                 if (!string.IsNullOrWhiteSpace(filter.Name))                
                     customer = conn.Query<ActionMD>("Select id as Id, parent_id as ParentId, name as Name, order_value as OrderValue, action_type as ActionType, time_execution as TimeExecution, description as Description, rec_date as RecDate, del_rec as DelRec FROM public.t_scripts WHERE name = @Name", new { Name = filter.Name }).ToList();                
+            }
+
+            return customer.Count > 0 ? customer.First() : null;
+        }
+
+        private static IBaseObject GetData(GetDataFilterReport filter)
+        {
+            var customer = new List<Report>();
+            using (var conn = OpenConnection(ConnectionString))
+            {
+                if (!string.IsNullOrWhiteSpace(filter.Name))
+                    customer = conn.Query<Report>("Select id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports WHERE name = @Name", new { Name = filter.Name }).ToList();
             }
 
             return customer.Count > 0 ? customer.First() : null;
@@ -130,6 +145,9 @@ namespace MDSystem.Data
             else
                 if (typeof(T).Equals(typeof(ActionMD)))
                     return GetDataList((GetDataFilterActionMD)filter);
+            else
+                if (typeof(T).Equals(typeof(Report)))
+                    return GetDataList((GetDataFilterReport)filter);
 
             return null;
         }
@@ -209,7 +227,7 @@ namespace MDSystem.Data
             {
                 if (filter.AllObjects)
                 {
-                    customer = conn.Query<ScriptMD>("Select  id as Id, name as Name, code as Code, script_type as ScriptType, description as Description, reg_date as RegDate, rec_date as RecDate, del_rec as DelRec FROM public.t_scripts").ToList();
+                    customer = conn.Query<ScriptMD>("Select  id as Id, name as Name, code as Code, actions_order_list as ActionsOrderList, script_type as ScriptType, description as Description, reg_date as RegDate, rec_date as RecDate, del_rec as DelRec FROM public.t_scripts").ToList();
                 }
             }
 
@@ -238,6 +256,24 @@ namespace MDSystem.Data
                 else if (filter.ParentIds != null)
                 {
                     customer = conn.Query<ActionMD>("Select id as Id, parent_id as ParentId, name as Name, order_value as OrderValue, action_type as ActionType, time_execution as TimeExecution, description as Description, rec_date as RecDate, del_rec as DelRec FROM public.t_actions WHERE parent_id in (@ParentIds)", new { ParentIds = "'" + string.Join("', '", filter.ParentIds.Select(it => it.ToString())) + "'" }).ToList();
+                }
+            }
+
+            return customer.Cast<IBaseObject>().ToList();
+        }
+
+        private static List<IBaseObject> GetDataList(GetDataFilterReport filter)
+        {
+            var customer = new List<Report>();
+            using (var conn = OpenConnection(ConnectionString))
+            {
+                if (filter.AllObjects)
+                {
+                    customer = conn.Query<Report>("SELECT  id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports").ToList();
+                }
+                else if (!string.IsNullOrWhiteSpace(filter.OperatorFullName))
+                {
+                    customer = conn.Query<Report>("SELECT  id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports WHERE operator_name ilike @OperatorFullName", new { OperatorFullName = filter.OperatorFullName}).ToList();
                 }
             }
 
