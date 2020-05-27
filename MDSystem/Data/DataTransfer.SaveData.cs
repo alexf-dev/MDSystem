@@ -313,7 +313,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var insertSQL = "INSERT INTO public.t_workplaces (id, parent_id, name, access_level, rec_date, del_rec) Values (@Id, @ParentId, @Name, @AccessLevel, now(), @DelRec);";
+                                var insertSQL = "INSERT INTO public.t_workplaces (id, parent_id, name, rec_date, del_rec) Values (@Id, @ParentId, @Name, now(), @DelRec);";
                                 affectedRows = conn.Execute(insertSQL, saveObject);
                             }
                             catch (Exception exc)
