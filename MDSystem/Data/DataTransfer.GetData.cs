@@ -23,6 +23,9 @@ namespace MDSystem.Data
                 if (typeof(T).Equals(typeof(Department)))
                     return GetData((GetDataFilterDepartment)filter);
             else
+                if (typeof(T).Equals(typeof(Workplace)))
+                    return GetData((GetDataFilterWorkplace)filter);
+            else
                 if (typeof(T).Equals(typeof(ScriptMD)))
                     return GetData((GetDataFilterScriptMD)filter);
             else
@@ -34,7 +37,30 @@ namespace MDSystem.Data
 
         private static IBaseObject GetData(GetDataFilterDepartment filter)
         {
-            throw new NotImplementedException();
+            var customer = new List<Department>();
+            using (var conn = OpenConnection(ConnectionString))
+            {
+                if (!string.IsNullOrWhiteSpace(filter.Name))
+                {
+                    customer = conn.Query<Department>("Select id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_departments").ToList();
+                }
+            }
+
+            return customer.Count > 0 ? customer.First() : null;
+        }
+
+        private static IBaseObject GetData(GetDataFilterWorkplace filter)
+        {
+            var customer = new List<Workplace>();
+            using (var conn = OpenConnection(ConnectionString))
+            {
+                if (filter.ParentId != Guid.Empty && !string.IsNullOrWhiteSpace(filter.Name))
+                {
+                    customer = conn.Query<Workplace>("SELECT id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_workplaces WHERE name = @WorkplaceName AND parent_id = @WorkplaceParentId ", new { WorkplaceName = filter.Name, WorkplaceParentId = filter.ParentId }).ToList();
+                }
+            }
+
+            return customer.Count > 0 ? customer.First() : null;
         }
 
         private static IBaseObject GetData(GetDataFilterUser filter)
@@ -42,7 +68,7 @@ namespace MDSystem.Data
             var customer = new List<User>();
             using (var conn = OpenConnection(ConnectionString))
             {
-                string query = @"SELECT id as Id, firstname as FirstName, lastname as LastName, middlename as MiddleName, workplace_id as WorkplaceId, department_id as DepartmentId, username as UserName, password as Password, status as Status, access_level_value as AccessLevelValue, rec_date as RecDate, del_rec as @DelRec  FROM public.t_users WHERE true ";
+                string query = @"SELECT id as Id, firstname as FirstName, lastname as LastName, middlename as MiddleName, workplace_id as WorkplaceId, department_id as DepartmentId, username as UserName, password as Password, status as Status, access_level_value as AccessLevelValue, rec_date as RecDate, del_rec as DelRec  FROM public.t_users WHERE true ";
                 string queryFilter = "";
                 if (!string.IsNullOrWhiteSpace(filter.FirstName))
                     queryFilter += " AND firstname = @FirstName ";
@@ -56,7 +82,7 @@ namespace MDSystem.Data
                 customer = conn.Query<User>(query, new { FirstName = filter.FirstName, LastName = filter.LastName, MiddleName = filter.MiddleName }).ToList();
             }
 
-            return customer.First();
+            return customer.Count > 0 ? customer.First() : null;
         }
 
         private static IBaseObject GetData(GetDataFilterScriptMD filter)
@@ -65,13 +91,10 @@ namespace MDSystem.Data
             using (var conn = OpenConnection(ConnectionString))
             {
                 if (!string.IsNullOrWhiteSpace(filter.Name))
-                    customer = conn.Query<ScriptMD>("Select * FROM public.t_scripts WHERE name = @Name", new { Name = filter.Name }).ToList();
-                //else
-                //    if (filter.AllObjects)
-                //        customer = conn.Query<User>("Select * FROM public.t_users").ToList();
+                    customer = conn.Query<ScriptMD>("SELECT id as Id, name as Name, code as Code, script_type as ScriptType, description as Description, reg_date as RegDate, rec_date as RecDate, del_rec as DelRec FROM public.t_scripts WHERE name = @Name", new { Name = filter.Name }).ToList();
             }
 
-            return customer.First();
+            return customer.Count > 0 ? customer.First() : null;
         }
 
         private static IBaseObject GetData(GetDataFilterActionMD filter)
@@ -83,7 +106,7 @@ namespace MDSystem.Data
                     customer = conn.Query<ActionMD>("Select id as Id, parent_id as ParentId, name as Name, order_value as OrderValue, action_type as ActionType, time_execution as TimeExecution, description as Description, rec_date as RecDate, del_rec as DelRec FROM public.t_scripts WHERE name = @Name", new { Name = filter.Name }).ToList();                
             }
 
-            return customer.First();
+            return customer.Count > 0 ? customer.First() : null;
         }
 
         /// <summary>
@@ -123,7 +146,7 @@ namespace MDSystem.Data
             {
                 if (filter.AllObjects)
                 {
-                    customer = conn.Query<Department>("Select * FROM public.t_departments").ToList();
+                    customer = conn.Query<Department>("Select id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_departments").ToList();
                 }
             }
 
@@ -142,11 +165,11 @@ namespace MDSystem.Data
             {
                 if (filter.AllObjects)
                 {
-                    customer = conn.Query<Workplace>("Select * FROM public.t_workplaces").ToList();
+                    customer = conn.Query<Workplace>("Select id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_workplaces").ToList();
                 }
                 else if (filter.ParentId != Guid.Empty)
                 {
-                    customer = conn.Query<Workplace>("Select * FROM public.t_workplaces WHERE parent_id = @ParentId", new { ParentId = filter.ParentId }).ToList();
+                    customer = conn.Query<Workplace>("Select id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_workplaces WHERE parent_id = @ParentId", new { ParentId = filter.ParentId }).ToList();
                 }
             }
 
@@ -166,7 +189,7 @@ namespace MDSystem.Data
             {
                 if (filter.AllObjects)
                 {
-                    customer = conn.Query<User>("SELECT id as Id, firstname as FirstName, lastname as LastName, middlename as MiddleName, workplace_id as WorkplaceId, department_id as DepartmentId, username as UserName, password as Password, status as Status, access_level_value as AccessLevelValue, rec_date as RecDate, del_rec as @DelRec FROM public.t_users").ToList();                  
+                    customer = conn.Query<User>("SELECT id as Id, firstname as FirstName, lastname as LastName, middlename as MiddleName, workplace_id as WorkplaceId, department_id as DepartmentId, username as UserName, password as Password, status as Status, access_level_value as AccessLevelValue, rec_date as RecDate, del_rec as DelRec FROM public.t_users").ToList();                  
                 }
             }
 
@@ -186,7 +209,7 @@ namespace MDSystem.Data
             {
                 if (filter.AllObjects)
                 {
-                    customer = conn.Query<ScriptMD>("Select * FROM public.t_scripts").ToList();
+                    customer = conn.Query<ScriptMD>("Select  id as Id, name as Name, code as Code, script_type as ScriptType, description as Description, reg_date as RegDate, rec_date as RecDate, del_rec as DelRec FROM public.t_scripts").ToList();
                 }
             }
 

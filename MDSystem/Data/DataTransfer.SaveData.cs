@@ -118,7 +118,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var insertSQL = "INSERT INTO public.t_scripts (id, name, code, script_type, description, rec_date, del_rec) Values (@Id, @Name, @Code, @ScriptType, @Description, now(), @DelRec);";
+                                var insertSQL = "INSERT INTO public.t_scripts (id, name, code, script_type, description, reg_date, rec_date, del_rec) Values (@Id, @Name, @Code, @ScriptType, @Description, @RegDate, now(), @DelRec);";
                                 affectedRows = conn.Execute(insertSQL, saveObject);
                             }
                             catch (Exception exc)

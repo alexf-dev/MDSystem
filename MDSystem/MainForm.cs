@@ -47,5 +47,10 @@ namespace MDSystem
             WorkplaceEdit we = new WorkplaceEdit();
             we.Show();
         }
+
+        private void ToolStripMenuItemExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

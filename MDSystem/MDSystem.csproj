@@ -89,6 +89,12 @@
     <Compile Include="Data\DataTransfer.cs" />
     <Compile Include="Data\DataTransfer.SaveData.cs" />
     <Compile Include="Data\DataTransfer.GetData.cs" />
+    <Compile Include="Forms\AuthorizationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AuthorizationForm.Designer.cs">
+      <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DepartmentEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,9 @@
     <Folder Include="Objects\BDObjects\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\AuthorizationForm.resx">
+      <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DepartmentEdit.resx">
       <DependentUpon>DepartmentEdit.cs</DependentUpon>
     </EmbeddedResource>

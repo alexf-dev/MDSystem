@@ -9,6 +9,11 @@ namespace MDSystem.Data
 {
     public static class ApplicationData
     {
+        private static User admin = new User { UserName = "Admin", Password = "root", AccessLevelValue = 3 };
+        public static bool IsAuthorizedUser { get; set; }
+        public static User Admin { get { return admin; } }
+        public static User CurrentUser { get; set; }
+
         public static List<Workplace> Workplaces = new List<Workplace>()
         {
             new Workplace{ Id = new Guid("10000000-1000-1000-1000-100000000001"), Name = "Космонавт", DelRec = false, ParentId = Guid.Empty},

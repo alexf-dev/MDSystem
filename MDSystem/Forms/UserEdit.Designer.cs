@@ -35,6 +35,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbAccessLevel = new System.Windows.Forms.ComboBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtLogin = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,8 +49,6 @@
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtMiddleName = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.cmbAccessLevel = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -131,11 +131,28 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Логин/Пароль";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(16, 120);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Уровень доступа:";
+            // 
+            // cmbAccessLevel
+            // 
+            this.cmbAccessLevel.FormattingEnabled = true;
+            this.cmbAccessLevel.Location = new System.Drawing.Point(19, 136);
+            this.cmbAccessLevel.Name = "cmbAccessLevel";
+            this.cmbAccessLevel.Size = new System.Drawing.Size(207, 21);
+            this.cmbAccessLevel.TabIndex = 12;
+            // 
             // txtPassword
             // 
             this.txtPassword.Enabled = false;
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtPassword.Location = new System.Drawing.Point(19, 92);
+            this.txtPassword.Location = new System.Drawing.Point(19, 85);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(207, 21);
@@ -144,7 +161,7 @@
             // txtLogin
             // 
             this.txtLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtLogin.Location = new System.Drawing.Point(19, 42);
+            this.txtLogin.Location = new System.Drawing.Point(19, 38);
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(207, 21);
             this.txtLogin.TabIndex = 7;
@@ -153,7 +170,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 74);
+            this.label5.Location = new System.Drawing.Point(16, 67);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 8;
@@ -162,7 +179,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 26);
+            this.label4.Location = new System.Drawing.Point(16, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 13);
             this.label4.TabIndex = 7;
@@ -244,23 +261,6 @@
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // cmbAccessLevel
-            // 
-            this.cmbAccessLevel.FormattingEnabled = true;
-            this.cmbAccessLevel.Location = new System.Drawing.Point(19, 136);
-            this.cmbAccessLevel.Name = "cmbAccessLevel";
-            this.cmbAccessLevel.Size = new System.Drawing.Size(207, 21);
-            this.cmbAccessLevel.TabIndex = 12;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 120);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Уровень доступа:";
             // 
             // UserEdit
             // 

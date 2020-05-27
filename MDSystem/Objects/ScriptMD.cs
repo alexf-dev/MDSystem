@@ -24,7 +24,7 @@ namespace MDSystem.Objects
         /// <summary>
         /// Дата создания (регистрации) 
         /// </summary>
-        public DateTime RecDate { get; set; }        
+        public DateTime RegDate { get; set; }        
 
         /// <summary>
         /// Описание 
@@ -40,5 +40,10 @@ namespace MDSystem.Objects
         /// Список действий
         /// </summary>
         public List<ActionMD> Actions { get; set; }
+
+        /// <summary>
+        /// Дата изменения записи в БД
+        /// </summary>
+        public DateTime RecDate { get; set; }
     }
 }

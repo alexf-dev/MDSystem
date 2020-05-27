@@ -40,7 +40,7 @@ namespace MDSystem.Forms
             }
             else
             {
-                MessageBox.Show(result);
+                MessageBox.Show(result, "Внимание!");
                 return;
             }     
         }
@@ -55,9 +55,9 @@ namespace MDSystem.Forms
                 result += "Не указано имя\r\n";
             if (string.IsNullOrWhiteSpace(txtFirstName.Text))
                 result += "Не указано отчество\r\n";
-            if (!string.IsNullOrWhiteSpace(txtLogin.Text))
+            if (string.IsNullOrWhiteSpace(txtLogin.Text))
                 result += "Не указан логин\r\n";
-            if (!string.IsNullOrWhiteSpace(txtPassword.Text))
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
                 result += "Не указан пароль\r\n";
             if (selectedDepartment == null)
                 result += "Не указано подразделение\r\n";

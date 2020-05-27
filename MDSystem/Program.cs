@@ -1,4 +1,6 @@
 ﻿using Dapper;
+using MDSystem.Data;
+using MDSystem.Forms;
 using MDSystem.Objects;
 using Npgsql;
 using System;
@@ -19,13 +21,15 @@ namespace MDSystem
         [STAThread]
         static void Main(string[] args)
         {
-
             //if (args.Contains("-debug"))
             //    ApplicationSettings.IsDeveloper = true;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new AuthorizationForm());
+
+            if (ApplicationData.IsAuthorizedUser)
+                Application.Run(new MainForm());
 
             //            Console.WriteLine("Hello Alex!");
 

@@ -28,7 +28,7 @@ namespace MDSystem.Forms
             }
             else
             {
-                MessageBox.Show(result);
+                MessageBox.Show(result, "Внимание!");
                 return;
             }
         }
