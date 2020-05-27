@@ -25,6 +25,25 @@ namespace MDSystem.Forms
 
         private void btnAuthorization_Click(object sender, EventArgs e)
         {
+            MakeAuthorization();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            ApplicationData.IsAuthorizedUser = false;
+            this.Close();
+        }
+
+        private void AuthorizationForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                MakeAuthorization();
+            }
+        }
+
+        private void MakeAuthorization()
+        {
             ApplicationData.IsAuthorizedUser = false;
 
             if (string.IsNullOrWhiteSpace(txtLogin.Text))
@@ -64,12 +83,6 @@ namespace MDSystem.Forms
             }
 
             ApplicationData.IsAuthorizedUser = ApplicationData.CurrentUser != null;
-            this.Close();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            ApplicationData.IsAuthorizedUser = false;
             this.Close();
         }
     }

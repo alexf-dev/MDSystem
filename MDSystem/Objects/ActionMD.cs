@@ -41,5 +41,10 @@ namespace MDSystem.Objects
         /// Дата изменения записи в БД
         /// </summary>
         public DateTime RecDate { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format(@"{0}  {1}  {2};", OrderValue, Name, TimeExecution);            
+        }
     }
 }

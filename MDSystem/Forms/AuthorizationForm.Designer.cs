@@ -102,9 +102,11 @@
             this.Controls.Add(this.btnAuthorization);
             this.Controls.Add(this.txtLogin);
             this.Controls.Add(this.label1);
+            this.KeyPreview = true;
             this.Name = "AuthorizationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Авторизация пользователя";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AuthorizationForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

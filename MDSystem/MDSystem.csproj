@@ -101,6 +101,12 @@
     <Compile Include="Forms\DepartmentEdit.Designer.cs">
       <DependentUpon>DepartmentEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ReportListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReportListForm.Designer.cs">
+      <DependentUpon>ReportListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RunTestedScript.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DepartmentEdit.resx">
       <DependentUpon>DepartmentEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReportListForm.resx">
+      <DependentUpon>ReportListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RunTestedScript.resx">
       <DependentUpon>RunTestedScript.cs</DependentUpon>

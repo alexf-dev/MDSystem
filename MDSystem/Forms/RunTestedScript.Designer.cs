@@ -104,6 +104,7 @@
             this.txtUserActionsList.Location = new System.Drawing.Point(3, 16);
             this.txtUserActionsList.Multiline = true;
             this.txtUserActionsList.Name = "txtUserActionsList";
+            this.txtUserActionsList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtUserActionsList.Size = new System.Drawing.Size(419, 309);
             this.txtUserActionsList.TabIndex = 4;
             // 
@@ -124,6 +125,7 @@
             this.txtBDActionsList.Multiline = true;
             this.txtBDActionsList.Name = "txtBDActionsList";
             this.txtBDActionsList.ReadOnly = true;
+            this.txtBDActionsList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtBDActionsList.Size = new System.Drawing.Size(418, 309);
             this.txtBDActionsList.TabIndex = 4;
             // 

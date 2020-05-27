@@ -158,10 +158,10 @@ namespace MDSystem.Forms
             operatorScript.Code = _selectedBDScript.Code;
             operatorScript.Actions = new List<ActionMD>();
 
-
             foreach (var item in sp)
             {
                 ActionMD actionMD = new ActionMD();
+                actionMD.Id = Guid.NewGuid();
 
                 // делим каждое действие на данные - номер по порядку, наименование, время выполнения
                 List<string> dataList = item.Trim().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -207,7 +207,7 @@ namespace MDSystem.Forms
                 _selectedBDScript.Actions = (DataTransfer.GetDataObjects<ActionMD>(new GetDataFilterActionMD { ParentId = _selectedBDScript.Id })).ConvertAll(it => (ActionMD)it);
 
                 foreach (var ac in _selectedBDScript.Actions)                
-                    _actionsDate += ac.OrderValue.ToString() + " " + ac.Name + " " + ac.TimeExecution.ToString() + Environment.NewLine;                
+                    _actionsDate += ac.ToString() + Environment.NewLine;                
 
                 txtBDActionsList.Text = _actionsDate;
                 btnRunTest.Enabled = true;
@@ -244,9 +244,20 @@ namespace MDSystem.Forms
         private void btnSaveReport_Click(object sender, EventArgs e)
         {
             Report report = MakeNewReport();
+            
+            bool isSuccess = false;
 
             if (report.Save(CommandAttribute.INSERT))
-                MessageBox.Show("Отчет сохранен");
+            {
+                foreach (var actionMD in report.Actions)
+                {
+                    actionMD.ParentId = report.Id;
+                    isSuccess = actionMD.Save(CommandAttribute.INSERT);
+                }
+            }
+
+            if (isSuccess)
+                MessageBox.Show("Отчет сохранен");            
             else
                 MessageBox.Show("Ошибка сохранения");
         }

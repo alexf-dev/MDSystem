@@ -55,7 +55,8 @@ namespace MDSystem
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            ReportListForm rl = new ReportListForm();
+            rl.Show();
         }
     }
 }
