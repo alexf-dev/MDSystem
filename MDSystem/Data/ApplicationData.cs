@@ -41,7 +41,7 @@ namespace MDSystem.Data
         {
             new AccessLevel { Value = 1, Name = "Выполнение тестов" },
             new AccessLevel { Value = 2, Name = "Выполнение тестов и вывод отчётов" },
-            new AccessLevel { Value = 3, Name = "Администратор" }
+            new AccessLevel { Value = 3, Name = "Полный доступ" }
         };
 
         private static object locker = new object();

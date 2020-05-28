@@ -52,7 +52,7 @@
             // 
             // btnReports
             // 
-            this.btnReports.Location = new System.Drawing.Point(343, 33);
+            this.btnReports.Location = new System.Drawing.Point(371, 33);
             this.btnReports.Name = "btnReports";
             this.btnReports.Size = new System.Drawing.Size(75, 23);
             this.btnReports.TabIndex = 2;

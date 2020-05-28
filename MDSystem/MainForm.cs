@@ -1,4 +1,5 @@
-﻿using MDSystem.Forms;
+﻿using MDSystem.Data;
+using MDSystem.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,9 @@ namespace MDSystem
         public MainForm()
         {
             InitializeComponent();
+
+            if (ApplicationData.CurrentUser.AccessLevelValue < 2)
+                button1.Visible = button3.Visible = false;
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
@@ -63,6 +67,11 @@ namespace MDSystem
         {
             DepartmentWorkplacesEditForm dw = new DepartmentWorkplacesEditForm();
             dw.Show();
+        }
+
+        private void справкаОПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

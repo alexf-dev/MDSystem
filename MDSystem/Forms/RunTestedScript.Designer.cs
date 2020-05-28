@@ -80,9 +80,9 @@
             // 
             // btnRunTest
             // 
-            this.btnRunTest.Location = new System.Drawing.Point(650, 31);
+            this.btnRunTest.Location = new System.Drawing.Point(682, 35);
             this.btnRunTest.Name = "btnRunTest";
-            this.btnRunTest.Size = new System.Drawing.Size(113, 44);
+            this.btnRunTest.Size = new System.Drawing.Size(86, 44);
             this.btnRunTest.TabIndex = 4;
             this.btnRunTest.Text = "Старт";
             this.btnRunTest.UseVisualStyleBackColor = true;
@@ -149,9 +149,9 @@
             // btnMakeStatus
             // 
             this.btnMakeStatus.Enabled = false;
-            this.btnMakeStatus.Location = new System.Drawing.Point(635, 469);
+            this.btnMakeStatus.Location = new System.Drawing.Point(562, 469);
             this.btnMakeStatus.Name = "btnMakeStatus";
-            this.btnMakeStatus.Size = new System.Drawing.Size(113, 44);
+            this.btnMakeStatus.Size = new System.Drawing.Size(113, 35);
             this.btnMakeStatus.TabIndex = 9;
             this.btnMakeStatus.Text = "Сменить статус";
             this.btnMakeStatus.UseVisualStyleBackColor = true;
@@ -160,9 +160,9 @@
             // btnSaveReport
             // 
             this.btnSaveReport.Enabled = false;
-            this.btnSaveReport.Location = new System.Drawing.Point(790, 469);
+            this.btnSaveReport.Location = new System.Drawing.Point(730, 469);
             this.btnSaveReport.Name = "btnSaveReport";
-            this.btnSaveReport.Size = new System.Drawing.Size(113, 44);
+            this.btnSaveReport.Size = new System.Drawing.Size(113, 35);
             this.btnSaveReport.TabIndex = 10;
             this.btnSaveReport.Text = "Сохранить отчет";
             this.btnSaveReport.UseVisualStyleBackColor = true;

@@ -33,6 +33,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem22 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -40,7 +41,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.ToolStripMenuItem22 = new System.Windows.Forms.ToolStripMenuItem();
+            this.справкаОПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -91,9 +92,17 @@
             this.ToolStripMenuItem4.Text = "Новая должность";
             this.ToolStripMenuItem4.Click += new System.EventHandler(this.ToolStripMenuItem4_Click);
             // 
+            // ToolStripMenuItem22
+            // 
+            this.ToolStripMenuItem22.Name = "ToolStripMenuItem22";
+            this.ToolStripMenuItem22.Size = new System.Drawing.Size(267, 22);
+            this.ToolStripMenuItem22.Text = "Новая должность в подразделении";
+            this.ToolStripMenuItem22.Click += new System.EventHandler(this.ToolStripMenuItem22_Click);
+            // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.справкаОПрограммеToolStripMenuItem,
             this.ToolStripMenuItemExit});
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(53, 28);
@@ -102,7 +111,7 @@
             // ToolStripMenuItemExit
             // 
             this.ToolStripMenuItemExit.Name = "ToolStripMenuItemExit";
-            this.ToolStripMenuItemExit.Size = new System.Drawing.Size(108, 22);
+            this.ToolStripMenuItemExit.Size = new System.Drawing.Size(196, 22);
             this.ToolStripMenuItemExit.Text = "Выход";
             this.ToolStripMenuItemExit.Click += new System.EventHandler(this.ToolStripMenuItemExit_Click);
             // 
@@ -131,7 +140,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(417, 64);
+            this.button3.Location = new System.Drawing.Point(425, 60);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 59);
             this.button3.TabIndex = 2;
@@ -141,7 +150,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(239, 64);
+            this.button2.Location = new System.Drawing.Point(233, 60);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 59);
             this.button2.TabIndex = 1;
@@ -151,7 +160,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(61, 64);
+            this.button1.Location = new System.Drawing.Point(41, 60);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 59);
             this.button1.TabIndex = 0;
@@ -159,12 +168,12 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // ToolStripMenuItem22
+            // справкаОПрограммеToolStripMenuItem
             // 
-            this.ToolStripMenuItem22.Name = "ToolStripMenuItem22";
-            this.ToolStripMenuItem22.Size = new System.Drawing.Size(267, 22);
-            this.ToolStripMenuItem22.Text = "Новая должность в подразделении";
-            this.ToolStripMenuItem22.Click += new System.EventHandler(this.ToolStripMenuItem22_Click);
+            this.справкаОПрограммеToolStripMenuItem.Name = "справкаОПрограммеToolStripMenuItem";
+            this.справкаОПрограммеToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.справкаОПрограммеToolStripMenuItem.Text = "Справка о программе";
+            this.справкаОПрограммеToolStripMenuItem.Click += new System.EventHandler(this.справкаОПрограммеToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -201,5 +210,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemExit;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem22;
+        private System.Windows.Forms.ToolStripMenuItem справкаОПрограммеToolStripMenuItem;
     }
 }

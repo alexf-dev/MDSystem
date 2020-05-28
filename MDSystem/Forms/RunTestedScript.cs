@@ -36,7 +36,7 @@ namespace MDSystem.Forms
         {
             InitializeComponent();
 
-            btnRunTest.Enabled = false;
+            btnRunTest.Enabled = btnMakeStatus.Enabled = false;
 
             //_bdScripts = GetBDScripts();
         }
@@ -144,7 +144,8 @@ namespace MDSystem.Forms
             timeResult += "Разница времени выполнения: " + result.ToString() + Environment.NewLine;
 
             txtTimeControl.Text = timeResult;
-            btnMakeStatus.Enabled = btnSaveReport.Enabled = true;
+            btnMakeStatus.Enabled = ApplicationData.CurrentUser.AccessLevelValue > 1 ? true : false;
+            btnSaveReport.Enabled = true;
         }
 
         private ScriptMD GetOperatorScript()
@@ -233,22 +234,24 @@ namespace MDSystem.Forms
         private void btnSaveReport_Click(object sender, EventArgs e)
         {
             Report report = MakeNewReport();
-            
-            bool isSuccess = false;
 
-            if (report.Save(CommandAttribute.INSERT))
-            {
-                foreach (var actionMD in report.Actions)
-                {
-                    actionMD.ParentId = report.Id;
-                    isSuccess = actionMD.Save(CommandAttribute.INSERT);
-                }
-            }
+            ReportEditForm re = new ReportEditForm(report);
+            re.Show();
+            //bool isSuccess = false;
 
-            if (isSuccess)
-                MessageBox.Show("Отчет сохранен");            
-            else
-                MessageBox.Show("Ошибка сохранения");
+            //if (report.Save(CommandAttribute.INSERT))
+            //{
+            //    foreach (var actionMD in report.Actions)
+            //    {
+            //        actionMD.ParentId = report.Id;
+            //        isSuccess = actionMD.Save(CommandAttribute.INSERT);
+            //    }
+            //}
+
+            //if (isSuccess)
+            //    MessageBox.Show("Отчет сохранен");            
+            //else
+            //    MessageBox.Show("Ошибка сохранения");
         }
 
         private Report MakeNewReport()
