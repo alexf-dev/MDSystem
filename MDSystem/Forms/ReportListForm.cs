@@ -15,18 +15,24 @@ namespace MDSystem.Forms
     public partial class ReportListForm : Form
     {
         private List<Report> _reports = new List<Report>();
+        private List<User> _operatorUsers = new List<User>();
+
+        private User selectedOperatorsUser { get { return (User)cmbOperatorUsers.SelectedItem; } }
 
         public ReportListForm()
         {
             InitializeComponent();
+
+            _operatorUsers = DataTransfer.GetDataObjects<User>(new GetDataFilterUser() { AllObjects = true }).ConvertAll(it => (User)it);
+            cmbOperatorUsers.Items.AddRange(_operatorUsers.ToArray());
         }
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtOperatorName.Text))
+            if (selectedOperatorsUser == null)
                 return;
 
-            _reports = (DataTransfer.GetDataObjects<Report>(new GetDataFilterReport {  OperatorFullName = txtOperatorName.Text })).ConvertAll(it => (Report)it);
+            _reports = (DataTransfer.GetDataObjects<Report>(new GetDataFilterReport {  OperatorFullName = selectedOperatorsUser.FullName })).ConvertAll(it => (Report)it);
 
             ShowReports(_reports);
         }
@@ -67,6 +73,11 @@ namespace MDSystem.Forms
             }
 
             txtReportList.Text = reportsList.ToString();
+        }
+
+        private void cmbOperatorUsers_SelectedValueChanged(object sender, EventArgs e)
+        {
+            btnReports.Enabled = selectedOperatorsUser != null;
         }
     }
 }

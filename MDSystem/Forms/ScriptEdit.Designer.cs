@@ -32,8 +32,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtActionsList = new System.Windows.Forms.TextBox();
-            this.txtScriptCode = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.txtScriptName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -44,19 +42,17 @@
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtActionsList);
-            this.panel1.Controls.Add(this.txtScriptCode);
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtScriptName);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(794, 378);
+            this.panel1.Size = new System.Drawing.Size(523, 473);
             this.panel1.TabIndex = 0;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(116, 213);
+            this.btnSave.Location = new System.Drawing.Point(387, 30);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(111, 38);
             this.btnSave.TabIndex = 6;
@@ -67,7 +63,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(346, 21);
+            this.label3.Location = new System.Drawing.Point(21, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 13);
             this.label3.TabIndex = 5;
@@ -75,27 +71,12 @@
             // 
             // txtActionsList
             // 
-            this.txtActionsList.Location = new System.Drawing.Point(349, 40);
+            this.txtActionsList.Location = new System.Drawing.Point(24, 95);
             this.txtActionsList.Multiline = true;
             this.txtActionsList.Name = "txtActionsList";
-            this.txtActionsList.Size = new System.Drawing.Size(430, 324);
+            this.txtActionsList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtActionsList.Size = new System.Drawing.Size(474, 367);
             this.txtActionsList.TabIndex = 4;
-            // 
-            // txtScriptCode
-            // 
-            this.txtScriptCode.Location = new System.Drawing.Point(24, 100);
-            this.txtScriptCode.Name = "txtScriptCode";
-            this.txtScriptCode.Size = new System.Drawing.Size(290, 20);
-            this.txtScriptCode.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Код сценария:";
             // 
             // txtScriptName
             // 
@@ -117,7 +98,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 378);
+            this.ClientSize = new System.Drawing.Size(523, 473);
             this.Controls.Add(this.panel1);
             this.Name = "ScriptEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -133,8 +114,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtActionsList;
-        private System.Windows.Forms.TextBox txtScriptCode;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtScriptName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSave;

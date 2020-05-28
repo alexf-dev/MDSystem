@@ -70,7 +70,7 @@ namespace MDSystem.Data
                         {
                             try
                             {                                
-                                var updateSQL = "UPDATE public.t_users SET workplace_id = @WorkplaceId, department_id = @DepartmentId, username = @UserName, password = @Password, status = @Status, access_level_value = @AccessLevelValue, now(), del_rec = @DelRec WHERE id = @Id ;";
+                                var updateSQL = "UPDATE public.t_users SET workplace_id = @WorkplaceId, department_id = @DepartmentId, username = @UserName, password = @Password, status = @Status, access_level_value = @AccessLevelValue, rec_date = now(), del_rec = @DelRec WHERE id = @Id ;";
                                 affectedRows = conn.Execute(updateSQL, saveObject);
                             }
                             catch (Exception exc)
@@ -134,7 +134,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var updateSQL = "UPDATE INTO public.t_users (id, firstname, lastname, middlename, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, now(), @DelRec);";
+                                var updateSQL = "UPDATE public.t_scripts SET rec_date = now() WHERE id = @Id;";
                                 affectedRows = conn.Execute(updateSQL, saveObject);
                             }
                             catch (Exception exc)
@@ -198,7 +198,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var updateSQL = "UPDATE INTO public.t_users (id, firstname, lastname, middlename, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, now(), @DelRec);";
+                                var updateSQL = "UPDATE public.t_actions SET parent_id = @ParentId, name = @Name, order_value = @OrderValue, action_type = @ActionType, time_execution = @TimeExecution, description = @Description, rec_date = now(), del_rec = @DelRec WHERE id = @Id";
                                 affectedRows = conn.Execute(updateSQL, saveObject);
                             }
                             catch (Exception exc)
@@ -211,7 +211,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var deleteSQL = "DELETE FROM public.t_users WHERE id = @Id;";
+                                var deleteSQL = "DELETE FROM public.t_actions WHERE id = @Id;";
                                 affectedRows = conn.Execute(deleteSQL, saveObject);
                             }
                             catch (Exception exc)

@@ -16,22 +16,39 @@ namespace MDSystem.Forms
         }
 
         private void btnSave_Click(object sender, EventArgs e)
-        {
+        {       
             string result;
 
             if (IsValidData(out result))
             {
-                if (SaveScript())
-                    MessageBox.Show("Сценарий сохранен");
+                ScriptMD sc = (ScriptMD)DataTransfer.GetDataObject<ScriptMD>(new GetDataFilterScriptMD { Name = txtScriptName.Text });
+
+                if (sc != null)
+                {
+                    if (MessageBox.Show(string.Format("Сценарий '{0}' уже присутствует в БД, заменить данные?", txtScriptName.Text), "Внимание!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                        return;
+                    else
+                    {
+                        if (UpdateScript(sc))
+                            MessageBox.Show("Сценарий обновлен");
+                        else
+                            MessageBox.Show("Ошибка сохранения");
+                    }
+                }
                 else
-                    MessageBox.Show("Ошибка сохранения");
+                {
+                    if (SaveScript())
+                        MessageBox.Show("Сценарий сохранен");
+                    else
+                        MessageBox.Show("Ошибка сохранения");
+                }
             }
             else
             {
                 MessageBox.Show(result, "Внимание!");
                 return;
             }
-        }
+        }        
 
         private bool IsValidData(out string result)
         {
@@ -54,7 +71,6 @@ namespace MDSystem.Forms
             ScriptMD script = new ScriptMD();
             script.Id = Guid.NewGuid();
             script.Name = txtScriptName.Text;
-            script.Code = txtScriptCode.Text;
             script.ScriptType = ScriptMDType.Тестовый;
             script.Actions = GetScriptActions();
 
@@ -68,6 +84,37 @@ namespace MDSystem.Forms
             bool isSuccess = false;
 
             if (script.Save(CommandAttribute.INSERT))
+            {
+                foreach (var actionMD in script.Actions)
+                {
+                    actionMD.ParentId = script.Id;
+                    isSuccess = actionMD.Save(CommandAttribute.INSERT);
+                }
+            }
+
+            return isSuccess;
+        }
+
+        private bool UpdateScript(ScriptMD script)
+        {
+            List<ActionMD> oldActions = DataTransfer.GetDataObjects<ActionMD>(new GetDataFilterActionMD() { ParentId = script.Id }).ConvertAll(it => (ActionMD)it);
+            script.Actions = GetScriptActions();
+
+            List<int> orderList = new List<int>();
+
+            foreach (var act in script.Actions)
+                orderList.Add(act.OrderValue);
+
+            script.ActionsOrderList = orderList.ToArray();
+
+            bool isSuccess = true;
+
+            foreach (var action in oldActions)
+            {
+                isSuccess = action.Save(CommandAttribute.DELETE);
+            }
+
+            if (isSuccess && script.Save(CommandAttribute.UPDATE))
             {
                 foreach (var actionMD in script.Actions)
                 {

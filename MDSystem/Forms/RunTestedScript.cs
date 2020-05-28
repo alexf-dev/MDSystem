@@ -19,17 +19,15 @@ namespace MDSystem.Forms
 
         private List<ScriptMD> _bdScripts = new List<ScriptMD>();
         private List<ScriptMD> _operatorScripts = new List<ScriptMD>();
+        private List<User> _operatorUsers = new List<User>();
 
         private TimeSpan operatorTime = new TimeSpan();
         private TimeSpan selectedDBTime = new TimeSpan();
 
         private ScriptMD _selectedBDScript = null;
         private ScriptMD _operatorScript = null;
-        private User _operatorsUser = null;
+        private User selectedOperatorsUser { get { return (User)cmbOperators.SelectedItem; } }
 
-        private string _firstName = "";
-        private string _lastName = "";
-        private string _middleName = "";
         private DateTime _startDate;
 
         public RunTestedScript()
@@ -38,7 +36,8 @@ namespace MDSystem.Forms
 
             btnRunTest.Enabled = btnMakeStatus.Enabled = false;
 
-            //_bdScripts = GetBDScripts();
+            _operatorUsers = DataTransfer.GetDataObjects<User>(new GetDataFilterUser() { AllObjects = true }).ConvertAll(it => (User)it);
+            cmbOperators.Items.AddRange(_operatorUsers.ToArray());
         }
 
         private List<ScriptMD> GetBDScripts()
@@ -116,18 +115,32 @@ namespace MDSystem.Forms
 
         private void btnRunTest_Click(object sender, EventArgs e)
         {
+            if (selectedOperatorsUser == null)
+            {
+                MessageBox.Show("Не выбран оператор", "Внимание!");
+                return;
+            }
+
             btnMakeStatus.Enabled = btnSaveReport.Enabled = false;
 
             _startDate = DateTime.Now;
-            _operatorsUser = GetOperatorsUser();
             _operatorScript = GetOperatorScript();
+
+            if (_operatorScript.Actions.Count < _selectedBDScript.Actions.Count)
+            {
+                MessageBox.Show("Не все действия сценария выполнены", "Внимание!");
+                return;
+            }
+            if (!_operatorScript.ActionsOrderList.SequenceEqual(_selectedBDScript.ActionsOrderList))
+            {
+                MessageBox.Show("Неверный порядок действий оператора", "Внимание!");
+                return;
+            }
             MakeReportData();
         }
 
         private void MakeReportData()
-        {
-            TimeSpan zeroTime = new TimeSpan(0, 0, 0);
-
+        {            
             operatorTime = new TimeSpan();
             foreach (var action in _operatorScript.Actions)
                 operatorTime += action.TimeExecution;
@@ -136,12 +149,19 @@ namespace MDSystem.Forms
             foreach (var action in _selectedBDScript.Actions)
                 selectedDBTime += action.TimeExecution;
 
-            TimeSpan result = selectedDBTime - operatorTime;
+            TimeSpan result = operatorTime - selectedDBTime; // положительное время оператора лучше, отрицательное - время оператора хуже
+            TimeSpan minuteTime = new TimeSpan(0, 1, 0);
+            TimeSpan zero = new TimeSpan(0, 0, 0);
+
 
             string timeResult = "";
             timeResult += "Время выполнения сценария в БД: " + selectedDBTime.ToString() + Environment.NewLine;
             timeResult += "Время выполнения сценария пользователем: " + operatorTime.ToString() + Environment.NewLine;
             timeResult += "Разница времени выполнения: " + result.ToString() + Environment.NewLine;
+            if (result > minuteTime)
+                timeResult += "Тест не пройден: превышен временной интервал";
+            else 
+                timeResult += "Тест пройден";
 
             txtTimeControl.Text = timeResult;
             btnMakeStatus.Enabled = ApplicationData.CurrentUser.AccessLevelValue > 1 ? true : false;
@@ -162,7 +182,7 @@ namespace MDSystem.Forms
 
             foreach (var item in sp)
             {
-                if (item.Contains('|') && item.Contains('*'))
+                if (!string.IsNullOrWhiteSpace(item) && item.Contains('|'))
                 {
                     ActionMD actionMD = new ActionMD();
                     actionMD.Id = Guid.NewGuid();
@@ -219,21 +239,7 @@ namespace MDSystem.Forms
                 return;
             }            
         }
-
-        private User GetOperatorsUser()
-        {
-            if (string.IsNullOrWhiteSpace(txtFullName.Text))
-                return null;
-
-            string[] fullNameArray = txtFullName.Text.Split(new char[] { ' ' });
-
-            _firstName = fullNameArray.Length > 0 ? fullNameArray[0].Trim() : "";
-            _lastName = fullNameArray.Length > 1 ? fullNameArray[1].Trim() : "";
-            _middleName = fullNameArray.Length > 2 ? fullNameArray[2].Trim() : "";
-
-            return (User)(DataTransfer.GetDataObject<User>(new GetDataFilterUser { FirstName = _firstName, LastName = _lastName, MiddleName = _middleName }));
-        }
-        
+                
         private void btnSaveReport_Click(object sender, EventArgs e)
         {
             Report report = MakeNewReport();
@@ -264,7 +270,7 @@ namespace MDSystem.Forms
             report.ScriptId = _selectedBDScript.Id;
             report.ScriptName = _selectedBDScript.Name;
             report.UserID = ApplicationData.CurrentUser.Id;
-            report.OperatorFullName = _operatorsUser.FullName;
+            report.OperatorFullName = selectedOperatorsUser.FullName;
             report.ActionsAmount = _operatorScript.Actions.Count;
             report.TimeExecutionAmount = operatorTime;
             report.Actions = _operatorScript.Actions;
@@ -277,9 +283,9 @@ namespace MDSystem.Forms
 
         private void btnMakeStatus_Click(object sender, EventArgs e)
         {
-            if (_operatorsUser != null)
+            if (selectedOperatorsUser != null)
             {
-                UserStatusChangeForm sf = new UserStatusChangeForm(_operatorsUser);
+                UserStatusChangeForm sf = new UserStatusChangeForm(selectedOperatorsUser);
                 sf.Show();
             }
             else

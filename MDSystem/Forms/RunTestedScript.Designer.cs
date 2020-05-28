@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtFullName = new System.Windows.Forms.TextBox();
             this.txtScriptName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnRunTest = new System.Windows.Forms.Button();
@@ -42,6 +41,7 @@
             this.btnMakeStatus = new System.Windows.Forms.Button();
             this.btnSaveReport = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.cmbOperators = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -55,18 +55,11 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "ФИО:";
             // 
-            // txtFullName
-            // 
-            this.txtFullName.Location = new System.Drawing.Point(92, 15);
-            this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(363, 20);
-            this.txtFullName.TabIndex = 1;
-            // 
             // txtScriptName
             // 
             this.txtScriptName.Location = new System.Drawing.Point(92, 59);
             this.txtScriptName.Name = "txtScriptName";
-            this.txtScriptName.Size = new System.Drawing.Size(363, 20);
+            this.txtScriptName.Size = new System.Drawing.Size(360, 20);
             this.txtScriptName.TabIndex = 3;
             // 
             // label2
@@ -143,7 +136,7 @@
             this.txtTimeControl.Location = new System.Drawing.Point(33, 469);
             this.txtTimeControl.Multiline = true;
             this.txtTimeControl.Name = "txtTimeControl";
-            this.txtTimeControl.Size = new System.Drawing.Size(419, 54);
+            this.txtTimeControl.Size = new System.Drawing.Size(419, 67);
             this.txtTimeControl.TabIndex = 8;
             // 
             // btnMakeStatus
@@ -178,11 +171,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // cmbOperators
+            // 
+            this.cmbOperators.FormattingEnabled = true;
+            this.cmbOperators.Location = new System.Drawing.Point(92, 18);
+            this.cmbOperators.Name = "cmbOperators";
+            this.cmbOperators.Size = new System.Drawing.Size(360, 21);
+            this.cmbOperators.TabIndex = 12;
+            // 
             // RunTestedScript
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 535);
+            this.ClientSize = new System.Drawing.Size(930, 548);
+            this.Controls.Add(this.cmbOperators);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSaveReport);
             this.Controls.Add(this.btnMakeStatus);
@@ -193,7 +195,6 @@
             this.Controls.Add(this.btnRunTest);
             this.Controls.Add(this.txtScriptName);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtFullName);
             this.Controls.Add(this.label1);
             this.Name = "RunTestedScript";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -210,7 +211,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtFullName;
         private System.Windows.Forms.TextBox txtScriptName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnRunTest;
@@ -223,5 +223,6 @@
         private System.Windows.Forms.Button btnMakeStatus;
         private System.Windows.Forms.Button btnSaveReport;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cmbOperators;
     }
 }

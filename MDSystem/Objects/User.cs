@@ -85,5 +85,10 @@ namespace MDSystem.Objects
         public Guid DepartmentId { get; set; }
 
         public int AccessLevelValue { get; set; }
+
+        public override string ToString()
+        {
+            return FullName;
+        }
     }
 }
