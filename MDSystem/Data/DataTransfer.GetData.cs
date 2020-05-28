@@ -45,7 +45,11 @@ namespace MDSystem.Data
             {
                 if (!string.IsNullOrWhiteSpace(filter.Name))
                 {
-                    customer = conn.Query<Department>("Select id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_departments").ToList();
+                    customer = conn.Query<Department>("Select id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_departments WHERE name = @FilterName", new { FilterName = filter.Name }).ToList();
+                }
+                else if (filter.Id != Guid.Empty)
+                {
+                    customer = conn.Query<Department>("Select id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_departments WHERE id = @FilterId", new { FilterId = filter.Id }).ToList();
                 }
             }
 
@@ -57,7 +61,11 @@ namespace MDSystem.Data
             var customer = new List<Workplace>();
             using (var conn = OpenConnection(ConnectionString))
             {
-                if (filter.ParentId != Guid.Empty && !string.IsNullOrWhiteSpace(filter.Name))
+                if (filter.Id != Guid.Empty)
+                {
+                    customer = conn.Query<Workplace>("SELECT id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_workplaces WHERE id = @FilterId ", new { FilterId = filter.Id }).ToList();
+                }
+                else if (filter.ParentId != Guid.Empty && !string.IsNullOrWhiteSpace(filter.Name))
                 {
                     customer = conn.Query<Workplace>("SELECT id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_workplaces WHERE name = @WorkplaceName AND parent_id = @WorkplaceParentId ", new { WorkplaceName = filter.Name, WorkplaceParentId = filter.ParentId }).ToList();
                 }
@@ -264,6 +272,11 @@ namespace MDSystem.Data
             return customer.Cast<IBaseObject>().ToList();
         }
 
+        /// <summary>
+        /// Get List Reports from DB
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         private static List<IBaseObject> GetDataList(GetDataFilterReport filter)
         {
             var customer = new List<Report>();

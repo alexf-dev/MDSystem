@@ -27,15 +27,33 @@ namespace MDSystem.Objects
         /// </summary>
         public string FullName { get { return string.Format("{0} {1} {2}", FirstName, LastName, MiddleName); } }
 
+        private Workplace _workplace;
         /// <summary>
         /// Должность 
         /// </summary>
-        public Workplace Workplace { get; set; }
+        public Workplace Workplace
+        {
+            get { return _workplace; }
+            set
+            {
+                _workplace = value;
+                WorkplaceId = _workplace != null ? _workplace.Id : Guid.Empty;
+            }
+        }
 
+        private Department _department;
         /// <summary>
         /// Подразделение 
         /// </summary>
-        public Department Department { get; set; }
+        public Department Department
+        {
+            get { return _department; }
+            set
+            {
+                _department = value;
+                DepartmentId = _department != null ? _department.Id : Guid.Empty;
+            }
+        }
 
         /// <summary>
         /// Логин пользователя
@@ -62,9 +80,9 @@ namespace MDSystem.Objects
         /// </summary>
         public DateTime RecDate { get; set; }
 
-        public Guid WorkplaceId { get { return Workplace.Id; } }
+        public Guid WorkplaceId { get; set; }
 
-        public Guid DepartmentId { get { return Department.Id; } }
+        public Guid DepartmentId { get; set; }
 
         public int AccessLevelValue { get; set; }
     }

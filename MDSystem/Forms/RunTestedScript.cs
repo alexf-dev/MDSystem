@@ -162,21 +162,24 @@ namespace MDSystem.Forms
 
             foreach (var item in sp)
             {
-                ActionMD actionMD = new ActionMD();
-                actionMD.Id = Guid.NewGuid();
+                if (item.Contains('|') && item.Contains('*'))
+                {
+                    ActionMD actionMD = new ActionMD();
+                    actionMD.Id = Guid.NewGuid();
 
-                // делим каждое действие на данные - номер по порядку, наименование, время выполнения
-                List<string> dataList = item.Trim().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                    // делим каждое действие на данные - номер по порядку, наименование, время выполнения
+                    List<string> dataList = item.Trim().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                // получаем индекс первого вхождения символа '.' - до этого символа это порядковый номер действия
-                int orderValueIndex = dataList[0].IndexOf('.');
-                string orderValueStr = dataList[0].Substring(0, orderValueIndex);
+                    // получаем индекс первого вхождения символа '.' - до этого символа это порядковый номер действия
+                    int orderValueIndex = dataList[0].IndexOf('.');
+                    string orderValueStr = dataList[0].Substring(0, orderValueIndex);
 
-                actionMD.OrderValue = int.Parse(orderValueStr);
-                actionMD.Name = dataList[0].Substring(orderValueIndex + 1).Trim();
-                actionMD.TimeExecution = TimeSpan.Parse(dataList[1].Trim());
+                    actionMD.OrderValue = int.Parse(orderValueStr);
+                    actionMD.Name = dataList[0].Substring(orderValueIndex + 1).Trim();
+                    actionMD.TimeExecution = TimeSpan.Parse(dataList[1].Trim());
 
-                operatorScript.Actions.Add(actionMD);               
+                    operatorScript.Actions.Add(actionMD);
+                }
             }
 
             List<int> orderList = new List<int>();
@@ -274,8 +277,13 @@ namespace MDSystem.Forms
 
         private void btnMakeStatus_Click(object sender, EventArgs e)
         {
-            UserStatusChangeForm sf = new UserStatusChangeForm(_operatorsUser);
-            sf.Show();
+            if (_operatorsUser != null)
+            {
+                UserStatusChangeForm sf = new UserStatusChangeForm(_operatorsUser);
+                sf.Show();
+            }
+            else
+                MessageBox.Show("Не указаны данные оператора", "Внимание!");
         }
     }
 }

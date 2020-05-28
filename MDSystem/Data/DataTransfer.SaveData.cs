@@ -70,7 +70,7 @@ namespace MDSystem.Data
                         {
                             try
                             {                                
-                                var updateSQL = "UPDATE public.t_users SET workplace_id = @WorkplaceId, department_id = @DepartmentId, username = @UserName, password = @Password, status = @Status, access_level_value = @AccessLevelValue, rec_date, del_rec = @DelRec WHERE id = @Id ;";
+                                var updateSQL = "UPDATE public.t_users SET workplace_id = @WorkplaceId, department_id = @DepartmentId, username = @UserName, password = @Password, status = @Status, access_level_value = @AccessLevelValue, now(), del_rec = @DelRec WHERE id = @Id ;";
                                 affectedRows = conn.Execute(updateSQL, saveObject);
                             }
                             catch (Exception exc)

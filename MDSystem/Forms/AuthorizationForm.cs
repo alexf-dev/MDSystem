@@ -65,6 +65,7 @@ namespace MDSystem.Forms
                 _users = (DataTransfer.GetDataObjects<User>(new GetDataFilterUser { AllObjects = true })).ConvertAll(it => (User)it);
 
                 User current = _users.FirstOrDefault(it => it.UserName.Equals(txtLogin.Text));
+                current.Department = (Department)DataTransfer.GetDataObject<Department>(new GetDataFilterDepartment {  });
                 if (current == null)
                 {
                     MessageBox.Show("Пользователь с логином " + txtLogin.Text + " не найден в базе данных");
