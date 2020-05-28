@@ -79,6 +79,7 @@
             this.Controls.Add(this.txtOperatorName);
             this.Controls.Add(this.label1);
             this.Name = "ReportListForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Список отчетов";
             this.ResumeLayout(false);
             this.PerformLayout();

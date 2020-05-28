@@ -102,6 +102,7 @@
             this.Controls.Add(this.cmbDepartments);
             this.Controls.Add(this.label1);
             this.Name = "DepartmentWorkplacesEditForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Новая должность в подразделении";
             this.ResumeLayout(false);
             this.PerformLayout();

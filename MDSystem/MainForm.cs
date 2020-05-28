@@ -71,7 +71,8 @@ namespace MDSystem
 
         private void справкаОПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ProgramReferenceDataForm pf = new ProgramReferenceDataForm();
+            pf.Show();
         }
     }
 }

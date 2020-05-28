@@ -105,6 +105,7 @@
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.groupBox1);
             this.Name = "ReportEditForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Редактирование отчета";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

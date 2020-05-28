@@ -108,6 +108,12 @@
     <Compile Include="Forms\DepartmentWorkplacesEditForm.Designer.cs">
       <DependentUpon>DepartmentWorkplacesEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ProgramReferenceDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProgramReferenceDataForm.Designer.cs">
+      <DependentUpon>ProgramReferenceDataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ReportEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,10 +182,19 @@
     <Compile Include="Objects\Workplace.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objects\BDObjects\" />
@@ -193,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DepartmentWorkplacesEditForm.resx">
       <DependentUpon>DepartmentWorkplacesEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgramReferenceDataForm.resx">
+      <DependentUpon>ProgramReferenceDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ReportEditForm.resx">
       <DependentUpon>ReportEditForm.cs</DependentUpon>
