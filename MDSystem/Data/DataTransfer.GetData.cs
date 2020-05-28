@@ -183,7 +183,9 @@ namespace MDSystem.Data
             {
                 if (filter.AllObjects)
                 {
-                    customer = conn.Query<Workplace>("Select id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_workplaces").ToList();
+                    //customer = conn.Query<Workplace>("Select id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_workplaces").ToList();
+                    customer = conn.Query<Workplace>("Select id as Id, parent_id as ParentId, name as Name, rec_date as RecDate, del_rec as DelRec FROM public.t_workplaces WHERE parent_id = @ParentId", new { ParentId = filter.ParentId }).ToList();
+
                 }
                 else if (filter.ParentId != Guid.Empty)
                 {

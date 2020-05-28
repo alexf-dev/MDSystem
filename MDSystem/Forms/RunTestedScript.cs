@@ -119,6 +119,7 @@ namespace MDSystem.Forms
             btnMakeStatus.Enabled = btnSaveReport.Enabled = false;
 
             _startDate = DateTime.Now;
+            _operatorsUser = GetOperatorsUser();
             _operatorScript = GetOperatorScript();
             MakeReportData();
         }
@@ -184,9 +185,6 @@ namespace MDSystem.Forms
 
             operatorScript.ActionsOrderList = orderList.ToArray();
 
-            //foreach (var act in operatorScript.Actions)
-            //    operatorScript.ActionsOrderList.Add(act.OrderValue);
-
             return operatorScript;
         }
 
@@ -200,7 +198,6 @@ namespace MDSystem.Forms
                 return;
 
             _selectedBDScript = (ScriptMD)(DataTransfer.GetDataObject<ScriptMD>(new GetDataFilterScriptMD { Name = txtScriptName.Text }));
-            //_bdScripts.FirstOrDefault(it => it.Name.Equals(txtScriptName.Text));
 
             if (_selectedBDScript != null)
             {
@@ -224,23 +221,15 @@ namespace MDSystem.Forms
             if (string.IsNullOrWhiteSpace(txtFullName.Text))
                 return null;
 
-            MakeOperatorsFullName();
-
-            return (User)(DataTransfer.GetDataObject<User>(new GetDataFilterUser { FirstName = _firstName, LastName = _lastName, MiddleName = _middleName }));
-        }
-
-        private void MakeOperatorsFullName()
-        {
-            if (string.IsNullOrWhiteSpace(txtFullName.Text))
-                return;
-
             string[] fullNameArray = txtFullName.Text.Split(new char[] { ' ' });
 
             _firstName = fullNameArray.Length > 0 ? fullNameArray[0].Trim() : "";
             _lastName = fullNameArray.Length > 1 ? fullNameArray[1].Trim() : "";
             _middleName = fullNameArray.Length > 2 ? fullNameArray[2].Trim() : "";
-        }
 
+            return (User)(DataTransfer.GetDataObject<User>(new GetDataFilterUser { FirstName = _firstName, LastName = _lastName, MiddleName = _middleName }));
+        }
+        
         private void btnSaveReport_Click(object sender, EventArgs e)
         {
             Report report = MakeNewReport();
@@ -264,8 +253,6 @@ namespace MDSystem.Forms
 
         private Report MakeNewReport()
         {
-            _operatorsUser = GetOperatorsUser();
-
             Report report = new Report();
             report.Id = Guid.NewGuid();
             report.ScriptId = _selectedBDScript.Id;
@@ -280,6 +267,12 @@ namespace MDSystem.Forms
             report.StartDate = _startDate;
 
             return report;
+        }
+
+        private void btnMakeStatus_Click(object sender, EventArgs e)
+        {
+            UserStatusChangeForm sf = new UserStatusChangeForm(_operatorsUser);
+            sf.Show();
         }
     }
 }

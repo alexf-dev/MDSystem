@@ -10,7 +10,7 @@ namespace MDSystem.Forms
     {
         private List<Workplace> _workplaces = new List<Workplace>();
         private List<Department> _departments = new List<Department>();
-        private Department selectedDepartment { get { return (Department)cmbDepartments.SelectedItem; } }
+        private Department selectedDepartment = null;// { get { return (Department)cmbDepartments.SelectedItem; } }
         
         public WorkplaceEdit(bool isNewRecord = true)
         {
@@ -19,8 +19,8 @@ namespace MDSystem.Forms
             if (isNewRecord)
                 this.Text = "Новая должность";
 
-            _departments = (DataTransfer.GetDataObjects<Department>(new GetDataFilterDepartment { AllObjects = true})).ConvertAll(it => (Department)it);
-            cmbDepartments.Items.AddRange(_departments.ToArray());
+            //_departments = (DataTransfer.GetDataObjects<Department>(new GetDataFilterDepartment { AllObjects = true})).ConvertAll(it => (Department)it);
+            //cmbDepartments.Items.AddRange(_departments.ToArray());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -48,8 +48,8 @@ namespace MDSystem.Forms
             if (string.IsNullOrWhiteSpace(txtWorkplaceName.Text))
                 result += "Не указано наименование должности\r\n";
 
-            if (selectedDepartment == null)
-                result += "Не указано подразделение\r\n";
+            //if (selectedDepartment == null)
+            //    result += "Не указано подразделение\r\n";
 
             if (!string.IsNullOrWhiteSpace(result))
                 return false;

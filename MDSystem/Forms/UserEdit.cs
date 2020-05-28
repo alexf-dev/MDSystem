@@ -86,6 +86,7 @@ namespace MDSystem.Forms
             user.Department = selectedDepartment;
             user.AccessLevel = selectedAccessLevel;
             user.AccessLevelValue = selectedAccessLevel.Value;
+            user.Status = UserStatus.не_использовал_систему;
 
             return user.Save(CommandAttribute.INSERT);
         }

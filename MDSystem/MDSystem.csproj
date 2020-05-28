@@ -101,6 +101,12 @@
     <Compile Include="Forms\DepartmentEdit.Designer.cs">
       <DependentUpon>DepartmentEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DepartmentWorkplacesEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DepartmentWorkplacesEditForm.Designer.cs">
+      <DependentUpon>DepartmentWorkplacesEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ReportListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,12 @@
     <Compile Include="Forms\UserEdit.Designer.cs">
       <DependentUpon>UserEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserStatusChangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserStatusChangeForm.Designer.cs">
+      <DependentUpon>UserStatusChangeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\WorkplaceEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +152,7 @@
     <Compile Include="Objects\AccessLevel.cs" />
     <Compile Include="Objects\ActionMD.cs" />
     <Compile Include="Objects\ActionMDHistory.cs" />
+    <Compile Include="Objects\Attributies.cs" />
     <Compile Include="Objects\Base\BaseObject.cs" />
     <Compile Include="Objects\Base\IBaseObject.cs" />
     <Compile Include="Objects\Base\ISaveObject.cs" />
@@ -171,6 +184,9 @@
     <EmbeddedResource Include="Forms\DepartmentEdit.resx">
       <DependentUpon>DepartmentEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DepartmentWorkplacesEditForm.resx">
+      <DependentUpon>DepartmentWorkplacesEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ReportListForm.resx">
       <DependentUpon>ReportListForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserEdit.resx">
       <DependentUpon>UserEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserStatusChangeForm.resx">
+      <DependentUpon>UserStatusChangeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\WorkplaceEdit.resx">
       <DependentUpon>WorkplaceEdit.cs</DependentUpon>

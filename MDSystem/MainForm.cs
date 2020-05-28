@@ -58,5 +58,11 @@ namespace MDSystem
             ReportListForm rl = new ReportListForm();
             rl.Show();
         }
+
+        private void ToolStripMenuItem22_Click(object sender, EventArgs e)
+        {
+            DepartmentWorkplacesEditForm dw = new DepartmentWorkplacesEditForm();
+            dw.Show();
+        }
     }
 }

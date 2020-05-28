@@ -155,6 +155,7 @@
             this.btnMakeStatus.TabIndex = 9;
             this.btnMakeStatus.Text = "Сменить статус";
             this.btnMakeStatus.UseVisualStyleBackColor = true;
+            this.btnMakeStatus.Click += new System.EventHandler(this.btnMakeStatus_Click);
             // 
             // btnSaveReport
             // 
