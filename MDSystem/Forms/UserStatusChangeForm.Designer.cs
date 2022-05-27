@@ -33,6 +33,7 @@
             this.cmbStatuses = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUserFullName
@@ -72,19 +73,30 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(120, 158);
+            this.button1.Location = new System.Drawing.Point(59, 159);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 32);
+            this.button1.Size = new System.Drawing.Size(100, 32);
             this.button1.TabIndex = 4;
             this.button1.Text = "Сохранить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(190, 159);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(100, 32);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Отмена";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // UserStatusChangeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(345, 222);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbStatuses);
@@ -104,5 +116,6 @@
         private System.Windows.Forms.ComboBox cmbStatuses;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

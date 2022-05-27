@@ -49,6 +49,7 @@
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtMiddleName = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -57,6 +58,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
@@ -254,13 +256,24 @@
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.SystemColors.Control;
-            this.btnSave.Location = new System.Drawing.Point(599, 242);
+            this.btnSave.Location = new System.Drawing.Point(519, 258);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(103, 38);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.SystemColors.Control;
+            this.btnCancel.Location = new System.Drawing.Point(665, 258);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(103, 38);
+            this.btnCancel.TabIndex = 10;
+            this.btnCancel.Text = "Отмена";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // UserEdit
             // 
@@ -305,5 +318,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbAccessLevel;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

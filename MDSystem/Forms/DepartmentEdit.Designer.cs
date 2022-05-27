@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtDepartmentName = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -51,7 +52,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(181, 103);
+            this.button1.Location = new System.Drawing.Point(104, 98);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 32);
             this.button1.TabIndex = 2;
@@ -59,11 +60,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(255, 98);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(108, 32);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "Отмена";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // DepartmentEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 156);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtDepartmentName);
             this.Controls.Add(this.label1);
@@ -80,5 +92,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtDepartmentName;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
