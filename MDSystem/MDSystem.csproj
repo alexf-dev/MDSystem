@@ -97,16 +97,16 @@
     <Compile Include="Forms\AuthorizationForm.Designer.cs">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DepartmentEdit.cs">
+    <Compile Include="Forms\Department\DepartmentEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DepartmentEdit.Designer.cs">
+    <Compile Include="Forms\Department\DepartmentEdit.Designer.cs">
       <DependentUpon>DepartmentEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DepartmentWorkplacesEditForm.cs">
+    <Compile Include="Forms\Department\DepartmentWorkplacesEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DepartmentWorkplacesEditForm.Designer.cs">
+    <Compile Include="Forms\Department\DepartmentWorkplacesEditForm.Designer.cs">
       <DependentUpon>DepartmentWorkplacesEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ProgramReferenceDataForm.cs">
@@ -115,46 +115,46 @@
     <Compile Include="Forms\ProgramReferenceDataForm.Designer.cs">
       <DependentUpon>ProgramReferenceDataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ReportEditForm.cs">
+    <Compile Include="Forms\Report\ReportEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ReportEditForm.Designer.cs">
+    <Compile Include="Forms\Report\ReportEditForm.Designer.cs">
       <DependentUpon>ReportEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ReportListForm.cs">
+    <Compile Include="Forms\Report\ReportListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ReportListForm.Designer.cs">
+    <Compile Include="Forms\Report\ReportListForm.Designer.cs">
       <DependentUpon>ReportListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RunTestedScript.cs">
+    <Compile Include="Forms\Script\RunTestedScript.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RunTestedScript.Designer.cs">
+    <Compile Include="Forms\Script\RunTestedScript.Designer.cs">
       <DependentUpon>RunTestedScript.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ScriptEdit.cs">
+    <Compile Include="Forms\Script\ScriptEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ScriptEdit.Designer.cs">
+    <Compile Include="Forms\Script\ScriptEdit.Designer.cs">
       <DependentUpon>ScriptEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserEdit.cs">
+    <Compile Include="Forms\User\UserEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\UserEdit.Designer.cs">
+    <Compile Include="Forms\User\UserEdit.Designer.cs">
       <DependentUpon>UserEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserStatusChangeForm.cs">
+    <Compile Include="Forms\User\UserStatusChangeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\UserStatusChangeForm.Designer.cs">
+    <Compile Include="Forms\User\UserStatusChangeForm.Designer.cs">
       <DependentUpon>UserStatusChangeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\WorkplaceEdit.cs">
+    <Compile Include="Forms\Department\WorkplaceEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\WorkplaceEdit.Designer.cs">
+    <Compile Include="Forms\Department\WorkplaceEdit.Designer.cs">
       <DependentUpon>WorkplaceEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -198,40 +198,42 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Forms\Analysis\" />
+    <Folder Include="Forms\Documentation\" />
     <Folder Include="Objects\BDObjects\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DepartmentEdit.resx">
+    <EmbeddedResource Include="Forms\Department\DepartmentEdit.resx">
       <DependentUpon>DepartmentEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DepartmentWorkplacesEditForm.resx">
+    <EmbeddedResource Include="Forms\Department\DepartmentWorkplacesEditForm.resx">
       <DependentUpon>DepartmentWorkplacesEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProgramReferenceDataForm.resx">
       <DependentUpon>ProgramReferenceDataForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ReportEditForm.resx">
+    <EmbeddedResource Include="Forms\Report\ReportEditForm.resx">
       <DependentUpon>ReportEditForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ReportListForm.resx">
+    <EmbeddedResource Include="Forms\Report\ReportListForm.resx">
       <DependentUpon>ReportListForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RunTestedScript.resx">
+    <EmbeddedResource Include="Forms\Script\RunTestedScript.resx">
       <DependentUpon>RunTestedScript.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ScriptEdit.resx">
+    <EmbeddedResource Include="Forms\Script\ScriptEdit.resx">
       <DependentUpon>ScriptEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserEdit.resx">
+    <EmbeddedResource Include="Forms\User\UserEdit.resx">
       <DependentUpon>UserEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserStatusChangeForm.resx">
+    <EmbeddedResource Include="Forms\User\UserStatusChangeForm.resx">
       <DependentUpon>UserStatusChangeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\WorkplaceEdit.resx">
+    <EmbeddedResource Include="Forms\Department\WorkplaceEdit.resx">
       <DependentUpon>WorkplaceEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

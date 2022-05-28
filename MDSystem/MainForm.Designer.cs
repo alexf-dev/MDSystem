@@ -33,7 +33,6 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem22 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаОПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,19 +40,18 @@
             this.tabPageInformation = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button8 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button12 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.addScriptButton = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPageInformation.SuspendLayout();
@@ -83,8 +81,7 @@
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2,
             this.ToolStripMenuItem3,
-            this.ToolStripMenuItem4,
-            this.ToolStripMenuItem22});
+            this.ToolStripMenuItem4});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(71, 28);
             this.toolStripMenuItem1.Text = "Добавить";
@@ -109,14 +106,6 @@
             this.ToolStripMenuItem4.Size = new System.Drawing.Size(267, 22);
             this.ToolStripMenuItem4.Text = "Новая должность";
             this.ToolStripMenuItem4.Click += new System.EventHandler(this.ToolStripMenuItem4_Click);
-            // 
-            // ToolStripMenuItem22
-            // 
-            this.ToolStripMenuItem22.Name = "ToolStripMenuItem22";
-            this.ToolStripMenuItem22.Size = new System.Drawing.Size(267, 22);
-            this.ToolStripMenuItem22.Text = "Новая должность в подразделении";
-            this.ToolStripMenuItem22.Visible = false;
-            this.ToolStripMenuItem22.Click += new System.EventHandler(this.ToolStripMenuItem22_Click);
             // 
             // toolStripMenuItem5
             // 
@@ -195,6 +184,16 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Анализ документации";
             // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button8.Location = new System.Drawing.Point(37, 57);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(96, 35);
+            this.button8.TabIndex = 3;
+            this.button8.Text = "Просмотр";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.button7);
@@ -206,6 +205,16 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Пользователи";
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button7.Location = new System.Drawing.Point(39, 57);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(96, 35);
+            this.button7.TabIndex = 2;
+            this.button7.Text = "Просмотр";
+            this.button7.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -220,12 +229,22 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Бортовая документация";
             // 
+            // button12
+            // 
+            this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button12.Location = new System.Drawing.Point(38, 124);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(96, 35);
+            this.button12.TabIndex = 2;
+            this.button12.Text = "Просмотр";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button6.Location = new System.Drawing.Point(34, 47);
+            this.button6.Location = new System.Drawing.Point(26, 47);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(106, 54);
+            this.button6.Size = new System.Drawing.Size(126, 54);
             this.button6.TabIndex = 2;
             this.button6.Text = "Загрузить данные";
             this.button6.UseVisualStyleBackColor = true;
@@ -233,7 +252,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.addScriptButton);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
@@ -253,25 +272,25 @@
             this.button5.Text = "Просмотр";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // addScriptButton
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button4.Location = new System.Drawing.Point(19, 47);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(131, 54);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "Загрузить данные о сценарии";
-            this.button4.UseVisualStyleBackColor = true;
+            this.addScriptButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.addScriptButton.Location = new System.Drawing.Point(19, 47);
+            this.addScriptButton.Name = "addScriptButton";
+            this.addScriptButton.Size = new System.Drawing.Size(131, 54);
+            this.addScriptButton.TabIndex = 0;
+            this.addScriptButton.Text = "Загрузить данные о сценарии";
+            this.addScriptButton.UseVisualStyleBackColor = true;
+            this.addScriptButton.Click += new System.EventHandler(this.addScriptButton_Click);
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(725, 306);
+            this.tabPage1.Size = new System.Drawing.Size(725, 239);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Выбор действия";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -295,46 +314,6 @@
             this.button2.Text = "Выполнить тестовый сценарий";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(41, 60);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 59);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Загрузить данные о сценарии";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button12
-            // 
-            this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button12.Location = new System.Drawing.Point(38, 124);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(96, 35);
-            this.button12.TabIndex = 2;
-            this.button12.Text = "Просмотр";
-            this.button12.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button7.Location = new System.Drawing.Point(39, 57);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(96, 35);
-            this.button7.TabIndex = 2;
-            this.button7.Text = "Просмотр";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button8.Location = new System.Drawing.Point(37, 57);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(96, 35);
-            this.button8.TabIndex = 3;
-            this.button8.Text = "Просмотр";
-            this.button8.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -371,12 +350,10 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemExit;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem22;
         private System.Windows.Forms.ToolStripMenuItem справкаОПрограммеToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPageInformation;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -386,7 +363,7 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button addScriptButton;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button12;

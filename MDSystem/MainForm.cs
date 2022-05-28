@@ -19,19 +19,13 @@ namespace MDSystem
             InitializeComponent();
 
             if (ApplicationData.CurrentUser.AccessLevelValue < 2)
-                button1.Visible = button3.Visible = false;
+                addScriptButton.Visible = button3.Visible = false;
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             UserEdit userEdit = new UserEdit();
             userEdit.Show();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ScriptEdit se = new ScriptEdit();
-            se.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -73,6 +67,12 @@ namespace MDSystem
         {
             ProgramReferenceDataForm pf = new ProgramReferenceDataForm();
             pf.Show();
+        }
+
+        private void addScriptButton_Click(object sender, EventArgs e)
+        {
+            ScriptEdit se = new ScriptEdit();
+            se.Show();
         }
     }
 }
