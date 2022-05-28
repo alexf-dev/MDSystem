@@ -139,6 +139,12 @@
     <Compile Include="Forms\Script\ScriptEdit.Designer.cs">
       <DependentUpon>ScriptEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Script\ScriptList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Script\ScriptList.Designer.cs">
+      <DependentUpon>ScriptList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\User\UserEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Script\ScriptEdit.resx">
       <DependentUpon>ScriptEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Script\ScriptList.resx">
+      <DependentUpon>ScriptList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\User\UserEdit.resx">
       <DependentUpon>UserEdit.cs</DependentUpon>

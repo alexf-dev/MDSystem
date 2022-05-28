@@ -19,7 +19,7 @@ namespace MDSystem
             InitializeComponent();
 
             if (ApplicationData.CurrentUser.AccessLevelValue < 2)
-                addScriptButton.Visible = button3.Visible = false;
+                addScriptBtn.Visible = button3.Visible = false;
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)

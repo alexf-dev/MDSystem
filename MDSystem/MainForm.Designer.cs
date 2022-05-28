@@ -40,15 +40,15 @@
             this.tabPageInformation = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button8 = new System.Windows.Forms.Button();
+            this.btnAnalysisDocuments = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btnUserList = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnDocumentList = new System.Windows.Forms.Button();
+            this.btnAddDocument = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.addScriptButton = new System.Windows.Forms.Button();
+            this.btnScriptList = new System.Windows.Forms.Button();
+            this.addScriptBtn = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -89,21 +89,21 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(267, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(195, 22);
             this.toolStripMenuItem2.Text = "Новый пользователь";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // ToolStripMenuItem3
             // 
             this.ToolStripMenuItem3.Name = "ToolStripMenuItem3";
-            this.ToolStripMenuItem3.Size = new System.Drawing.Size(267, 22);
+            this.ToolStripMenuItem3.Size = new System.Drawing.Size(195, 22);
             this.ToolStripMenuItem3.Text = "Новое подразделение";
             this.ToolStripMenuItem3.Click += new System.EventHandler(this.ToolStripMenuItem3_Click);
             // 
             // ToolStripMenuItem4
             // 
             this.ToolStripMenuItem4.Name = "ToolStripMenuItem4";
-            this.ToolStripMenuItem4.Size = new System.Drawing.Size(267, 22);
+            this.ToolStripMenuItem4.Size = new System.Drawing.Size(195, 22);
             this.ToolStripMenuItem4.Text = "Новая должность";
             this.ToolStripMenuItem4.Click += new System.EventHandler(this.ToolStripMenuItem4_Click);
             // 
@@ -174,7 +174,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button8);
+            this.groupBox4.Controls.Add(this.btnAnalysisDocuments);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox4.Location = new System.Drawing.Point(540, 3);
@@ -184,19 +184,19 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Анализ документации";
             // 
-            // button8
+            // btnAnalysisDocuments
             // 
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button8.Location = new System.Drawing.Point(37, 57);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(96, 35);
-            this.button8.TabIndex = 3;
-            this.button8.Text = "Просмотр";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btnAnalysisDocuments.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnAnalysisDocuments.Location = new System.Drawing.Point(37, 57);
+            this.btnAnalysisDocuments.Name = "btnAnalysisDocuments";
+            this.btnAnalysisDocuments.Size = new System.Drawing.Size(96, 35);
+            this.btnAnalysisDocuments.TabIndex = 3;
+            this.btnAnalysisDocuments.Text = "Просмотр";
+            this.btnAnalysisDocuments.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button7);
+            this.groupBox3.Controls.Add(this.btnUserList);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox3.Location = new System.Drawing.Point(361, 3);
@@ -206,20 +206,20 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Пользователи";
             // 
-            // button7
+            // btnUserList
             // 
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button7.Location = new System.Drawing.Point(39, 57);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(96, 35);
-            this.button7.TabIndex = 2;
-            this.button7.Text = "Просмотр";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnUserList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnUserList.Location = new System.Drawing.Point(39, 57);
+            this.btnUserList.Name = "btnUserList";
+            this.btnUserList.Size = new System.Drawing.Size(96, 35);
+            this.btnUserList.TabIndex = 2;
+            this.btnUserList.Text = "Просмотр";
+            this.btnUserList.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button12);
-            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Controls.Add(this.btnDocumentList);
+            this.groupBox2.Controls.Add(this.btnAddDocument);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox2.Location = new System.Drawing.Point(182, 3);
@@ -229,30 +229,30 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Бортовая документация";
             // 
-            // button12
+            // btnDocumentList
             // 
-            this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button12.Location = new System.Drawing.Point(38, 124);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(96, 35);
-            this.button12.TabIndex = 2;
-            this.button12.Text = "Просмотр";
-            this.button12.UseVisualStyleBackColor = true;
+            this.btnDocumentList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnDocumentList.Location = new System.Drawing.Point(38, 124);
+            this.btnDocumentList.Name = "btnDocumentList";
+            this.btnDocumentList.Size = new System.Drawing.Size(96, 35);
+            this.btnDocumentList.TabIndex = 2;
+            this.btnDocumentList.Text = "Просмотр";
+            this.btnDocumentList.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnAddDocument
             // 
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button6.Location = new System.Drawing.Point(26, 47);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(126, 54);
-            this.button6.TabIndex = 2;
-            this.button6.Text = "Загрузить данные";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnAddDocument.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnAddDocument.Location = new System.Drawing.Point(26, 47);
+            this.btnAddDocument.Name = "btnAddDocument";
+            this.btnAddDocument.Size = new System.Drawing.Size(126, 54);
+            this.btnAddDocument.TabIndex = 2;
+            this.btnAddDocument.Text = "Загрузить данные";
+            this.btnAddDocument.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.addScriptButton);
+            this.groupBox1.Controls.Add(this.btnScriptList);
+            this.groupBox1.Controls.Add(this.addScriptBtn);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
@@ -262,26 +262,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Тестовые сценарии";
             // 
-            // button5
+            // btnScriptList
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button5.Location = new System.Drawing.Point(37, 124);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(96, 35);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "Просмотр";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnScriptList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnScriptList.Location = new System.Drawing.Point(37, 124);
+            this.btnScriptList.Name = "btnScriptList";
+            this.btnScriptList.Size = new System.Drawing.Size(96, 35);
+            this.btnScriptList.TabIndex = 1;
+            this.btnScriptList.Text = "Просмотр";
+            this.btnScriptList.UseVisualStyleBackColor = true;
             // 
-            // addScriptButton
+            // addScriptBtn
             // 
-            this.addScriptButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.addScriptButton.Location = new System.Drawing.Point(19, 47);
-            this.addScriptButton.Name = "addScriptButton";
-            this.addScriptButton.Size = new System.Drawing.Size(131, 54);
-            this.addScriptButton.TabIndex = 0;
-            this.addScriptButton.Text = "Загрузить данные о сценарии";
-            this.addScriptButton.UseVisualStyleBackColor = true;
-            this.addScriptButton.Click += new System.EventHandler(this.addScriptButton_Click);
+            this.addScriptBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.addScriptBtn.Location = new System.Drawing.Point(19, 47);
+            this.addScriptBtn.Name = "addScriptBtn";
+            this.addScriptBtn.Size = new System.Drawing.Size(131, 54);
+            this.addScriptBtn.TabIndex = 0;
+            this.addScriptBtn.Text = "Загрузить данные о сценарии";
+            this.addScriptBtn.UseVisualStyleBackColor = true;
+            this.addScriptBtn.Click += new System.EventHandler(this.addScriptButton_Click);
             // 
             // tabPage1
             // 
@@ -360,12 +360,12 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnAddDocument;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button addScriptButton;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button btnScriptList;
+        private System.Windows.Forms.Button addScriptBtn;
+        private System.Windows.Forms.Button btnAnalysisDocuments;
+        private System.Windows.Forms.Button btnUserList;
+        private System.Windows.Forms.Button btnDocumentList;
     }
 }
