@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,10 @@ namespace MDSystem.Forms
     public partial class AuthorizationForm : Form
     {
         private List<User> _users = new List<User>();
+        private string path = "creds.txt";
+        private string default_value = string.Empty;
+        private string _login = string.Empty;
+        private string _password = string.Empty;
 
         public AuthorizationForm()
         {
@@ -42,7 +47,7 @@ namespace MDSystem.Forms
             }
         }
 
-        private void MakeAuthorization()
+        private async void MakeAuthorization()
         {
             ApplicationData.IsAuthorizedUser = false;
 
@@ -84,7 +89,62 @@ namespace MDSystem.Forms
             }
 
             ApplicationData.IsAuthorizedUser = ApplicationData.CurrentUser != null;
+
+            await AddUserCredentials(txtLogin.Text, txtPassword.Text);
+
             this.Close();
+        }
+
+        private void AuthorizationForm_Load(object sender, EventArgs e)
+        {
+            SendCheckUserCredentials();            
+        }
+
+        private async Task SendCheckUserCredentials()
+        {
+            if (File.Exists(path))
+            {
+                var credentials = new List<string>();
+
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    string line;
+                    while ((line = await reader.ReadLineAsync()) != null)
+                    {
+                        credentials.Add(line);
+                    }
+
+                    if (credentials.Any() && credentials.Count == 2)
+                    {
+                        _login = credentials[0];
+                        _password = credentials[1];
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(_login) && !string.IsNullOrWhiteSpace(_password))
+                {
+                    txtLogin.Text = _login;
+                    txtPassword.Text = _password;
+                }
+            }
+            else
+            {
+                // полная перезапись файла 
+                using (StreamWriter writer = new StreamWriter(path, false))
+                {
+                    await writer.WriteLineAsync(default_value);
+                }
+            }
+        }
+
+        private async Task AddUserCredentials(string login, string password)
+        {
+            // полная перезапись файла 
+            using (StreamWriter writer = new StreamWriter(path, false))
+            {
+                await writer.WriteLineAsync(login);
+                await writer.WriteAsync(password);
+            }
         }
     }
 }

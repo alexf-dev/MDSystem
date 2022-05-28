@@ -106,6 +106,7 @@
             this.Name = "AuthorizationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Авторизация пользователя";
+            this.Load += new System.EventHandler(this.AuthorizationForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AuthorizationForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
