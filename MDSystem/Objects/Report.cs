@@ -60,10 +60,5 @@ namespace MDSystem.Objects
         /// Комментарии к отчету
         /// </summary>
         public string Description { get; set; }
-
-        /// <summary>
-        /// Дата изменения записи в БД
-        /// </summary>
-        public DateTime RecDate { get; set; }
     }
 }

@@ -61,4 +61,9 @@ namespace MDSystem.Objects
     {
         public string OperatorFullName { get; set; }
     }
+
+    public class GetDataFilterDocumentMD : GetDataFilter
+    {
+
+    }
 }

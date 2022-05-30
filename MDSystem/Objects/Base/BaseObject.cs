@@ -12,7 +12,12 @@ namespace MDSystem.Objects
         /// Идентификатор объекта
         /// </summary>
         public Guid Id { get; set; }
-        
+
+        /// <summary>
+        /// Дата изменения записи в БД
+        /// </summary>
+        public DateTime RecDate { get; set; }
+
         /// <summary>
         /// Признак удаленной записи
         /// </summary>

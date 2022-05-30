@@ -73,12 +73,7 @@ namespace MDSystem.Objects
         /// <summary>
         /// Уровень доступа
         /// </summary>
-        public AccessLevel AccessLevel { get; set; }
-
-        /// <summary>
-        /// Дата изменения записи в БД
-        /// </summary>
-        public DateTime RecDate { get; set; }
+        public AccessLevel AccessLevel { get; set; }        
 
         public Guid WorkplaceId { get; set; }
 

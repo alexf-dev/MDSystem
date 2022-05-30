@@ -1,5 +1,7 @@
 ﻿using MDSystem.Data;
 using MDSystem.Forms;
+using MDSystem.Forms.Documentation;
+using MDSystem.Forms.Script;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -73,6 +75,24 @@ namespace MDSystem
         {
             ScriptEdit se = new ScriptEdit();
             se.Show();
+        }
+
+        private void btnScriptList_Click(object sender, EventArgs e)
+        {
+            ScriptList sl = new ScriptList();
+            sl.Show();
+        }
+
+        private void btnAddDocument_Click(object sender, EventArgs e)
+        {
+            DocumentEdit de = new DocumentEdit();
+            de.Show();
+        }
+
+        private void btnDocumentList_Click(object sender, EventArgs e)
+        {
+            DocumentList dl = new DocumentList();
+            dl.Show();
         }
     }
 }

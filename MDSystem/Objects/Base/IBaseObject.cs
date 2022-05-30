@@ -12,6 +12,9 @@ namespace MDSystem.Objects
     public interface IBaseObject
     {
         Guid Id { get; set; }
+
+        DateTime RecDate { get; set; }
+
         bool DelRec { get; set; }
     }
 }

@@ -109,6 +109,18 @@
     <Compile Include="Forms\Department\DepartmentWorkplacesEditForm.Designer.cs">
       <DependentUpon>DepartmentWorkplacesEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Documentation\DocumentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Documentation\DocumentEdit.Designer.cs">
+      <DependentUpon>DocumentEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Documentation\DocumentList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Documentation\DocumentList.Designer.cs">
+      <DependentUpon>DocumentList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ProgramReferenceDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,16 +157,22 @@
     <Compile Include="Forms\Script\ScriptList.Designer.cs">
       <DependentUpon>ScriptList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\User\UserEdit.cs">
+    <Compile Include="Forms\Users\UserEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\User\UserEdit.Designer.cs">
+    <Compile Include="Forms\Users\UserEdit.Designer.cs">
       <DependentUpon>UserEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\User\UserStatusChangeForm.cs">
+    <Compile Include="Forms\Users\UserList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\User\UserStatusChangeForm.Designer.cs">
+    <Compile Include="Forms\Users\UserList.Designer.cs">
+      <DependentUpon>UserList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Users\UserStatusChangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Users\UserStatusChangeForm.Designer.cs">
       <DependentUpon>UserStatusChangeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Department\WorkplaceEdit.cs">
@@ -177,10 +195,13 @@
     <Compile Include="Objects\Base\IBaseObject.cs" />
     <Compile Include="Objects\Base\ISaveObject.cs" />
     <Compile Include="Objects\Department.cs" />
+    <Compile Include="Objects\DocumentMD.cs" />
     <Compile Include="Objects\Enumerators\ActionMDType.cs" />
     <Compile Include="Objects\Enumerators\CommandAttribute.cs" />
     <Compile Include="Objects\GetDataFilter.cs" />
     <Compile Include="Objects\LibraryMD.cs" />
+    <Compile Include="Objects\Models\ModelDocumentMD.cs" />
+    <Compile Include="Objects\Models\ModelScriptMD.cs" />
     <Compile Include="Objects\Report.cs" />
     <Compile Include="Objects\ScriptMD.cs" />
     <Compile Include="Objects\Enumerators\ScriptMDType.cs" />
@@ -205,8 +226,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\Analysis\" />
-    <Folder Include="Forms\Documentation\" />
-    <Folder Include="Objects\BDObjects\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\AuthorizationForm.resx">
@@ -217,6 +236,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Department\DepartmentWorkplacesEditForm.resx">
       <DependentUpon>DepartmentWorkplacesEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Documentation\DocumentEdit.resx">
+      <DependentUpon>DocumentEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Documentation\DocumentList.resx">
+      <DependentUpon>DocumentList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProgramReferenceDataForm.resx">
       <DependentUpon>ProgramReferenceDataForm.cs</DependentUpon>
@@ -236,10 +261,13 @@
     <EmbeddedResource Include="Forms\Script\ScriptList.resx">
       <DependentUpon>ScriptList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\User\UserEdit.resx">
+    <EmbeddedResource Include="Forms\Users\UserEdit.resx">
       <DependentUpon>UserEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\User\UserStatusChangeForm.resx">
+    <EmbeddedResource Include="Forms\Users\UserList.resx">
+      <DependentUpon>UserList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Users\UserStatusChangeForm.resx">
       <DependentUpon>UserStatusChangeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Department\WorkplaceEdit.resx">

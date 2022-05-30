@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MDSystem.Forms.User
+namespace MDSystem.Forms
 {
     public partial class UserList : Form
     {

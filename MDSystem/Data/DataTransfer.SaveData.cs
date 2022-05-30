@@ -35,6 +35,9 @@ namespace MDSystem.Data
             else
                 if (saveObject is Report)
                     return SaveObject((Report)saveObject, commandAttribute);
+            else
+                if (saveObject is DocumentMD)
+                    return SaveObject((DocumentMD)saveObject, commandAttribute);
 
             return false;
         }        
@@ -404,6 +407,70 @@ namespace MDSystem.Data
                             try
                             {
                                 var deleteSQL = "DELETE FROM public.t_users WHERE id = @Id;";
+                                affectedRows = conn.Execute(deleteSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка удаления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (affectedRows > 0)
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Save object Report
+        /// </summary>
+        /// <param name="saveObject"></param>
+        /// <param name="commandAttribute"></param>
+        /// <returns></returns>
+        private static bool SaveObject(DocumentMD saveObject, CommandAttribute commandAttribute)
+        {
+            int affectedRows = 0;
+
+            using (var conn = OpenConnection(ConnectionString))
+            {
+                switch (commandAttribute)
+                {
+                    case CommandAttribute.INSERT:
+                        {
+                            try
+                            {
+                                var insertSQL = "INSERT INTO public.t_documents (id, parent_id, name, description, rec_date, del_rec) Values (@Id, @ParentId, @Name, @Description, now(), @DelRec);";
+                                affectedRows = conn.Execute(insertSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.UPDATE:
+                        {
+                            try
+                            {
+                                var updateSQL = "UPDATE INTO public.t_documents (id, parent_id, name, description, rec_date, del_rec) Values (@Id, @ParentId, @Name, @Description, now(), @DelRec);";
+                                affectedRows = conn.Execute(updateSQL, saveObject);
+                            }
+                            catch (Exception exc)
+                            {
+                                MessageBox.Show("Ошибка обновления записи в БД: " + Environment.NewLine + exc.Message);
+                            }
+                        }
+                        break;
+                    case CommandAttribute.DELETE:
+                        {
+                            try
+                            {
+                                var deleteSQL = "DELETE FROM public.t_documents WHERE id = @Id;";
                                 affectedRows = conn.Execute(deleteSQL, saveObject);
                             }
                             catch (Exception exc)

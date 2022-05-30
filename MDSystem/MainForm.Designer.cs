@@ -238,6 +238,7 @@
             this.btnDocumentList.TabIndex = 2;
             this.btnDocumentList.Text = "Просмотр";
             this.btnDocumentList.UseVisualStyleBackColor = true;
+            this.btnDocumentList.Click += new System.EventHandler(this.btnDocumentList_Click);
             // 
             // btnAddDocument
             // 
@@ -248,6 +249,7 @@
             this.btnAddDocument.TabIndex = 2;
             this.btnAddDocument.Text = "Загрузить данные";
             this.btnAddDocument.UseVisualStyleBackColor = true;
+            this.btnAddDocument.Click += new System.EventHandler(this.btnAddDocument_Click);
             // 
             // groupBox1
             // 
@@ -271,6 +273,7 @@
             this.btnScriptList.TabIndex = 1;
             this.btnScriptList.Text = "Просмотр";
             this.btnScriptList.UseVisualStyleBackColor = true;
+            this.btnScriptList.Click += new System.EventHandler(this.btnScriptList_Click);
             // 
             // addScriptBtn
             // 
