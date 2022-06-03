@@ -59,7 +59,9 @@ namespace MDSystem.Objects
 
     public class GetDataFilterReport : GetDataFilter
     {
+        public Guid? OperatorID { get; set; }
         public string OperatorFullName { get; set; }
+        public string ScriptName { get; set; }
     }
 
     public class GetDataFilterDocumentMD : GetDataFilter

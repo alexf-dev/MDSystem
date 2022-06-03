@@ -270,6 +270,7 @@ namespace MDSystem.Forms
             report.ScriptId = _selectedBDScript.Id;
             report.ScriptName = _selectedBDScript.Name;
             report.UserID = ApplicationData.CurrentUser.Id;
+            report.OperatorID = selectedOperatorsUser.Id;
             report.OperatorFullName = selectedOperatorsUser.FullName;
             report.ActionsAmount = _operatorScript.Actions.Count;
             report.TimeExecutionAmount = operatorTime;

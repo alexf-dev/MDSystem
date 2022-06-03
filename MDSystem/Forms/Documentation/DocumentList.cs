@@ -15,10 +15,8 @@ namespace MDSystem.Forms.Documentation
 {
     public partial class DocumentList : Form
     {
-        private string _actionsDate = "";
-
         private List<DocumentMD> _bdDocuments = new List<DocumentMD>();
-        private List<ModelDocumentMD> _bdModelDocuments = new List<ModelDocumentMD>();
+        private List<DocumentModel> _bdModelDocuments = new List<DocumentModel>();
 
         private DocumentMD _selectedBDDocument = null;
 
@@ -30,11 +28,11 @@ namespace MDSystem.Forms.Documentation
         private void DocumentList_Load(object sender, EventArgs e)
         {
             _bdDocuments = (DataTransfer.GetDataObjects<DocumentMD>(new GetDataFilterDocumentMD { AllObjects = true })).ConvertAll(it => (DocumentMD)it);
-            _bdModelDocuments = _bdDocuments.OrderBy(it => it.RecDate).Select(it => new ModelDocumentMD(it.Id, it.Name)).ToList();
+            _bdModelDocuments = _bdDocuments.OrderBy(it => it.RecDate).Select(it => new DocumentModel(it.Id, it.Name)).ToList();
 
             if (_bdDocuments != null)
             {
-                foreach (ModelDocumentMD doc in _bdModelDocuments)
+                foreach (DocumentModel doc in _bdModelDocuments)
                 {
                     listDocuments.Items.Add(doc);
                 }
@@ -43,11 +41,10 @@ namespace MDSystem.Forms.Documentation
 
         private void listDocuments_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            var document = listDocuments.SelectedItem as ModelDocumentMD;
+            var document = listDocuments.SelectedItem as DocumentModel;
 
             if (document != null)
             {
-                _actionsDate = "";
                 _selectedBDDocument = null;
                 txtDocDescription.Text = "";
 
@@ -58,7 +55,7 @@ namespace MDSystem.Forms.Documentation
 
                 if (_selectedBDDocument != null)
                 {
-                    txtDocDescription.Text = _actionsDate;
+                    txtDocDescription.Text = _selectedBDDocument.Description;
                 }
                 else
                 {

@@ -40,10 +40,27 @@ namespace MDSystem.Forms.Documentation
 
             if (IsValidData(out result))
             {
-                if (SaveDocument())
-                    MessageBox.Show("Документ сохранен");
+                DocumentMD doc = (DocumentMD)DataTransfer.GetDataObject<DocumentMD>(new GetDataFilterDocumentMD { Name = txtDocName.Text });
+
+                if (doc != null)
+                {
+                    if (MessageBox.Show(string.Format("Документ '{0}' уже присутствует в БД, заменить данные?", txtDocName.Text), "Внимание!", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                        return;
+                    else
+                    {
+                        if (UpdateDocument(doc))
+                            MessageBox.Show("Документ обновлен");
+                        else
+                            MessageBox.Show("Ошибка сохранения");
+                    }
+                }
                 else
-                    MessageBox.Show("Ошибка сохранения");
+                {
+                    if (SaveDocument())
+                        MessageBox.Show("Документ сохранен");
+                    else
+                        MessageBox.Show("Ошибка сохранения");
+                }
             }
             else
             {
@@ -74,8 +91,17 @@ namespace MDSystem.Forms.Documentation
             document.ParentId = Guid.Empty;
             document.Name = txtDocName.Text;
             document.Description = txtDocDescripton.Text;
+            document.ChangeCount = 1;
 
             return document.Save(CommandAttribute.INSERT);
+        }
+
+        private bool UpdateDocument(DocumentMD doc)
+        {
+            doc.Description = txtDocDescripton.Text;
+            doc.ChangeCount += doc.ChangeCount;
+
+            return doc.Save(CommandAttribute.UPDATE); ;
         }
     }
 }

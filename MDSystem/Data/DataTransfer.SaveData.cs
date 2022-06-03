@@ -124,7 +124,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var insertSQL = "INSERT INTO public.t_scripts (id, name, code, actions_order_list, script_type, description, reg_date, rec_date, del_rec) Values (@Id, @Name, @Code, @ActionsOrderList, @ScriptType, @Description, @RegDate, now(), @DelRec);";
+                                var insertSQL = "INSERT INTO public.t_scripts (id, name, code, actions_order_list, script_type, description, reg_date, rec_date, del_rec, change_count) Values (@Id, @Name, @Code, @ActionsOrderList, @ScriptType, @Description, @RegDate, now(), @DelRec, @ChangeCount);";
                                 affectedRows = conn.Execute(insertSQL, saveObject);
                             }
                             catch (Exception exc)
@@ -137,7 +137,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var updateSQL = "UPDATE public.t_scripts SET rec_date = now() WHERE id = @Id;";
+                                var updateSQL = "UPDATE public.t_scripts SET name = @Name, rec_date = now(), change_count = @ChangeCount WHERE id = @Id;";
                                 affectedRows = conn.Execute(updateSQL, saveObject);
                             }
                             catch (Exception exc)
@@ -380,7 +380,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var insertSQL = "INSERT INTO public.t_reports (id, script_id, script_name, user_id, operator_name, actions_amount, time_execution_amount, actions_order_list, description, start_date, rec_date, del_rec) Values (@Id, @ScriptId, @ScriptName, @UserID, @OperatorFullName, @ActionsAmount, @TimeExecutionAmount, @ActionsOrderList, @Description, @StartDate, now(), @DelRec);";
+                                var insertSQL = "INSERT INTO public.t_reports (id, script_id, script_name, user_id, operator_id, operator_name, actions_amount, time_execution_amount, actions_order_list, description, start_date, rec_date, del_rec) Values (@Id, @ScriptId, @ScriptName, @UserID, @OperatorID, @OperatorFullName, @ActionsAmount, @TimeExecutionAmount, @ActionsOrderList, @Description, @StartDate, now(), @DelRec);";
                                 affectedRows = conn.Execute(insertSQL, saveObject);
                             }
                             catch (Exception exc)
@@ -444,7 +444,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var insertSQL = "INSERT INTO public.t_documents (id, parent_id, name, description, rec_date, del_rec) Values (@Id, @ParentId, @Name, @Description, now(), @DelRec);";
+                                var insertSQL = "INSERT INTO public.t_documents (id, parent_id, name, description, rec_date, del_rec, change_count) Values (@Id, @ParentId, @Name, @Description, now(), @DelRec, @ChangeCount);";
                                 affectedRows = conn.Execute(insertSQL, saveObject);
                             }
                             catch (Exception exc)
@@ -457,7 +457,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var updateSQL = "UPDATE INTO public.t_documents (id, parent_id, name, description, rec_date, del_rec) Values (@Id, @ParentId, @Name, @Description, now(), @DelRec);";
+                                var updateSQL = "UPDATE public.t_documents SET name = @Name, description = @Description, rec_date = now(), change_count = @ChangeCount WHERE id = @Id;";
                                 affectedRows = conn.Execute(updateSQL, saveObject);
                             }
                             catch (Exception exc)

@@ -18,7 +18,7 @@ namespace MDSystem.Forms.Script
         private string _actionsDate = "";
 
         private List<ScriptMD> _bdScripts = new List<ScriptMD>();
-        private List<ModelScriptMD> _bdScriptModels = new List<ModelScriptMD>();
+        private List<ScriptModel> _bdScriptModels = new List<ScriptModel>();
 
         private ScriptMD _selectedBDScript = null;
 
@@ -33,9 +33,9 @@ namespace MDSystem.Forms.Script
 
             if (_bdScripts != null)
             {
-                _bdScriptModels = _bdScripts.OrderBy(it => it.RegDate).Select(it => new ModelScriptMD(it.Id, it.Name)).ToList();
+                _bdScriptModels = _bdScripts.OrderBy(it => it.RegDate).Select(it => new ScriptModel(it.Id, it.Name)).ToList();
 
-                foreach (ModelScriptMD script in _bdScriptModels)
+                foreach (ScriptModel script in _bdScriptModels)
                 {
                     listScripts.Items.Add(script);
                 }
@@ -44,7 +44,7 @@ namespace MDSystem.Forms.Script
 
         private void listScripts_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            var script = listScripts.SelectedItem as ModelScriptMD;
+            var script = listScripts.SelectedItem as ScriptModel;
 
             if (script != null)
             {

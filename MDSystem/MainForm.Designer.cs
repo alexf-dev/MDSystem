@@ -215,6 +215,7 @@
             this.btnUserList.TabIndex = 2;
             this.btnUserList.Text = "Просмотр";
             this.btnUserList.UseVisualStyleBackColor = true;
+            this.btnUserList.Click += new System.EventHandler(this.btnUserList_Click);
             // 
             // groupBox2
             // 

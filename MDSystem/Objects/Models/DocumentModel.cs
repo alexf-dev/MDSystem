@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MDSystem.Objects.Models
 {
-    public class ModelDocumentMD
+    public class DocumentModel
     {
-        public ModelDocumentMD(Guid id, string name)
+        public DocumentModel(Guid id, string name)
         {
             this.Id = id;
             this.Name = name;

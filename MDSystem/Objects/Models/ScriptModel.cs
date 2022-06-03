@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MDSystem.Objects.Models
 {
-    public class ModelScriptMD
+    public class ScriptModel
     {
-        public ModelScriptMD(Guid id, string name)
+        public ScriptModel(Guid id, string name)
         {
             this.Id = id;
             this.Name = name;

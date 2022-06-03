@@ -94,5 +94,11 @@ namespace MDSystem
             DocumentList dl = new DocumentList();
             dl.Show();
         }
+
+        private void btnUserList_Click(object sender, EventArgs e)
+        {
+            UserList ul = new UserList();
+            ul.Show();
+        }
     }
 }

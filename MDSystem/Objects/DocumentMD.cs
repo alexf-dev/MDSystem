@@ -22,5 +22,7 @@ namespace MDSystem.Objects
         /// Содержание документа
         /// </summary>
         public string Description { get; set; }
+
+        public int ChangeCount { get; set; }
     }
 }

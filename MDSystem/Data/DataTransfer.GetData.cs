@@ -104,7 +104,7 @@ namespace MDSystem.Data
             var customer = new List<ScriptMD>();
             using (var conn = OpenConnection(ConnectionString))
             {
-                string query = @"SELECT id as Id, name as Name, code as Code, actions_order_list as ActionsOrderList, script_type as ScriptType, description as Description, reg_date as RegDate, rec_date as RecDate, del_rec as DelRec FROM public.t_scripts WHERE true ";
+                string query = @"SELECT id as Id, name as Name, code as Code, actions_order_list as ActionsOrderList, script_type as ScriptType, description as Description, reg_date as RegDate, rec_date as RecDate, del_rec as DelRec, change_count as ChangeCount FROM public.t_scripts WHERE true ";
 
                 string queryFilter = "";
                 if (filter.Id != null && filter.Id != Guid.Empty)
@@ -141,8 +141,17 @@ namespace MDSystem.Data
             var customer = new List<Report>();
             using (var conn = OpenConnection(ConnectionString))
             {
-                if (!string.IsNullOrWhiteSpace(filter.Name))
-                    customer = conn.Query<Report>("Select id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports WHERE name = @Name", new { Name = filter.Name }).ToList();
+                string query = @"Select id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_id as OperatorID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports WHERE true ";
+
+                string queryFilter = "";
+                if (filter.Id != null && filter.Id != Guid.Empty)
+                {
+                    queryFilter += " AND id = @Id ";
+                }
+
+                query += queryFilter;
+
+                customer = conn.Query<Report>(query, new { Id = filter.Id }).ToList();
             }
 
             return customer.Count > 0 ? customer.First() : null;
@@ -153,7 +162,7 @@ namespace MDSystem.Data
             var customer = new List<DocumentMD>();
             using (var conn = OpenConnection(ConnectionString))
             {
-                string query = @"SELECT id as Id, parent_id as ParentId, name as Name, description as Description, rec_date as RecDate, del_rec as DelRec FROM public.t_documents WHERE true ";
+                string query = @"SELECT id as Id, parent_id as ParentId, name as Name, description as Description, rec_date as RecDate, del_rec as DelRec, change_count as ChangeCount FROM public.t_documents WHERE true ";
 
                 string queryFilter = "";
                 if (filter.Id != null && filter.Id != Guid.Empty)
@@ -281,7 +290,7 @@ namespace MDSystem.Data
             {
                 if (filter.AllObjects)
                 {
-                    customer = conn.Query<ScriptMD>("Select  id as Id, name as Name, code as Code, actions_order_list as ActionsOrderList, script_type as ScriptType, description as Description, reg_date as RegDate, rec_date as RecDate, del_rec as DelRec FROM public.t_scripts").ToList();
+                    customer = conn.Query<ScriptMD>("Select  id as Id, name as Name, code as Code, actions_order_list as ActionsOrderList, script_type as ScriptType, description as Description, reg_date as RegDate, rec_date as RecDate, del_rec as DelRec, change_count as ChangeCount FROM public.t_scripts").ToList();
                 }
             }
 
@@ -328,11 +337,15 @@ namespace MDSystem.Data
             {
                 if (filter.AllObjects)
                 {
-                    customer = conn.Query<Report>("SELECT  id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports").ToList();
+                    customer = conn.Query<Report>("Select id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_id as OperatorID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports").ToList();
+                }
+                else if (filter.OperatorID != null && filter.OperatorID != Guid.Empty)
+                {
+                    customer = conn.Query<Report>("Select id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_id as OperatorID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports WHERE operator_id = @OperatorID", new { OperatorID = filter.OperatorID }).ToList();
                 }
                 else if (!string.IsNullOrWhiteSpace(filter.OperatorFullName))
                 {
-                    customer = conn.Query<Report>("SELECT  id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports WHERE operator_name ilike @OperatorFullName", new { OperatorFullName = filter.OperatorFullName}).ToList();
+                    customer = conn.Query<Report>("SELECT id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_id as OperatorID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports WHERE operator_name ilike @OperatorFullName", new { OperatorFullName = filter.OperatorFullName}).ToList();
                 }
             }
 
@@ -352,15 +365,15 @@ namespace MDSystem.Data
             {
                 if (filter.AllObjects)
                 {
-                    customer = conn.Query<DocumentMD>("SELECT id as Id, parent_id as ParentId, name as Name, description as Description, rec_date as RecDate, del_rec as DelRec FROM public.t_documents").ToList();
+                    customer = conn.Query<DocumentMD>("SELECT id as Id, parent_id as ParentId, name as Name, description as Description, rec_date as RecDate, del_rec as DelRec, change_count as ChangeCount FROM public.t_documents").ToList();
                 }
                 else if (filter.ParentId != Guid.Empty)
                 {
-                    customer = conn.Query<DocumentMD>("SELECT id as Id, parent_id as ParentId, name as Name, description as Description, rec_date as RecDate, del_rec as DelRec FROM public.t_documents WHERE parent_id = @ParentId", new { ParentId = filter.ParentId }).ToList();
+                    customer = conn.Query<DocumentMD>("SELECT id as Id, parent_id as ParentId, name as Name, description as Description, rec_date as RecDate, del_rec as DelRec, change_count as ChangeCount FROM public.t_documents WHERE parent_id = @ParentId", new { ParentId = filter.ParentId }).ToList();
                 }
                 else if (filter.ParentIds != null)
                 {
-                    customer = conn.Query<DocumentMD>("SELECT id as Id, parent_id as ParentId, name as Name, description as Description, rec_date as RecDate, del_rec as DelRec FROM public.t_documents WHERE parent_id in (@ParentIds)", new { ParentIds = "'" + string.Join("', '", filter.ParentIds.Select(it => it.ToString())) + "'" }).ToList();
+                    customer = conn.Query<DocumentMD>("SELECT id as Id, parent_id as ParentId, name as Name, description as Description, rec_date as RecDate, del_rec as DelRec, change_count as ChangeCount FROM public.t_documents WHERE parent_id in (@ParentIds)", new { ParentIds = "'" + string.Join("', '", filter.ParentIds.Select(it => it.ToString())) + "'" }).ToList();
                 }
             }
 

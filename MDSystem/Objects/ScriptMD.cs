@@ -45,5 +45,7 @@ namespace MDSystem.Objects
         /// Порядок выполненных действий
         /// </summary>
         public int[] ActionsOrderList { get; set; }       
+
+        public int ChangeCount { get; set; }
     }
 }

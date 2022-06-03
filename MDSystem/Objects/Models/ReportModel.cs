@@ -4,13 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MDSystem.Objects
+namespace MDSystem.Objects.Models
 {
-    /// <summary>
-    /// Запись лога
-    /// </summary>
-    public class Report : BaseObject, ISaveObject
-    {        
+    public class ReportModel
+    {
+        public ReportModel(
+            DateTime startDate,
+            Guid scriptId,
+            string scriptName,
+            Guid operatorID,
+            int actionsAmount,
+            TimeSpan timeExecutionAmount,
+            List<ActionMD> actions,
+            int[] actionsOrderList
+            )
+        {
+            StartDate = startDate;
+            ScriptId = scriptId;
+            ScriptName = scriptName;
+            OperatorID = operatorID;
+            ActionsAmount = actionsAmount;
+            TimeExecutionAmount = timeExecutionAmount;
+            Actions = actions;
+            ActionsOrderList = actionsOrderList;
+        }
+
         /// <summary>
         /// Время запуска 
         /// </summary>
@@ -27,19 +45,9 @@ namespace MDSystem.Objects
         public string ScriptName { get; set; }
 
         /// <summary>
-        /// Id пользователя, проводившего тестированиеы
-        /// </summary>
-        public Guid UserID { get; set; }
-
-        /// <summary>
         /// Id оператора, который проходил этот тест
         /// </summary>
         public Guid OperatorID { get; set; }
-
-        /// <summary>
-        /// ФИО оператора, который проходил этот тест
-        /// </summary>
-        public string OperatorFullName { get; set; }
 
         /// <summary>
         /// количество выполненных оператором действий
@@ -60,10 +68,5 @@ namespace MDSystem.Objects
         /// Порядок выполненных действий
         /// </summary>
         public int[] ActionsOrderList { get; set; }
-
-        /// <summary>
-        /// Комментарии к отчету
-        /// </summary>
-        public string Description { get; set; }
     }
 }

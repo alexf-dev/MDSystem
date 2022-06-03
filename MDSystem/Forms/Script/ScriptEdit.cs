@@ -73,6 +73,8 @@ namespace MDSystem.Forms
             script.Name = txtScriptName.Text;
             script.ScriptType = ScriptMDType.Тестовый;
             script.Actions = GetScriptActions();
+            script.ChangeCount = 1;
+
 
             List<int> orderList = new List<int>();
 
@@ -114,6 +116,7 @@ namespace MDSystem.Forms
                 isSuccess = action.Save(CommandAttribute.DELETE);
             }
 
+            script.ChangeCount += script.ChangeCount;
             if (isSuccess && script.Save(CommandAttribute.UPDATE))
             {
                 foreach (var actionMD in script.Actions)
