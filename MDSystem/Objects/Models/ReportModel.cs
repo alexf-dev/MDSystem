@@ -15,7 +15,6 @@ namespace MDSystem.Objects.Models
             Guid operatorID,
             int actionsAmount,
             TimeSpan timeExecutionAmount,
-            List<ActionMD> actions,
             int[] actionsOrderList
             )
         {
@@ -25,7 +24,6 @@ namespace MDSystem.Objects.Models
             OperatorID = operatorID;
             ActionsAmount = actionsAmount;
             TimeExecutionAmount = timeExecutionAmount;
-            Actions = actions;
             ActionsOrderList = actionsOrderList;
         }
 

@@ -1,5 +1,6 @@
 ﻿using MDSystem.Data;
 using MDSystem.Forms;
+using MDSystem.Forms.Analysis;
 using MDSystem.Forms.Documentation;
 using MDSystem.Forms.Script;
 using System;
@@ -99,6 +100,18 @@ namespace MDSystem
         {
             UserList ul = new UserList();
             ul.Show();
+        }
+
+        private void btnAnalysisDocuments_Click(object sender, EventArgs e)
+        {
+            AnalysisDocumentsDiagram da = new AnalysisDocumentsDiagram();
+            da.Show();
+        }
+
+        private void btnRankOperators_Click(object sender, EventArgs e)
+        {
+            AnalysisOperatorsDiagram aod = new AnalysisOperatorsDiagram();
+            aod.Show();
         }
     }
 }

@@ -52,6 +52,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnRankOperators = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPageInformation.SuspendLayout();
@@ -193,6 +194,7 @@
             this.btnAnalysisDocuments.TabIndex = 3;
             this.btnAnalysisDocuments.Text = "Просмотр";
             this.btnAnalysisDocuments.UseVisualStyleBackColor = true;
+            this.btnAnalysisDocuments.Click += new System.EventHandler(this.btnAnalysisDocuments_Click);
             // 
             // groupBox3
             // 
@@ -289,6 +291,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnRankOperators);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -301,9 +304,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(425, 60);
+            this.button3.Location = new System.Drawing.Point(251, 35);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(120, 59);
+            this.button3.Size = new System.Drawing.Size(133, 59);
             this.button3.TabIndex = 2;
             this.button3.Text = "Вывести отчеты оператора";
             this.button3.UseVisualStyleBackColor = true;
@@ -311,13 +314,23 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(233, 60);
+            this.button2.Location = new System.Drawing.Point(43, 35);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(120, 59);
+            this.button2.Size = new System.Drawing.Size(134, 59);
             this.button2.TabIndex = 1;
             this.button2.Text = "Выполнить тестовый сценарий";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnRankOperators
+            // 
+            this.btnRankOperators.Location = new System.Drawing.Point(471, 35);
+            this.btnRankOperators.Name = "btnRankOperators";
+            this.btnRankOperators.Size = new System.Drawing.Size(142, 59);
+            this.btnRankOperators.TabIndex = 3;
+            this.btnRankOperators.Text = "Рекомендации по использованию операторов";
+            this.btnRankOperators.UseVisualStyleBackColor = true;
+            this.btnRankOperators.Click += new System.EventHandler(this.btnRankOperators_Click);
             // 
             // MainForm
             // 
@@ -371,5 +384,6 @@
         private System.Windows.Forms.Button btnAnalysisDocuments;
         private System.Windows.Forms.Button btnUserList;
         private System.Windows.Forms.Button btnDocumentList;
+        private System.Windows.Forms.Button btnRankOperators;
     }
 }

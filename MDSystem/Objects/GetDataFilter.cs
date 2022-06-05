@@ -60,6 +60,7 @@ namespace MDSystem.Objects
     public class GetDataFilterReport : GetDataFilter
     {
         public Guid? OperatorID { get; set; }
+        public Guid? ScriptID { get; set; }
         public string OperatorFullName { get; set; }
         public string ScriptName { get; set; }
     }

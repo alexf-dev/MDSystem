@@ -106,6 +106,24 @@
     <Compile Include="Data\DataTransfer.cs" />
     <Compile Include="Data\DataTransfer.SaveData.cs" />
     <Compile Include="Data\DataTransfer.GetData.cs" />
+    <Compile Include="Forms\Analysis\AnalysisDocumentsDiagram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Analysis\AnalysisDocumentsDiagram.Designer.cs">
+      <DependentUpon>AnalysisDocumentsDiagram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Analysis\AnalysisOperatorsDiagram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Analysis\AnalysisOperatorsDiagram.Designer.cs">
+      <DependentUpon>AnalysisOperatorsDiagram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Analysis\OperatorReportsDiagram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Analysis\OperatorReportsDiagram.Designer.cs">
+      <DependentUpon>OperatorReportsDiagram.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AuthorizationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,6 +233,8 @@
     <Compile Include="Objects\Enumerators\CommandAttribute.cs" />
     <Compile Include="Objects\GetDataFilter.cs" />
     <Compile Include="Objects\LibraryMD.cs" />
+    <Compile Include="Objects\Models\AnalysisDocModel.cs" />
+    <Compile Include="Objects\Models\AnalysisOperatorModel.cs" />
     <Compile Include="Objects\Models\DocumentModel.cs" />
     <Compile Include="Objects\Models\ReportModel.cs" />
     <Compile Include="Objects\Models\ScriptModel.cs" />
@@ -241,10 +261,17 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Forms\Analysis\" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Forms\Analysis\AnalysisDocumentsDiagram.resx">
+      <DependentUpon>AnalysisDocumentsDiagram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Analysis\AnalysisOperatorsDiagram.resx">
+      <DependentUpon>AnalysisOperatorsDiagram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Analysis\OperatorReportsDiagram.resx">
+      <DependentUpon>OperatorReportsDiagram.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </EmbeddedResource>

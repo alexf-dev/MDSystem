@@ -342,6 +342,11 @@ namespace MDSystem.Data
                 else if (filter.OperatorID != null && filter.OperatorID != Guid.Empty)
                 {
                     customer = conn.Query<Report>("Select id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_id as OperatorID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports WHERE operator_id = @OperatorID", new { OperatorID = filter.OperatorID }).ToList();
+
+                    if (filter.ScriptID != null && filter.ScriptID != Guid.Empty)
+                    {
+                        customer = conn.Query<Report>("Select id as Id, script_id as ScriptId, script_name as ScriptName, user_id as UserID, operator_id as OperatorID, operator_name as OperatorFullName, actions_amount as ActionsAmount, time_execution_amount as TimeExecutionAmount, actions_order_list as ActionsOrderList, description as Description, start_date as StartDate, rec_date as RecDate, del_rec as DelRec FROM public.t_reports WHERE operator_id = @OperatorID AND script_id = @ScriptId ", new { OperatorID = filter.OperatorID, ScriptId = filter.ScriptID }).ToList();
+                    }
                 }
                 else if (!string.IsNullOrWhiteSpace(filter.OperatorFullName))
                 {
