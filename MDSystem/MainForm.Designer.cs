@@ -50,9 +50,10 @@
             this.btnScriptList = new System.Windows.Forms.Button();
             this.addScriptBtn = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnRankOperators = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnRankOperators = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPageInformation.SuspendLayout();
@@ -291,6 +292,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.btnRankOperators);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.button2);
@@ -301,6 +303,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Выбор действия";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnRankOperators
+            // 
+            this.btnRankOperators.Location = new System.Drawing.Point(471, 35);
+            this.btnRankOperators.Name = "btnRankOperators";
+            this.btnRankOperators.Size = new System.Drawing.Size(142, 59);
+            this.btnRankOperators.TabIndex = 3;
+            this.btnRankOperators.Text = "Рекомендации по использованию операторов";
+            this.btnRankOperators.UseVisualStyleBackColor = true;
+            this.btnRankOperators.Click += new System.EventHandler(this.btnRankOperators_Click);
             // 
             // button3
             // 
@@ -322,15 +334,15 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnRankOperators
+            // button1
             // 
-            this.btnRankOperators.Location = new System.Drawing.Point(471, 35);
-            this.btnRankOperators.Name = "btnRankOperators";
-            this.btnRankOperators.Size = new System.Drawing.Size(142, 59);
-            this.btnRankOperators.TabIndex = 3;
-            this.btnRankOperators.Text = "Рекомендации по использованию операторов";
-            this.btnRankOperators.UseVisualStyleBackColor = true;
-            this.btnRankOperators.Click += new System.EventHandler(this.btnRankOperators_Click);
+            this.button1.Location = new System.Drawing.Point(471, 138);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(142, 59);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Распределение процессов";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainForm
             // 
@@ -385,5 +397,6 @@
         private System.Windows.Forms.Button btnUserList;
         private System.Windows.Forms.Button btnDocumentList;
         private System.Windows.Forms.Button btnRankOperators;
+        private System.Windows.Forms.Button button1;
     }
 }

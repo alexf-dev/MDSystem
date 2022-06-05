@@ -113,5 +113,11 @@ namespace MDSystem
             AnalysisOperatorsDiagram aod = new AnalysisOperatorsDiagram();
             aod.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Processes pr = new Processes();
+            pr.Show();
+        }
     }
 }

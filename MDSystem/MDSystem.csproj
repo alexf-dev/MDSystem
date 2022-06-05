@@ -154,6 +154,12 @@
     <Compile Include="Forms\Documentation\DocumentList.Designer.cs">
       <DependentUpon>DocumentList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Processes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Processes.Designer.cs">
+      <DependentUpon>Processes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ProgramReferenceDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -286,6 +292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Documentation\DocumentList.resx">
       <DependentUpon>DocumentList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Processes.resx">
+      <DependentUpon>Processes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProgramReferenceDataForm.resx">
       <DependentUpon>ProgramReferenceDataForm.cs</DependentUpon>
