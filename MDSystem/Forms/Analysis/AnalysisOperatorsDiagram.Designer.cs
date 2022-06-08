@@ -99,9 +99,11 @@
             this.dgvOperatorReports.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOperatorReports.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvOperatorReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOperatorReports.ColumnHeadersVisible = false;
             this.dgvOperatorReports.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOperatorReports.Location = new System.Drawing.Point(3, 16);
             this.dgvOperatorReports.Name = "dgvOperatorReports";
+            this.dgvOperatorReports.RowHeadersVisible = false;
             this.dgvOperatorReports.Size = new System.Drawing.Size(788, 341);
             this.dgvOperatorReports.TabIndex = 0;
             this.dgvOperatorReports.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOperatorReports_CellDoubleClick);

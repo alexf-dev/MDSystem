@@ -1,6 +1,7 @@
 ﻿using MDSystem.Data;
 using MDSystem.Objects;
 using System;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -62,17 +63,24 @@ namespace MDSystem.Forms
 
                 if (SaveReport())
                 {
-                    foreach (var actionMD in report.Actions)
+                    if (!report.Actions.Any())
                     {
-                        actionMD.ParentId = report.Id;
-                        isSuccess = actionMD.Save(CommandAttribute.INSERT);
+                        isSuccess = true;
+                    }
+                    else
+                    {
+                        foreach (var actionMD in report.Actions)
+                        {
+                            actionMD.ParentId = report.Id;
+                            isSuccess = actionMD.Save(CommandAttribute.INSERT);
+                        }
                     }
                 }
 
                 if (isSuccess)
                     MessageBox.Show("Отчет сохранен");
                 else
-                    MessageBox.Show("Ошибка сохранения");
+                    MessageBox.Show("Ошибка сохранения действий");
             }
             else
             {

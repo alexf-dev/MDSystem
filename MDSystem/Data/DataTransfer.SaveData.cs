@@ -380,7 +380,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var insertSQL = "INSERT INTO public.t_reports (id, script_id, script_name, user_id, operator_id, operator_name, actions_amount, time_execution_amount, actions_order_list, description, start_date, rec_date, del_rec) Values (@Id, @ScriptId, @ScriptName, @UserID, @OperatorID, @OperatorFullName, @ActionsAmount, @TimeExecutionAmount, @ActionsOrderList, @Description, @StartDate, now(), @DelRec);";
+                                var insertSQL = "INSERT INTO public.t_reports (id, script_id, script_name, user_id, operator_id, operator_name, actions_amount, time_execution_amount, actions_order_list, description, start_date, rec_date, successful, del_rec) Values (@Id, @ScriptId, @ScriptName, @UserID, @OperatorID, @OperatorFullName, @ActionsAmount, @TimeExecutionAmount, @ActionsOrderList, @Description, @StartDate, now(), @Successful, @DelRec);";
                                 affectedRows = conn.Execute(insertSQL, saveObject);
                             }
                             catch (Exception exc)
@@ -393,7 +393,7 @@ namespace MDSystem.Data
                         {
                             try
                             {
-                                var updateSQL = "UPDATE INTO public.t_reports (id, firstname, lastname, middlename, rec_date, del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, now(), @DelRec);";
+                                var updateSQL = "UPDATE INTO public.t_reports (id, firstname, lastname, middlename, rec_date, successful del_rec) Values (@Id, @FirstName, @LastName, @MiddleName, now(), @DelRec);";
                                 affectedRows = conn.Execute(updateSQL, saveObject);
                             }
                             catch (Exception exc)

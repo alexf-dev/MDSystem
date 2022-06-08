@@ -81,16 +81,6 @@ namespace MDSystem.Forms.Analysis
                 ann.LineDashStyle = ChartDashStyle.Dash;
                 chart1.Annotations.Add(ann);
 
-                //chart1.Annotations["LineAnnotation1"].AxisX = chart1.ChartAreas[0].AxisX;
-                //chart1.Annotations["LineAnnotation1"].AxisY = chart1.ChartAreas[0].AxisY;
-                //chart1.Annotations["LineAnnotation1"].IsSizeAlwaysRelative = false;
-                //chart1.Annotations["LineAnnotation1"].AnchorY = selectedDBTime.Minutes;
-                //var maxXValue = values.Max(x => x.StartDate);
-                //var maxYValue = selectedDBTime.Minutes;
-
-                //chart1.Series["Series2"].Points.AddXY(0, maxYValue);
-                //chart1.Series["Series2"].Points.AddXY(maxXValue.ToShortDateString(), maxYValue);
-
                 int i = 0;
                 foreach (var item in _bdReportModels)
                 {

@@ -29,6 +29,7 @@ namespace MDSystem.Forms
         private User selectedOperatorsUser { get { return (User)cmbOperators.SelectedItem; } }
 
         private DateTime _startDate;
+        private bool _IsSuccessful = true;
 
         public RunTestedScript()
         {
@@ -126,42 +127,67 @@ namespace MDSystem.Forms
             _startDate = DateTime.Now;
             _operatorScript = GetOperatorScript();
 
+            var isValidActions = true;
             if (_operatorScript.Actions.Count < _selectedBDScript.Actions.Count)
             {
                 MessageBox.Show("Не все действия сценария выполнены", "Внимание!");
-                return;
+                isValidActions = false;
             }
-            if (!_operatorScript.ActionsOrderList.SequenceEqual(_selectedBDScript.ActionsOrderList))
+            else if (!_operatorScript.ActionsOrderList.SequenceEqual(_selectedBDScript.ActionsOrderList))
             {
                 MessageBox.Show("Неверный порядок действий оператора", "Внимание!");
-                return;
+                isValidActions = false;
             }
-            MakeReportData();
+            MakeReportData(isValidActions);
         }
 
-        private void MakeReportData()
-        {            
-            operatorTime = new TimeSpan();
-            foreach (var action in _operatorScript.Actions)
-                operatorTime += action.TimeExecution;
-
-            selectedDBTime = new TimeSpan();
-            foreach (var action in _selectedBDScript.Actions)
-                selectedDBTime += action.TimeExecution;
-
-            TimeSpan result = operatorTime - selectedDBTime; // положительное время оператора лучше, отрицательное - время оператора хуже
-            TimeSpan minuteTime = new TimeSpan(0, 1, 0);
-            TimeSpan zero = new TimeSpan(0, 0, 0);
-
-
+        private void MakeReportData(bool isValidActions)
+        {
             string timeResult = "";
-            timeResult += "Время выполнения сценария в БД: " + selectedDBTime.ToString() + Environment.NewLine;
-            timeResult += "Время выполнения сценария пользователем: " + operatorTime.ToString() + Environment.NewLine;
-            timeResult += "Разница времени выполнения: " + result.ToString() + Environment.NewLine;
-            if (result > minuteTime)
-                timeResult += "Тест не пройден: превышен временной интервал";
-            else 
-                timeResult += "Тест пройден";
+
+            if (!isValidActions)
+            {
+                _operatorScript.Actions.Clear();
+
+                operatorTime = new TimeSpan(0, 0, 0);
+                selectedDBTime = new TimeSpan();
+                foreach (var action in _selectedBDScript.Actions)
+                    selectedDBTime += action.TimeExecution;
+                
+                timeResult += "Время выполнения сценария в БД: " + selectedDBTime.ToString() + Environment.NewLine;
+                timeResult += "Время выполнения сценария пользователем: " + operatorTime.ToString() + Environment.NewLine;
+                timeResult += "Разница времени выполнения: " + selectedDBTime.ToString() + Environment.NewLine;
+                timeResult += "Тест не пройден: нарушение выполнения действий";
+
+                _IsSuccessful = false;
+            }
+            else
+            {
+                operatorTime = new TimeSpan();
+                foreach (var action in _operatorScript.Actions)
+                    operatorTime += action.TimeExecution;
+
+                selectedDBTime = new TimeSpan();
+                foreach (var action in _selectedBDScript.Actions)
+                    selectedDBTime += action.TimeExecution;
+
+                TimeSpan result = operatorTime - selectedDBTime; 
+                TimeSpan zero = new TimeSpan(0, 0, 0);
+
+                timeResult += "Время выполнения сценария в БД: " + selectedDBTime.ToString() + Environment.NewLine;
+                timeResult += "Время выполнения сценария пользователем: " + operatorTime.ToString() + Environment.NewLine;
+                timeResult += "Разница времени выполнения: " + result.ToString() + Environment.NewLine;
+                if (result > zero)
+                {
+                    timeResult += "Тест не пройден: превышен временной интервал";
+                    _IsSuccessful = false;
+                }
+                else
+                {
+                    timeResult += "Тест пройден";
+                    _IsSuccessful = true;
+                }
+            }
 
             txtTimeControl.Text = timeResult;
             btnMakeStatus.Enabled = ApplicationData.CurrentUser.AccessLevelValue > 1 ? true : false;
@@ -246,21 +272,6 @@ namespace MDSystem.Forms
 
             ReportEditForm re = new ReportEditForm(report);
             re.Show();
-            //bool isSuccess = false;
-
-            //if (report.Save(CommandAttribute.INSERT))
-            //{
-            //    foreach (var actionMD in report.Actions)
-            //    {
-            //        actionMD.ParentId = report.Id;
-            //        isSuccess = actionMD.Save(CommandAttribute.INSERT);
-            //    }
-            //}
-
-            //if (isSuccess)
-            //    MessageBox.Show("Отчет сохранен");            
-            //else
-            //    MessageBox.Show("Ошибка сохранения");
         }
 
         private Report MakeNewReport()
@@ -278,6 +289,7 @@ namespace MDSystem.Forms
             report.ActionsOrderList = _operatorScript.ActionsOrderList;
             report.Description = "";
             report.StartDate = _startDate;
+            report.Successful = _IsSuccessful;
 
             return report;
         }

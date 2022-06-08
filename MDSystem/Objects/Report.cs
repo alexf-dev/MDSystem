@@ -65,5 +65,10 @@ namespace MDSystem.Objects
         /// Комментарии к отчету
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Успешное/неуспешное прохождение теста
+        /// </summary>
+        public bool Successful { get; set; }
     }
 }

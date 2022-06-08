@@ -13,13 +13,19 @@ namespace MDSystem.Objects.Models
             string operatorName,
             Guid scriptId,
             string scriptName,
-            string reportCount)
+            int reportCount,
+            int successfulReports,
+            int notSuccessfulReports,
+            int zeroActionsAmountReports)
         {
             UserId = userId;
             OperatorName = operatorName;
             ScriptId = scriptId;
             ScriptName = scriptName;
             ReportCount = reportCount;
+            SuccessfulReports = successfulReports;
+            NotSuccessfulReports = notSuccessfulReports;
+            ZeroActionsAmountReports = zeroActionsAmountReports;
         }
 
         /// <summary>
@@ -39,6 +45,12 @@ namespace MDSystem.Objects.Models
         /// <summary>
         /// Оператор
         /// </summary>
-        public string ReportCount { get; set; }
+        public int ReportCount { get; set; }
+
+        public int SuccessfulReports { get; set; }
+
+        public int NotSuccessfulReports { get; set; }
+
+        public int ZeroActionsAmountReports { get; set; }
     }
 }
