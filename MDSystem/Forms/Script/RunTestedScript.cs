@@ -20,13 +20,14 @@ namespace MDSystem.Forms
         private List<ScriptMD> _bdScripts = new List<ScriptMD>();
         private List<ScriptMD> _operatorScripts = new List<ScriptMD>();
         private List<User> _operatorUsers = new List<User>();
+        private List<ScriptMD> _selectedBDScripts = new List<ScriptMD>();
 
         private TimeSpan operatorTime = new TimeSpan();
         private TimeSpan selectedDBTime = new TimeSpan();
 
-        private ScriptMD _selectedBDScript = null;
         private ScriptMD _operatorScript = null;
         private User selectedOperatorsUser { get { return (User)cmbOperators.SelectedItem; } }
+        private ScriptMD _selectedBDScript { get { return (ScriptMD)cmbScripts.SelectedItem; } }
 
         private DateTime _startDate;
         private bool _IsSuccessful = true;
@@ -38,80 +39,9 @@ namespace MDSystem.Forms
             btnRunTest.Enabled = btnMakeStatus.Enabled = false;
 
             _operatorUsers = DataTransfer.GetDataObjects<User>(new GetDataFilterUser() { AllObjects = true }).ConvertAll(it => (User)it);
+            _selectedBDScripts = DataTransfer.GetDataObjects<ScriptMD>(new GetDataFilterScriptMD { AllObjects = true }).ConvertAll(it => (ScriptMD)it);
             cmbOperators.Items.AddRange(_operatorUsers.ToArray());
-        }
-
-        private List<ScriptMD> GetBDScripts()
-        {
-            List<ScriptMD> bdScripts = new List<ScriptMD>();
-
-            //string fileName = Environment.CurrentDirectory + @"\" + "BDScripts.txt";
-            //string scriptData = "";
-
-            //// Получаем информацию о сценариях из BDScripts.txt
-            //try
-            //{
-            //    using (StreamReader sr = new StreamReader(fileName, System.Text.Encoding.UTF8))
-            //    {
-            //        scriptData = sr.ReadToEnd();
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //}
-
-            //// Каждая запись о скрипте в текстовом файле заканчивается символом *
-            //// получаем массив строк, в каждой информация о конкретном скрипте
-            //string[] sp = scriptData.Split(new char[] { '*'}, StringSplitOptions.RemoveEmptyEntries);
-
-            //char[] trimChars = new char[] { '\\', 'r', 'n'};
-
-            //foreach (var item in sp)
-            //{
-            //    // item - строка данных одного сценария
-            //    if (item.Contains("script"))    // каждая строка сценария содержит слово script в начале строки, т.е. здесь мы избавляемся от пустых строк
-            //    {
-            //        List<string> items = item.Trim(trimChars).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(it => it.Trim(trimChars)).ToList();
-            //        if (items[0].Contains("script"))
-            //            items.RemoveAt(0);
-
-            //        ScriptMD script = new ScriptMD();
-            //        script.Name = items[0];
-            //        items.RemoveAt(0);
-            //        script.Code = items[0];
-            //        items.RemoveAt(0);
-
-            //        // если в строке сценария отсутствуют действия - пропускаем эту строку, сценарий не учитывается
-            //        if (items.Count > 0)
-            //            script.Actions = new List<ActionMD>();
-            //        else
-            //            continue;
-
-            //        // оставшиеся в items строки - действия по сценарию
-            //        foreach (var data in items)
-            //        {
-            //            ActionMD actionMD = new ActionMD();
-
-            //            // делим каждое действие на данные - номер по порядку, наименование, время выполнения
-            //            List<string> dataList = data.Trim().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            //            // получаем индекс первого вхождения символа '.' - до этого символа это порядковый номер действия
-            //            int orderValueIndex = dataList[0].IndexOf('.');
-            //            string orderValueStr = dataList[0].Substring(0, orderValueIndex);
-
-            //            actionMD.OrderValue = int.Parse(orderValueStr);
-            //            actionMD.Name = dataList[0].Substring(orderValueIndex + 1).Trim();
-            //            actionMD.TimeExecution = TimeSpan.Parse(dataList[1].Trim());
-
-            //            script.Actions.Add(actionMD);
-            //        }
-
-            //        bdScripts.Add(script);
-            //    }
-            //}
-            
-            return bdScripts;
+            cmbScripts.Items.AddRange(_selectedBDScripts.ToArray());
         }
 
         private void btnRunTest_Click(object sender, EventArgs e)
@@ -240,30 +170,30 @@ namespace MDSystem.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _actionsDate = "";
-            _selectedBDScript = null;
-            txtBDActionsList.Text = "";
+            //_actionsDate = "";
+            //_selectedBDScript = null;
+            //txtBDActionsList.Text = "";
 
-            if (string.IsNullOrWhiteSpace(txtScriptName.Text))
-                return;
+            //if (string.IsNullOrWhiteSpace(txtScriptName.Text))
+            //    return;
 
-            _selectedBDScript = (ScriptMD)(DataTransfer.GetDataObject<ScriptMD>(new GetDataFilterScriptMD { Name = txtScriptName.Text }));
+            //_selectedBDScript = (ScriptMD)(DataTransfer.GetDataObject<ScriptMD>(new GetDataFilterScriptMD { Name = txtScriptName.Text }));
 
-            if (_selectedBDScript != null)
-            {
-                _selectedBDScript.Actions = (DataTransfer.GetDataObjects<ActionMD>(new GetDataFilterActionMD { ParentId = _selectedBDScript.Id })).ConvertAll(it => (ActionMD)it);
+            //if (_selectedBDScript != null)
+            //{
+            //    _selectedBDScript.Actions = (DataTransfer.GetDataObjects<ActionMD>(new GetDataFilterActionMD { ParentId = _selectedBDScript.Id })).ConvertAll(it => (ActionMD)it);
 
-                foreach (var ac in _selectedBDScript.Actions)                
-                    _actionsDate += ac.ToString() + Environment.NewLine;                
+            //    foreach (var ac in _selectedBDScript.Actions)                
+            //        _actionsDate += ac.ToString() + Environment.NewLine;                
 
-                txtBDActionsList.Text = _actionsDate;
-                btnRunTest.Enabled = true;
-            }
-            else
-            {
-                MessageBox.Show("Сценарий " + "\"" + txtScriptName.Text + "\"" + " отсутствует в БД.");
-                return;
-            }            
+            //    txtBDActionsList.Text = _actionsDate;
+            //    btnRunTest.Enabled = true;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Сценарий " + "\"" + txtScriptName.Text + "\"" + " отсутствует в БД.");
+            //    return;
+            //}            
         }
                 
         private void btnSaveReport_Click(object sender, EventArgs e)
@@ -313,6 +243,30 @@ namespace MDSystem.Forms
                 return true;
             }
             return base.ProcessDialogKey(keyData);
+        }
+
+        private void cmbScripts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbScripts.SelectedIndex == -1)
+            {
+                return;
+            }
+            else
+            {
+                _actionsDate = "";
+                txtBDActionsList.Text = "";
+
+                if (_selectedBDScript != null)
+                {
+                    _selectedBDScript.Actions = (DataTransfer.GetDataObjects<ActionMD>(new GetDataFilterActionMD { ParentId = _selectedBDScript.Id })).ConvertAll(it => (ActionMD)it);
+
+                    foreach (var ac in _selectedBDScript.Actions)
+                        _actionsDate += ac.ToString() + Environment.NewLine;
+
+                    txtBDActionsList.Text = _actionsDate;
+                    btnRunTest.Enabled = true;
+                }
+            }
         }
     }
 }

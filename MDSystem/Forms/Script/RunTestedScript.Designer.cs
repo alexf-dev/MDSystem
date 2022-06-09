@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtScriptName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnRunTest = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -42,6 +41,7 @@
             this.btnSaveReport = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.cmbOperators = new System.Windows.Forms.ComboBox();
+            this.cmbScripts = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -54,13 +54,6 @@
             this.label1.Size = new System.Drawing.Size(37, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "ФИО:";
-            // 
-            // txtScriptName
-            // 
-            this.txtScriptName.Location = new System.Drawing.Point(92, 59);
-            this.txtScriptName.Name = "txtScriptName";
-            this.txtScriptName.Size = new System.Drawing.Size(360, 20);
-            this.txtScriptName.TabIndex = 3;
             // 
             // label2
             // 
@@ -169,6 +162,7 @@
             this.button1.TabIndex = 11;
             this.button1.Text = ">>";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // cmbOperators
@@ -179,11 +173,21 @@
             this.cmbOperators.Size = new System.Drawing.Size(360, 21);
             this.cmbOperators.TabIndex = 12;
             // 
+            // cmbScripts
+            // 
+            this.cmbScripts.FormattingEnabled = true;
+            this.cmbScripts.Location = new System.Drawing.Point(92, 59);
+            this.cmbScripts.Name = "cmbScripts";
+            this.cmbScripts.Size = new System.Drawing.Size(360, 21);
+            this.cmbScripts.TabIndex = 13;
+            this.cmbScripts.SelectedIndexChanged += new System.EventHandler(this.cmbScripts_SelectedIndexChanged);
+            // 
             // RunTestedScript
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(930, 548);
+            this.Controls.Add(this.cmbScripts);
             this.Controls.Add(this.cmbOperators);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSaveReport);
@@ -193,7 +197,6 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnRunTest);
-            this.Controls.Add(this.txtScriptName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "RunTestedScript";
@@ -211,7 +214,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtScriptName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnRunTest;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -224,5 +226,6 @@
         private System.Windows.Forms.Button btnSaveReport;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cmbOperators;
+        private System.Windows.Forms.ComboBox cmbScripts;
     }
 }

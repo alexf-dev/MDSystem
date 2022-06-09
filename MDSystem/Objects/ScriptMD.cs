@@ -47,5 +47,10 @@ namespace MDSystem.Objects
         public int[] ActionsOrderList { get; set; }       
 
         public int ChangeCount { get; set; }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }
