@@ -94,8 +94,8 @@ namespace MDSystem.Forms.Analysis
             var lowSortDocuments = (((lowSortRecDateDocuments.Union(lowSortChangeCountDocuments)).Except(highSortRecDateDocuments)).Except(highSortChangeCountDocuments)).Take(3);
             var highSortDocuments = (((highSortRecDateDocuments.Union(highSortChangeCountDocuments)).Except(lowSortRecDateDocuments)).Except(lowSortChangeCountDocuments)).Take(3);
 
-            lowSortDocuments = lowSortDocuments.Union(lowSorts).Take(3);
-            highSortDocuments = highSortDocuments.Union(highSorts).Take(3);
+            lowSortDocuments = lowSorts.Union(lowSortDocuments).Take(3);
+            highSortDocuments = highSorts.Union(highSortDocuments).Take(3);
 
             foreach (var document in lowSortDocuments)
             {
