@@ -15,6 +15,7 @@ namespace MDSystem.Objects.Models
             Guid operatorID,
             int actionsAmount,
             TimeSpan timeExecutionAmount,
+            bool succesful,
             int[] actionsOrderList
             )
         {
@@ -24,6 +25,7 @@ namespace MDSystem.Objects.Models
             OperatorID = operatorID;
             ActionsAmount = actionsAmount;
             TimeExecutionAmount = timeExecutionAmount;
+            Successful = succesful;
             ActionsOrderList = actionsOrderList;
         }
 
@@ -66,5 +68,10 @@ namespace MDSystem.Objects.Models
         /// Порядок выполненных действий
         /// </summary>
         public int[] ActionsOrderList { get; set; }
+
+        /// <summary>
+        /// Успешное/неуспешное прохождение теста
+        /// </summary>
+        public bool Successful { get; set; }
     }
 }

@@ -51,11 +51,19 @@ namespace MDSystem.Forms.Analysis
                         it.OperatorID,
                         it.ActionsAmount,
                         it.TimeExecutionAmount,
+                        it.Successful, 
                         it.ActionsOrderList))
                     .ToList();
-            }
 
-            FillReportsDiagram(_bdReportModels);
+                FillReportsDiagram(_bdReportModels);
+                FillOperatorResult(_bdReportModels);
+                FillOperatorAnalysis(_bdReportModels);
+            }
+            else
+            {
+                MessageBox.Show("Список выполненных сценариев пуст", "Внимание!");
+                Close();
+            }
         }
 
         private void FillReportsDiagram(List<ReportModel> values)
@@ -69,6 +77,17 @@ namespace MDSystem.Forms.Analysis
                 }
 
                 double lineHeight = selectedDBTime.TotalMinutes;
+
+                var maxTotalMinutes = _bdReportModels.Max(x => x.TimeExecutionAmount.TotalMinutes);
+                chart1.ChartAreas[0].AxisY.Maximum = lineHeight > maxTotalMinutes ? lineHeight + 2 : maxTotalMinutes + 2;
+
+                int i = 0;
+                foreach (var item in _bdReportModels)
+                {                   
+                    chart1.Series["Series1"].Points.AddXY(item.StartDate.ToShortDateString(), item.TimeExecutionAmount.TotalMinutes);
+                    i++;
+                }
+
                 HorizontalLineAnnotation ann = new HorizontalLineAnnotation();
                 ann.AxisX = chart1.ChartAreas[0].AxisX;
                 ann.AxisY = chart1.ChartAreas[0].AxisY;
@@ -76,18 +95,90 @@ namespace MDSystem.Forms.Analysis
                 ann.AnchorY = lineHeight;
                 ann.IsInfinitive = true;
                 ann.ClipToChartArea = chart1.ChartAreas[0].Name;
-                ann.LineColor = Color.Blue; 
+                ann.LineColor = Color.Blue;
                 ann.LineWidth = 2;
                 ann.LineDashStyle = ChartDashStyle.Dash;
                 chart1.Annotations.Add(ann);
-
-                int i = 0;
-                foreach (var item in _bdReportModels)
-                {
-                    chart1.Series["Series1"].Points.AddXY(item.StartDate.ToShortDateString(), item.TimeExecutionAmount.TotalMinutes);
-                    i++;
-                }
             }            
+        }
+
+        private void FillOperatorResult(List<ReportModel> values)
+        {
+            var operatorFullName = _bdReports[0].OperatorFullName;
+            var result = $"Прогресс оператора {operatorFullName}" + Environment.NewLine;
+            result += Environment.NewLine;
+
+            foreach (var item in values)
+            {
+                var success = item.Successful ? "допуск" : (item.ActionsAmount == 0 ? "не выполнен" : "требуется доработка");
+                result += $"{item.ScriptName}  |   {item.TimeExecutionAmount}  |  {success}";
+                result += Environment.NewLine;
+            }
+
+            txtOperatorResult.Text = result;
+        }
+
+        private void FillOperatorAnalysis(List<ReportModel> values)
+        {
+            var result = "";
+
+            if (values.Any(x => x.ActionsAmount == 0))
+            {
+                result += $" - показатели пользователя все еще неэффективны для работы с реальными ситуациями";
+            }
+            else
+            {
+                if (values.All(x => x.Successful))
+                {
+                    if (values.Count > 1)
+                    {
+                        result += $" - пользователь стабильно прогрессирует";
+                    }
+                    else
+                    {
+                        result += $" - пользователь показывает положительные результаты";
+                    }
+                }
+                else
+                {
+                    if (!values.Any(x => x.Successful))
+                    {
+                        var success = true;
+                        var timeResult = values[0].TimeExecutionAmount;
+                        foreach (var item in values)
+                        {
+                            success = item.TimeExecutionAmount >= timeResult;
+                            timeResult = item.TimeExecutionAmount;
+                        }
+
+                        if (success)
+                        {
+                            result += $" - пользователь стабильно прогрессирует, но показатели пользователя все еще неэффективны для работы с реальными ситуациями";
+                        }
+                        else
+                        {
+                            result += $" - показатели пользователя все еще неэффективны для работы с реальными ситуациями";
+                        }
+                    }
+                    else
+                    {
+                        var succesCount = values.Count(x => x.Successful);
+                        var notSuccesCount = values.Count(x => !x.Successful);
+
+                        var balance = ((double)notSuccesCount / values.Count) * 100;
+                        if (balance < 30)
+                        {
+                            result += $" - пользователь стабильно прогрессирует";
+                        }
+                        else
+                        {
+                            result += $" - показатели пользователя все еще неэффективны для работы с реальными ситуациями";
+                        }
+                    }                    
+                }
+            }
+            
+            txtOperatorAnalysis.Text = result;
         }
     }
 }

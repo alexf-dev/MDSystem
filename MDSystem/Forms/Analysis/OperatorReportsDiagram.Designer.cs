@@ -33,9 +33,9 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtOperatorAnalysis = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtOperatorResult = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel1.SuspendLayout();
@@ -64,7 +64,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.txtOperatorAnalysis);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(3, 332);
             this.groupBox3.Name = "groupBox3";
@@ -73,17 +73,17 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Выводы";
             // 
-            // textBox1
+            // txtOperatorAnalysis
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 19);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(388, 87);
-            this.textBox1.TabIndex = 0;
+            this.txtOperatorAnalysis.Location = new System.Drawing.Point(9, 19);
+            this.txtOperatorAnalysis.Multiline = true;
+            this.txtOperatorAnalysis.Name = "txtOperatorAnalysis";
+            this.txtOperatorAnalysis.Size = new System.Drawing.Size(388, 87);
+            this.txtOperatorAnalysis.TabIndex = 0;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.txtOperatorResult);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(412, 3);
             this.groupBox2.Name = "groupBox2";
@@ -92,13 +92,13 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Оценка выполнения ";
             // 
-            // textBox2
+            // txtOperatorResult
             // 
-            this.textBox2.Location = new System.Drawing.Point(6, 19);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(370, 298);
-            this.textBox2.TabIndex = 1;
+            this.txtOperatorResult.Location = new System.Drawing.Point(6, 19);
+            this.txtOperatorResult.Multiline = true;
+            this.txtOperatorResult.Name = "txtOperatorResult";
+            this.txtOperatorResult.Size = new System.Drawing.Size(370, 298);
+            this.txtOperatorResult.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -156,8 +156,8 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtOperatorAnalysis;
+        private System.Windows.Forms.TextBox txtOperatorResult;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
