@@ -17,6 +17,10 @@ namespace MDSystem
 {
     public partial class MainForm : Form
     {
+        string _testProperty = "Test property";
+
+        string _testProperty_v2 = "Test property_v2";
+
         public MainForm()
         {
             InitializeComponent();
